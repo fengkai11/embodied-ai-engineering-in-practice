@@ -9,7 +9,11 @@ src = "src"
 mathjax-support = true
 git-repository-url = "https://github.com/fengkai11/embodied-ai-engineering-in-practice"
 edit-url-template = "https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/{path}"
+additional-js = ["mermaid.min.js", "mermaid-init.js"]
 
 [output.html.fold]
 enable = true
 level = 1
+
+[preprocessor.mermaid]
+command = "/home/fengkai/.cargo/bin/mdbook-mermaid"
