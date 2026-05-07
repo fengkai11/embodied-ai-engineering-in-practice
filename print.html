@@ -1685,6 +1685,8 @@ python scripts/02_visualize_episode.py \
 </ul>
 <p>这些概念一旦在脑中稳定，后面任务定义、数据格式、行为克隆训练和评测协议都会变得顺很多。相反，如果这里混乱，后面每一章都会觉得“看着懂，一做就乱”。</p>
 <p>下一章，我们将在这个概念地基上继续前进，进入模仿学习、行为克隆、ACT 与 Diffusion Policy。届时你会看到：策略学习并不是一个抽象大词，而是从本章的 observation / state / action 关系中自然长出来的。</p>
+<h3 id="补充结果图action-timeline"><a class="header" href="#补充结果图action-timeline">补充结果图：action timeline</a></h3>
+<p><img src="chapters/../assets/images/action_timeline.png" alt="Chapter 3 action timeline 示例" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第-4-章模仿学习行为克隆act-与-diffusion-policy"><a class="header" href="#第-4-章模仿学习行为克隆act-与-diffusion-policy">第 4 章：模仿学习、行为克隆、ACT 与 Diffusion Policy</a></h1>
 <p>到了这一章，我们终于开始正面回答一个很多读者最关心的问题：<strong>机器人学习里的“学”，到底是在学什么？</strong></p>
 <p>前两章我们已经建立了两层地基。</p>
@@ -3479,6 +3481,8 @@ python scripts/01_generate_synthetic_episode.py
 <p>而且，这些部分必须尽可能对齐。</p>
 <p>从主线项目角度看，本章完成了一个非常重要的里程碑：它把前一章的任务定义真正落成了数据结构。下一章，我们就会顺势进入一个非常现实的问题：</p>
 <p>既然数据格式已经有了，那么<strong>如何检查这些数据是不是好的？</strong></p>
+<h3 id="补充结果图episode-action-timeline"><a class="header" href="#补充结果图episode-action-timeline">补充结果图：Episode action timeline</a></h3>
+<p><img src="chapters/../assets/images/ch07_episode_0001_action_timeline.png" alt="Chapter 7 episode action timeline 示例" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第-8-章数据质检与可视化"><a class="header" href="#第-8-章数据质检与可视化">第 8 章：数据质检与可视化</a></h1>
 <p>前一章我们已经把主线任务 <code>pick_box_to_bin</code> 变成了一个正式的 episode 数据结构。到这里，很多初学者会自然地把注意力转向模型：是不是该训练更大的网络？是不是该把 ACT、Diffusion Policy、VLA 全都试一遍？</p>
 <p>这当然是后面的方向，但如果现在立刻进入模型调参，通常会走上一条非常低效的路。因为在具身智能项目里，<strong>坏数据往往比小数据更危险</strong>。数据量少，你至少还能慢慢补；但如果数据结构错了、时间戳乱了、标签冲突了、动作越界了，那么你后面训练出来的任何结果都可能建立在错误基础上。</p>
@@ -3774,6 +3778,9 @@ python scripts/04_validate_dataset.py   --dataset_dir datasets/dataset_v0_sample
 </blockquote>
 <p>如果数据结构错了、时间乱了、动作越界了、标签冲突了，那么你后面做再多训练都只是在放大问题。相反，只要你先建立起一套最小数据质检链路，哪怕数据量还不大，也能在一个健康的基础上持续迭代。</p>
 <p>下一章，我们就顺着这个思路进入真实机器人系统的基础设施：既然数据要被可靠采集、同步和记录，那么在机器人世界里，最重要的通信中间层是什么？答案就是 <strong>ROS2</strong>。</p>
+<h3 id="补充结果图数据集动作分布对比"><a class="header" href="#补充结果图数据集动作分布对比">补充结果图：数据集动作分布对比</a></h3>
+<p><img src="chapters/../assets/images/ch08_dataset_v0_sample_action_distribution.png" alt="dataset_v0_sample 动作分布" /></p>
+<p><img src="chapters/../assets/images/ch08_dataset_v0_bad_examples_action_distribution.png" alt="dataset_v0_bad_examples 动作分布" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第-9-章ros2-最小知识体系为数据采集服务"><a class="header" href="#第-9-章ros2-最小知识体系为数据采集服务">第 9 章：ROS2 最小知识体系：为数据采集服务</a></h1>
 <p>前一章我们已经知道，机器人学习的数据不能只会“生成”，还必须会“检查”。但当你真正从离线 toy 数据走向真实机器人系统时，很快就会碰到一个更现实的问题：这些图像、关节状态、动作命令、任务信息，究竟是通过什么方式在系统里流动的？</p>
 <p>对于大多数现代机器人系统来说，这个答案就是 <strong>ROS2</strong>。不过，本章并不是一本完整的 ROS2 教程。我们的目标更聚焦：只讲那些<strong>为了数据采集与主线项目推进必须掌握的最小 ROS2 知识体系</strong>。</p>
@@ -4401,6 +4408,8 @@ python scripts/03_convert_rosbag_to_dataset.py   --bag_jsonl data/mock_rosbag/se
 <li>再回到验证与训练。</li>
 </ul>
 <p>这意味着第 1–10 章已经不仅是概念介绍，而是在逐步搭起一个真正能继续长成完整具身智能项目的系统骨架。</p>
+<h3 id="补充结果图rosbag-转换后动作分布"><a class="header" href="#补充结果图rosbag-转换后动作分布">补充结果图：rosbag 转换后动作分布</a></h3>
+<p><img src="chapters/../assets/images/ch10_dataset_from_mock_rosbag_action_distribution.png" alt="dataset_from_mock_rosbag 动作分布" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第-11-章tf机器人坐标系与相机空间理解"><a class="header" href="#第-11-章tf机器人坐标系与相机空间理解">第 11 章：TF、机器人坐标系与相机空间理解</a></h1>
 <p>前两章我们已经把机器人数据流接到了主线项目里：你知道了 ROS2 topic 是怎么流动的，也知道了 rosbag / mock rosbag 怎么转成 episode。接下来，工程会立刻碰到一个自动驾驶工程师很熟悉、但在机器人里又更“直接”的问题：</p>
 <blockquote>
@@ -5425,6 +5434,8 @@ python scripts/scripted_pick_and_place.py \
 <li>有数据质检。</li>
 </ul>
 <p>下一章开始，我们会继续往“真实数据”方向推进，进入遥操作数据采集。这时你会发现：有了规则 expert 作为对照基线，后续所有示教与学习过程都会更容易理解，也更容易诊断问题。</p>
+<h3 id="补充结果图scripted-dataset-动作分布"><a class="header" href="#补充结果图scripted-dataset-动作分布">补充结果图：scripted dataset 动作分布</a></h3>
+<p><img src="chapters/../assets/images/ch13_dataset_v1_scripted_action_distribution.png" alt="dataset_v1_scripted 动作分布" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第-14-章遥操作数据采集机器人学习的数据来源"><a class="header" href="#第-14-章遥操作数据采集机器人学习的数据来源">第 14 章：遥操作数据采集：机器人学习的数据来源</a></h1>
 <p>第 13 章我们用规则式 expert 跑通了第一个可执行的 pick-and-place 闭环，也生成了第一批 scripted episode。这个阶段非常关键，因为它让系统第一次真正“动了起来”。</p>
 <p>但如果你想继续往模仿学习、行为克隆、ACT、Diffusion Policy、VLA 方向走，很快就会遇到一个现实问题：</p>
@@ -6682,6 +6693,8 @@ python scripts/06_train_act_on_dataset_v0.py \
 <li>训练第一个可工作的策略 baseline。</li>
 </ul>
 <p>后续章节，我们将继续进入评测、失败回收、闭环迭代与更高阶系统设计，让这个基础闭环真正走向“工程化可持续演进”。</p>
+<h3 id="补充结果图act-baseline-训练损失曲线"><a class="header" href="#补充结果图act-baseline-训练损失曲线">补充结果图：ACT baseline 训练损失曲线</a></h3>
+<p><img src="chapters/../assets/images/ch16_act_dataset_v0_loss_curve.png" alt="ACT dataset_v0 loss curve" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="第-17-章评测协议不要只看成功视频"><a class="header" href="#第-17-章评测协议不要只看成功视频">第 17 章：评测协议：不要只看成功视频</a></h1>
 <p>到第 16 章为止，我们已经训练出了第一版 <code>policy_v1</code>。这意味着主线项目第一次具备了从数据到策略的完整流程：采集数据、构建 <code>dataset_v0</code>、训练 ACT-like baseline、保存 checkpoint、输出训练报告。</p>
 <p>但这并不意味着系统已经可用。真正的机器人项目里，最危险的误判之一就是：</p>
