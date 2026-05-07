@@ -282,14 +282,14 @@ z = d
 <hr />
 <h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-11-1-tf-树与从像素到抓取位姿的空间链路"><a class="header" href="#41-图-11-1-tf-树与从像素到抓取位姿的空间链路">4.1 图 11-1 TF 树与从像素到抓取位姿的空间链路</a></h3>
-<p><img src="../../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png" alt="图 11-1 TF 树与从像素到抓取位姿的空间链路" /></p>
+<p><img src="../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png" alt="图 11-1 TF 树与从像素到抓取位姿的空间链路" /></p>
 <p>这张图可以作为本章总图来理解。它把两件事连到了一起：</p>
 <ol>
 <li>上半部分说明了 <code>world / base_link / camera_link / end_effector / object_frame</code> 之间的关系；</li>
 <li>下半部分把“像素 + 深度”到“抓取位姿”的工程链路拆成 5 步。</li>
 </ol>
 <h3 id="42-图-11-2-eye-to-hand-与-eye-in-hand-对比"><a class="header" href="#42-图-11-2-eye-to-hand-与-eye-in-hand-对比">4.2 图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比</a></h3>
-<p><img src="../../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png" alt="图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比" /></p>
+<p><img src="../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png" alt="图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比" /></p>
 <p>这张图重点帮助你理解：相机安装方式不是部署细节，而是会直接影响标定链路、误差传播和遮挡模式的系统选择。</p>
 <h3 id="43-mermaid-图从视觉观测到抓取执行的最小链路"><a class="header" href="#43-mermaid-图从视觉观测到抓取执行的最小链路">4.3 Mermaid 图：从视觉观测到抓取执行的最小链路</a></h3>
 <pre class="mermaid">flowchart LR

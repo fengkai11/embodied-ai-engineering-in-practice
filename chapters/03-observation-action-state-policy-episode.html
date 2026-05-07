@@ -301,13 +301,13 @@
 <hr />
 <h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-3-1-observationstateactionpolicy-与-episode-的关系"><a class="header" href="#41-图-3-1-observationstateactionpolicy-与-episode-的关系">4.1 图 3-1 Observation、State、Action、Policy 与 Episode 的关系</a></h3>
-<p><img src="../../assets/images/ch03_obs_state_action_policy.png" alt="图 3-1 Observation、State、Action、Policy 与 Episode 的关系" /></p>
+<p><img src="../assets/images/ch03_obs_state_action_policy.png" alt="图 3-1 Observation、State、Action、Policy 与 Episode 的关系" /></p>
 <p>这张图建议你反复看几遍。因为它几乎就是整个机器人学习系统的最小框架：</p>
 <pre><code class="language-text">环境 / 机器人 → 产生 observation 与 state → 输入 policy → 输出 action → 作用回环境
 </code></pre>
 <p>而 episode，则是这个闭环从“开始”到“结束”的完整包络。</p>
 <h3 id="42-图-3-2-主线任务-pick_box_to_bin-的-episode-时间线"><a class="header" href="#42-图-3-2-主线任务-pick_box_to_bin-的-episode-时间线">4.2 图 3-2 主线任务 pick_box_to_bin 的 episode 时间线</a></h3>
-<p><img src="../../assets/images/ch03_episode_timeline.png" alt="图 3-2 主线任务 pick_box_to_bin 的 episode 时间线" /></p>
+<p><img src="../assets/images/ch03_episode_timeline.png" alt="图 3-2 主线任务 pick_box_to_bin 的 episode 时间线" /></p>
 <p>这张图把一次回合分解成了几个典型阶段：</p>
 <ol>
 <li>环境重置；</li>

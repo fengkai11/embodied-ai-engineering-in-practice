@@ -287,10 +287,10 @@
 <hr />
 <h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-17-1-机器人策略评测协议流程"><a class="header" href="#41-图-17-1-机器人策略评测协议流程">4.1 图 17-1 机器人策略评测协议流程</a></h3>
-<p><img src="../../assets/images/ch17_eval_protocol_flow.svg" alt="图 17-1 机器人策略评测协议流程" /></p>
+<p><img src="../assets/images/ch17_eval_protocol_flow.svg" alt="图 17-1 机器人策略评测协议流程" /></p>
 <p>这张图说明了一个最小评测协议：同一个 <code>policy_v1</code> 不能只跑一个固定场景，而要分别经过固定位置、随机位置、光照变化和物体扰动测试。所有 trial 都写入评测 CSV，最后统一生成报告。</p>
 <h3 id="42-图-17-2-评测指标关系图"><a class="header" href="#42-图-17-2-评测指标关系图">4.2 图 17-2 评测指标关系图</a></h3>
-<p><img src="../../assets/images/ch17_metric_dashboard.svg" alt="图 17-2 评测指标关系图" /></p>
+<p><img src="../assets/images/ch17_metric_dashboard.svg" alt="图 17-2 评测指标关系图" /></p>
 <p>这张图强调：success rate 只是入口，completion time、collision rate、drop rate、intervention rate 和 failure reason distribution 共同决定策略是否真的可用。</p>
 <h3 id="43-mermaid-图评测流程"><a class="header" href="#43-mermaid-图评测流程">4.3 Mermaid 图：评测流程</a></h3>
 <pre class="mermaid">flowchart TD

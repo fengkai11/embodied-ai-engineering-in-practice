@@ -970,7 +970,7 @@ Project initialized successfully.
 <hr />
 <h2 id="4-概念图--流程图--架构图-1"><a class="header" href="#4-概念图--流程图--架构图-1">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-2-1-自动驾驶数据闭环与机器人学习数据闭环对比"><a class="header" href="#41-图-2-1-自动驾驶数据闭环与机器人学习数据闭环对比">4.1 图 2-1 自动驾驶数据闭环与机器人学习数据闭环对比</a></h3>
-<p><img src="chapters/../../assets/images/ch02_data_closed_loop_comparison.png" alt="图 2-1 自动驾驶数据闭环与机器人学习数据闭环对比" /></p>
+<p><img src="chapters/../assets/images/ch02_data_closed_loop_comparison.png" alt="图 2-1 自动驾驶数据闭环与机器人学习数据闭环对比" /></p>
 <p>这张图把两个领域的共同结构直接摆在了一起。左侧是自动驾驶数据闭环，右侧是机器人学习数据闭环，中间则是几个关键概念映射：</p>
 <ul>
 <li><code>log → episode</code></li>
@@ -980,7 +980,7 @@ Project initialized successfully.
 </ul>
 <p>你应该从中看到的，不是“两个领域长得像”，而是“两个领域用的是同一种迭代逻辑”。</p>
 <h3 id="42-图-2-2-自动驾驶工程师迁移到机器人学习工程师的能力路径"><a class="header" href="#42-图-2-2-自动驾驶工程师迁移到机器人学习工程师的能力路径">4.2 图 2-2 自动驾驶工程师迁移到机器人学习工程师的能力路径</a></h3>
-<p><img src="chapters/../../assets/images/ch02_skill_transfer_path.png" alt="图 2-2 自动驾驶工程师迁移到机器人学习工程师的能力路径" /></p>
+<p><img src="chapters/../assets/images/ch02_skill_transfer_path.png" alt="图 2-2 自动驾驶工程师迁移到机器人学习工程师的能力路径" /></p>
 <p>这张图把“已有能力”和“待补能力”拆开了。很多人转型失败，不是因为能力不够，而是因为两边没有分开看：要么把自己想得太弱，要么把新领域想得太简单。</p>
 <h3 id="43-mermaid-图两个闭环的共性流程"><a class="header" href="#43-mermaid-图两个闭环的共性流程">4.3 Mermaid 图：两个闭环的共性流程</a></h3>
 <pre class="mermaid">flowchart TD
@@ -1414,13 +1414,13 @@ python scripts/01_generate_synthetic_episode.py
 <hr />
 <h2 id="4-概念图--流程图--架构图-2"><a class="header" href="#4-概念图--流程图--架构图-2">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-3-1-observationstateactionpolicy-与-episode-的关系"><a class="header" href="#41-图-3-1-observationstateactionpolicy-与-episode-的关系">4.1 图 3-1 Observation、State、Action、Policy 与 Episode 的关系</a></h3>
-<p><img src="chapters/../../assets/images/ch03_obs_state_action_policy.png" alt="图 3-1 Observation、State、Action、Policy 与 Episode 的关系" /></p>
+<p><img src="chapters/../assets/images/ch03_obs_state_action_policy.png" alt="图 3-1 Observation、State、Action、Policy 与 Episode 的关系" /></p>
 <p>这张图建议你反复看几遍。因为它几乎就是整个机器人学习系统的最小框架：</p>
 <pre><code class="language-text">环境 / 机器人 → 产生 observation 与 state → 输入 policy → 输出 action → 作用回环境
 </code></pre>
 <p>而 episode，则是这个闭环从“开始”到“结束”的完整包络。</p>
 <h3 id="42-图-3-2-主线任务-pick_box_to_bin-的-episode-时间线"><a class="header" href="#42-图-3-2-主线任务-pick_box_to_bin-的-episode-时间线">4.2 图 3-2 主线任务 pick_box_to_bin 的 episode 时间线</a></h3>
-<p><img src="chapters/../../assets/images/ch03_episode_timeline.png" alt="图 3-2 主线任务 pick_box_to_bin 的 episode 时间线" /></p>
+<p><img src="chapters/../assets/images/ch03_episode_timeline.png" alt="图 3-2 主线任务 pick_box_to_bin 的 episode 时间线" /></p>
 <p>这张图把一次回合分解成了几个典型阶段：</p>
 <ol>
 <li>环境重置；</li>
@@ -1870,7 +1870,7 @@ python scripts/02_visualize_episode.py \
 <hr />
 <h2 id="4-概念图--流程图--架构图-3"><a class="header" href="#4-概念图--流程图--架构图-3">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-4-1-单步-bc-与-act--chunk-prediction-对比"><a class="header" href="#41-图-4-1-单步-bc-与-act--chunk-prediction-对比">4.1 图 4-1 单步 BC 与 ACT / Chunk Prediction 对比</a></h3>
-<p><img src="chapters/../../assets/images/ch04_bc_vs_act.png" alt="图 4-1 单步 BC 与 ACT / Chunk Prediction 对比" /></p>
+<p><img src="chapters/../assets/images/ch04_bc_vs_act.png" alt="图 4-1 单步 BC 与 ACT / Chunk Prediction 对比" /></p>
 <p>这张图是本章最重要的图之一。它把两个核心差异讲得很直观：</p>
 <ul>
 <li>BC 输出单个 action；</li>
@@ -1878,7 +1878,7 @@ python scripts/02_visualize_episode.py \
 </ul>
 <p>更重要的是，图中用二维点到目标的例子把误差累积可视化了。左边单步 BC 的轨迹会逐渐偏离，右边 chunk predictor 的轨迹更平滑、更稳定。</p>
 <h3 id="42-图-4-2-模仿学习训练流程图"><a class="header" href="#42-图-4-2-模仿学习训练流程图">4.2 图 4-2 模仿学习训练流程图</a></h3>
-<p><img src="chapters/../../assets/images/ch04_imitation_learning_flow.png" alt="图 4-2 模仿学习训练流程图" /></p>
+<p><img src="chapters/../assets/images/ch04_imitation_learning_flow.png" alt="图 4-2 模仿学习训练流程图" /></p>
 <p>这张图把本章的最小训练闭环完整表达了出来：</p>
 <ol>
 <li>收集示范数据；</li>
@@ -2295,7 +2295,7 @@ reports/ch04_toy_act_rollout.png
 <hr />
 <h2 id="4-概念图--流程图--架构图-4"><a class="header" href="#4-概念图--流程图--架构图-4">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-5-1-vlm-与-vla-的区别"><a class="header" href="#41-图-5-1-vlm-与-vla-的区别">4.1 图 5-1 VLM 与 VLA 的区别</a></h3>
-<p><img src="chapters/../../assets/images/ch05_vlm_vs_vla.png" alt="图 5-1 VLM 与 VLA 的区别" /></p>
+<p><img src="chapters/../assets/images/ch05_vlm_vs_vla.png" alt="图 5-1 VLM 与 VLA 的区别" /></p>
 <p>这张图把本章最核心的差别表达得很清楚：</p>
 <ul>
 <li>左边 VLM 的输出是文本答案；</li>
@@ -2306,7 +2306,7 @@ reports/ch04_toy_act_rollout.png
 <p>VLA 的关键不是聊天，而是从 observation / instruction / state 到 action 的映射。</p>
 </blockquote>
 <h3 id="42-图-5-2-从自然语言指令到结构化机器人任务"><a class="header" href="#42-图-5-2-从自然语言指令到结构化机器人任务">4.2 图 5-2 从自然语言指令到结构化机器人任务</a></h3>
-<p><img src="chapters/../../assets/images/ch05_instruction_to_structured_task.png" alt="图 5-2 从自然语言指令到结构化机器人任务" /></p>
+<p><img src="chapters/../assets/images/ch05_instruction_to_structured_task.png" alt="图 5-2 从自然语言指令到结构化机器人任务" /></p>
 <p>这张图把本章主线项目新增能力说得很直观：先把自然语言任务解析成结构化 JSON / YAML，再让后续策略系统使用它。</p>
 <h3 id="43-mermaid-图vla-输入输出结构"><a class="header" href="#43-mermaid-图vla-输入输出结构">4.3 Mermaid 图：VLA 输入输出结构</a></h3>
 <pre class="mermaid">flowchart TD
@@ -2760,7 +2760,7 @@ python scripts/rule_based_task_parser.py \
 <hr />
 <h2 id="4-概念图--流程图--架构图-5"><a class="header" href="#4-概念图--流程图--架构图-5">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-6-1-从模糊目标到可执行任务"><a class="header" href="#41-图-6-1-从模糊目标到可执行任务">4.1 图 6-1 从模糊目标到可执行任务</a></h3>
-<p><img src="chapters/../../assets/images/ch06_task_decomposition_and_versions.png" alt="图 6-1 从模糊目标到可执行任务" /></p>
+<p><img src="chapters/../assets/images/ch06_task_decomposition_and_versions.png" alt="图 6-1 从模糊目标到可执行任务" /></p>
 <p>这张图做了三件事：</p>
 <ol>
 <li>把“整理桌面 / 做家务”这样的模糊目标拆成可执行子任务；</li>
@@ -2769,7 +2769,7 @@ python scripts/rule_based_task_parser.py \
 </ol>
 <p>如果你只记住本章一张图，我建议就记住这张。因为它实际上把任务定义的“问题空间”和“演进路径”都讲清楚了。</p>
 <h3 id="42-图-6-2-从自然语言任务到-yaml-配置"><a class="header" href="#42-图-6-2-从自然语言任务到-yaml-配置">4.2 图 6-2 从自然语言任务到 YAML 配置</a></h3>
-<p><img src="chapters/../../assets/images/ch06_task_yaml_config.png" alt="图 6-2 从自然语言任务到 YAML 配置" /></p>
+<p><img src="chapters/../assets/images/ch06_task_yaml_config.png" alt="图 6-2 从自然语言任务到 YAML 配置" /></p>
 <p>这张图强调的是：自然语言指令必须进一步规格化，变成可执行任务配置。它是第 5 章“语言 → 结构化任务”的延续，也是本章“结构化任务 → 正式配置文件”的落地。</p>
 <h3 id="43-mermaid-图模糊任务拆解"><a class="header" href="#43-mermaid-图模糊任务拆解">4.3 Mermaid 图：模糊任务拆解</a></h3>
 <pre class="mermaid">flowchart TD
@@ -3233,10 +3233,10 @@ python scripts/validate_task_config.py \
 <hr />
 <h2 id="4-概念图--流程图--架构图-6"><a class="header" href="#4-概念图--流程图--架构图-6">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-7-1-一条-episode-的目录结构"><a class="header" href="#41-图-7-1-一条-episode-的目录结构">4.1 图 7-1 一条 Episode 的目录结构</a></h3>
-<p><img src="chapters/../../assets/images/ch07_episode_structure.png" alt="图 7-1 一条 Episode 的目录结构" /></p>
+<p><img src="chapters/../assets/images/ch07_episode_structure.png" alt="图 7-1 一条 Episode 的目录结构" /></p>
 <p>这张图直观地说明：episode 不是单一视频文件，而是一个小型数据包，包含图像目录和结构化文件。</p>
 <h3 id="42-图-7-2-episode-的时间同步与数据关系"><a class="header" href="#42-图-7-2-episode-的时间同步与数据关系">4.2 图 7-2 Episode 的时间同步与数据关系</a></h3>
-<p><img src="chapters/../../assets/images/ch07_episode_sync.png" alt="图 7-2 Episode 的时间同步与数据关系" /></p>
+<p><img src="chapters/../assets/images/ch07_episode_sync.png" alt="图 7-2 Episode 的时间同步与数据关系" /></p>
 <p>这张图非常关键，因为它解释了为什么 observation、state、action 与 timestamp 必须对齐。它也是后面“数据质检”章节的重要铺垫。</p>
 <h3 id="43-mermaid-图episode-目录结构"><a class="header" href="#43-mermaid-图episode-目录结构">4.3 Mermaid 图：episode 目录结构</a></h3>
 <pre class="mermaid">flowchart TD
@@ -3576,10 +3576,10 @@ python scripts/01_generate_synthetic_episode.py
 <hr />
 <h2 id="4-概念图--流程图--架构图-7"><a class="header" href="#4-概念图--流程图--架构图-7">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-8-1-机器人数据质检流程"><a class="header" href="#41-图-8-1-机器人数据质检流程">4.1 图 8-1 机器人数据质检流程</a></h3>
-<p><img src="chapters/../../assets/images/ch08_dataset_quality_workflow.png" alt="图 8-1 机器人数据质检流程" /></p>
+<p><img src="chapters/../assets/images/ch08_dataset_quality_workflow.png" alt="图 8-1 机器人数据质检流程" /></p>
 <p>这张图展示了一个非常实用的最小数据质检流水线：从读取数据集开始，逐步检查目录结构、<code>meta.json</code>、<code>states/actions</code>、图像数量、时间戳、动作范围和 success/failure 标签，最后输出 <code>dataset report</code>。它也是本章脚本 <code>04_validate_dataset.py</code> 的结构蓝图。</p>
 <h3 id="42-图-8-2-数据异常分类与动作分布分析"><a class="header" href="#42-图-8-2-数据异常分类与动作分布分析">4.2 图 8-2 数据异常分类与动作分布分析</a></h3>
-<p><img src="chapters/../../assets/images/ch08_data_anomaly_and_action_distribution.png" alt="图 8-2 数据异常分类与动作分布分析" /></p>
+<p><img src="chapters/../assets/images/ch08_data_anomaly_and_action_distribution.png" alt="图 8-2 数据异常分类与动作分布分析" /></p>
 <p>这张图强调两个重点：</p>
 <ul>
 <li>左半部分是异常分类框架；</li>
@@ -3880,7 +3880,7 @@ python scripts/04_validate_dataset.py   --dataset_dir datasets/dataset_v0_sample
 <hr />
 <h2 id="4-概念图--流程图--架构图-8"><a class="header" href="#4-概念图--流程图--架构图-8">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-9-1-ros2-节点与-topic-通信图"><a class="header" href="#41-图-9-1-ros2-节点与-topic-通信图">4.1 图 9-1 ROS2 节点与 Topic 通信图</a></h3>
-<p><img src="chapters/../../assets/images/ch09_ros2_node_topic_communication.png" alt="图 9-1 ROS2 节点与 Topic 通信图" /></p>
+<p><img src="chapters/../assets/images/ch09_ros2_node_topic_communication.png" alt="图 9-1 ROS2 节点与 Topic 通信图" /></p>
 <p>这张图展示了主线项目中的最小通信骨架：</p>
 <ul>
 <li><code>camera_node</code> 发布图像；</li>
@@ -3890,7 +3890,7 @@ python scripts/04_validate_dataset.py   --dataset_dir datasets/dataset_v0_sample
 <li><code>data_recorder_node</code> 订阅这些数据并输出 episode dataset。</li>
 </ul>
 <h3 id="42-图-9-2-ros2-topic-到-episode-字段映射"><a class="header" href="#42-图-9-2-ros2-topic-到-episode-字段映射">4.2 图 9-2 ROS2 Topic 到 Episode 字段映射</a></h3>
-<p><img src="chapters/../../assets/images/ch09_ros2_topic_to_episode_mapping.png" alt="图 9-2 ROS2 Topic 到 Episode 字段映射" /></p>
+<p><img src="chapters/../assets/images/ch09_ros2_topic_to_episode_mapping.png" alt="图 9-2 ROS2 Topic 到 Episode 字段映射" /></p>
 <p>这张图非常关键，因为它直接把 ROS2 数据流和前面几章定义的 episode 结构连接了起来：</p>
 <ul>
 <li>相机 topic → <code>images/*.png</code></li>
@@ -4187,7 +4187,7 @@ python ros2_ws/src/shelf_demo_data_recorder/mock_ros2_pubsub_demo.py   --output_
 <hr />
 <h2 id="4-概念图--流程图--架构图-9"><a class="header" href="#4-概念图--流程图--架构图-9">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-10-1-rosbag-记录与回放流程"><a class="header" href="#41-图-10-1-rosbag-记录与回放流程">4.1 图 10-1 rosbag 记录与回放流程</a></h3>
-<p><img src="chapters/../../assets/images/ch10_rosbag_record_and_replay.png" alt="图 10-1 rosbag 记录与回放流程" /></p>
+<p><img src="chapters/../assets/images/ch10_rosbag_record_and_replay.png" alt="图 10-1 rosbag 记录与回放流程" /></p>
 <p>这张图展示了 rosbag 的两个核心动作：</p>
 <ul>
 <li><code>record</code>：订阅并记录多 topic；</li>
@@ -4195,7 +4195,7 @@ python ros2_ws/src/shelf_demo_data_recorder/mock_ros2_pubsub_demo.py   --output_
 </ul>
 <p>它强调了 rosbag 和自动驾驶 log 的类比关系：它们都不是最终训练数据本身，而是用于回放和构建数据集的原始记录材料。</p>
 <h3 id="42-图-10-2-rosbag-到-episode-的转换流程"><a class="header" href="#42-图-10-2-rosbag-到-episode-的转换流程">4.2 图 10-2 rosbag 到 episode 的转换流程</a></h3>
-<p><img src="chapters/../../assets/images/ch10_rosbag_to_episode_conversion.png" alt="图 10-2 rosbag 到 episode 的转换流程" /></p>
+<p><img src="chapters/../assets/images/ch10_rosbag_to_episode_conversion.png" alt="图 10-2 rosbag 到 episode 的转换流程" /></p>
 <p>这张图把转换过程拆得非常清楚：</p>
 <ul>
 <li>时间同步；</li>
@@ -4520,14 +4520,14 @@ z = d
 <hr />
 <h2 id="4-概念图--流程图--架构图-10"><a class="header" href="#4-概念图--流程图--架构图-10">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-11-1-tf-树与从像素到抓取位姿的空间链路"><a class="header" href="#41-图-11-1-tf-树与从像素到抓取位姿的空间链路">4.1 图 11-1 TF 树与从像素到抓取位姿的空间链路</a></h3>
-<p><img src="chapters/../../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png" alt="图 11-1 TF 树与从像素到抓取位姿的空间链路" /></p>
+<p><img src="chapters/../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png" alt="图 11-1 TF 树与从像素到抓取位姿的空间链路" /></p>
 <p>这张图可以作为本章总图来理解。它把两件事连到了一起：</p>
 <ol>
 <li>上半部分说明了 <code>world / base_link / camera_link / end_effector / object_frame</code> 之间的关系；</li>
 <li>下半部分把“像素 + 深度”到“抓取位姿”的工程链路拆成 5 步。</li>
 </ol>
 <h3 id="42-图-11-2-eye-to-hand-与-eye-in-hand-对比"><a class="header" href="#42-图-11-2-eye-to-hand-与-eye-in-hand-对比">4.2 图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比</a></h3>
-<p><img src="chapters/../../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png" alt="图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比" /></p>
+<p><img src="chapters/../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png" alt="图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比" /></p>
 <p>这张图重点帮助你理解：相机安装方式不是部署细节，而是会直接影响标定链路、误差传播和遮挡模式的系统选择。</p>
 <h3 id="43-mermaid-图从视觉观测到抓取执行的最小链路"><a class="header" href="#43-mermaid-图从视觉观测到抓取执行的最小链路">4.3 Mermaid 图：从视觉观测到抓取执行的最小链路</a></h3>
 <pre class="mermaid">flowchart LR
@@ -4849,7 +4849,7 @@ print('base point   =', p_b)
 <hr />
 <h2 id="4-概念图--流程图--架构图-11"><a class="header" href="#4-概念图--流程图--架构图-11">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-12-1-机械臂fkik-与-moveit2-规划流程"><a class="header" href="#41-图-12-1-机械臂fkik-与-moveit2-规划流程">4.1 图 12-1 机械臂、FK/IK 与 MoveIt2 规划流程</a></h3>
-<p><img src="chapters/../../assets/images/ch12_robot_arm_fk_ik_moveit2.png" alt="图 12-1 机械臂、FK/IK 与 MoveIt2 规划流程" /></p>
+<p><img src="chapters/../assets/images/ch12_robot_arm_fk_ik_moveit2.png" alt="图 12-1 机械臂、FK/IK 与 MoveIt2 规划流程" /></p>
 <p>这张图把本章的知识压缩成了三个层次：</p>
 <ol>
 <li>左上：6-DOF 机械臂的基本结构；</li>
@@ -4857,7 +4857,7 @@ print('base point   =', p_b)
 <li>下方：MoveIt2 从目标位姿到执行的最小流程。</li>
 </ol>
 <h3 id="42-图-12-2-规划场景与抓取路径示意"><a class="header" href="#42-图-12-2-规划场景与抓取路径示意">4.2 图 12-2 规划场景与抓取路径示意</a></h3>
-<p><img src="chapters/../../assets/images/ch12_planning_scene_and_grasp_path.png" alt="图 12-2 规划场景与抓取路径示意" /></p>
+<p><img src="chapters/../assets/images/ch12_planning_scene_and_grasp_path.png" alt="图 12-2 规划场景与抓取路径示意" /></p>
 <p>这张图特别适合与第 13 章衔接，因为它已经把 <code>pick_box_to_bin</code> 的几个关键阶段画出来了：</p>
 <ul>
 <li>预抓取位姿；</li>
@@ -5182,10 +5182,10 @@ print(arm.get_state())
 <hr />
 <h2 id="4-概念图--流程图--架构图-12"><a class="header" href="#4-概念图--流程图--架构图-12">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-13-1-规则式-pick-and-place-状态机"><a class="header" href="#41-图-13-1-规则式-pick-and-place-状态机">4.1 图 13-1 规则式 Pick-and-Place 状态机</a></h3>
-<p><img src="chapters/../../assets/images/ch13_scripted_pick_and_place_state_machine.png" alt="图 13-1 规则式 Pick-and-Place 状态机" /></p>
+<p><img src="chapters/../assets/images/ch13_scripted_pick_and_place_state_machine.png" alt="图 13-1 规则式 Pick-and-Place 状态机" /></p>
 <p>这张图就是本章最核心的“任务剧本”。它把脚本策略从一堆 if/else 逻辑，变成了可视化的阶段流。</p>
 <h3 id="42-图-13-2-从规则-expert-rollout-到-episode-数据"><a class="header" href="#42-图-13-2-从规则-expert-rollout-到-episode-数据">4.2 图 13-2 从规则 Expert Rollout 到 Episode 数据</a></h3>
-<p><img src="chapters/../../assets/images/ch13_expert_rollout_to_episode.png" alt="图 13-2 从规则 Expert Rollout 到 Episode 数据" /></p>
+<p><img src="chapters/../assets/images/ch13_expert_rollout_to_episode.png" alt="图 13-2 从规则 Expert Rollout 到 Episode 数据" /></p>
 <p>这张图把本章与前面所有章节连接起来：</p>
 <ul>
 <li>输入端：观测与状态；</li>
@@ -5573,7 +5573,7 @@ python scripts/scripted_pick_and_place.py \
 <hr />
 <h2 id="4-概念图--流程图--架构图-13"><a class="header" href="#4-概念图--流程图--架构图-13">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-14-1-遥操作数据采集系统结构"><a class="header" href="#41-图-14-1-遥操作数据采集系统结构">4.1 图 14-1 遥操作数据采集系统结构</a></h3>
-<p><img src="chapters/../../assets/images/ch14_teleoperation_system_structure.png" alt="图 14-1 遥操作数据采集系统结构" /></p>
+<p><img src="chapters/../assets/images/ch14_teleoperation_system_structure.png" alt="图 14-1 遥操作数据采集系统结构" /></p>
 <p>这张图建议你反复看。它不是在讲某个具体产品，而是在讲一个通用的机器人学习采集结构：</p>
 <ul>
 <li>命令流从人到机器人；</li>
@@ -5582,7 +5582,7 @@ python scripts/scripted_pick_and_place.py \
 <li>最终以 episode 形式落盘。</li>
 </ul>
 <h3 id="42-图-14-2-从人类示范到-episode-数据"><a class="header" href="#42-图-14-2-从人类示范到-episode-数据">4.2 图 14-2 从人类示范到 Episode 数据</a></h3>
-<p><img src="chapters/../../assets/images/ch14_human_demo_to_episode_data_flow.png" alt="图 14-2 从人类示范到 Episode 数据" /></p>
+<p><img src="chapters/../assets/images/ch14_human_demo_to_episode_data_flow.png" alt="图 14-2 从人类示范到 Episode 数据" /></p>
 <p>这张图把“演示”与“训练数据”之间的转换过程画得很直观。它提醒我们：</p>
 <ul>
 <li>演示本身不是数据集；</li>
@@ -5961,7 +5961,7 @@ python scripts/keyboard_teleop_sim.py \
 <hr />
 <h2 id="4-概念图--流程图--架构图-14"><a class="header" href="#4-概念图--流程图--架构图-14">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-15-1-dataset_v0-构建流程"><a class="header" href="#41-图-15-1-dataset_v0-构建流程">4.1 图 15-1 dataset_v0 构建流程</a></h3>
-<p><img src="chapters/../../assets/images/ch15_dataset_v0_build_pipeline.png" alt="图 15-1 dataset_v0 构建流程" /></p>
+<p><img src="chapters/../assets/images/ch15_dataset_v0_build_pipeline.png" alt="图 15-1 dataset_v0 构建流程" /></p>
 <p>这张图把本章的主线讲清楚了：</p>
 <ul>
 <li>任务配置决定采什么；</li>
@@ -5971,7 +5971,7 @@ python scripts/keyboard_teleop_sim.py \
 <li>最后生成 dataset report。</li>
 </ul>
 <h3 id="42-图-15-2-dataset_v0-划分与版本管理"><a class="header" href="#42-图-15-2-dataset_v0-划分与版本管理">4.2 图 15-2 dataset_v0 划分与版本管理</a></h3>
-<p><img src="chapters/../../assets/images/ch15_dataset_split_and_versioning.png" alt="图 15-2 dataset_v0 划分与版本管理" /></p>
+<p><img src="chapters/../assets/images/ch15_dataset_split_and_versioning.png" alt="图 15-2 dataset_v0 划分与版本管理" /></p>
 <p>这张图的重点在于强调：</p>
 <ul>
 <li>划分不是简单随机打乱；</li>
@@ -6375,7 +6375,7 @@ for item in items:
 <hr />
 <h2 id="4-概念图--流程图--架构图-15"><a class="header" href="#4-概念图--流程图--架构图-15">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-16-1-act-baseline-训练流程"><a class="header" href="#41-图-16-1-act-baseline-训练流程">4.1 图 16-1 ACT Baseline 训练流程</a></h3>
-<p><img src="chapters/../../assets/images/ch16_act_training_flow.png" alt="图 16-1 ACT Baseline 训练流程" /></p>
+<p><img src="chapters/../assets/images/ch16_act_training_flow.png" alt="图 16-1 ACT Baseline 训练流程" /></p>
 <p>这张图展示了从 <code>dataset_v0</code> 到 <code>policy_v1</code> 的主流程：</p>
 <ul>
 <li>dataset_v0 -&gt; DataLoader</li>
@@ -6388,7 +6388,7 @@ for item in items:
 <li>Validation</li>
 </ul>
 <h3 id="42-图-16-2-action-chunk-与-policy-rollout"><a class="header" href="#42-图-16-2-action-chunk-与-policy-rollout">4.2 图 16-2 action chunk 与 policy rollout</a></h3>
-<p><img src="chapters/../../assets/images/ch16_action_chunk_and_policy_rollout.png" alt="图 16-2 action chunk 与 policy rollout" /></p>
+<p><img src="chapters/../assets/images/ch16_action_chunk_and_policy_rollout.png" alt="图 16-2 action chunk 与 policy rollout" /></p>
 <p>这张图非常重要，因为它把两个概念清晰分开了：</p>
 <ul>
 <li>左边是“单次推理预测一个 chunk”；</li>
@@ -6806,10 +6806,10 @@ python scripts/06_train_act_on_dataset_v0.py \
 <hr />
 <h2 id="4-概念图--流程图--架构图-16"><a class="header" href="#4-概念图--流程图--架构图-16">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-17-1-机器人策略评测协议流程"><a class="header" href="#41-图-17-1-机器人策略评测协议流程">4.1 图 17-1 机器人策略评测协议流程</a></h3>
-<p><img src="chapters/../../assets/images/ch17_eval_protocol_flow.svg" alt="图 17-1 机器人策略评测协议流程" /></p>
+<p><img src="chapters/../assets/images/ch17_eval_protocol_flow.svg" alt="图 17-1 机器人策略评测协议流程" /></p>
 <p>这张图说明了一个最小评测协议：同一个 <code>policy_v1</code> 不能只跑一个固定场景，而要分别经过固定位置、随机位置、光照变化和物体扰动测试。所有 trial 都写入评测 CSV，最后统一生成报告。</p>
 <h3 id="42-图-17-2-评测指标关系图"><a class="header" href="#42-图-17-2-评测指标关系图">4.2 图 17-2 评测指标关系图</a></h3>
-<p><img src="chapters/../../assets/images/ch17_metric_dashboard.svg" alt="图 17-2 评测指标关系图" /></p>
+<p><img src="chapters/../assets/images/ch17_metric_dashboard.svg" alt="图 17-2 评测指标关系图" /></p>
 <p>这张图强调：success rate 只是入口，completion time、collision rate、drop rate、intervention rate 和 failure reason distribution 共同决定策略是否真的可用。</p>
 <h3 id="43-mermaid-图评测流程"><a class="header" href="#43-mermaid-图评测流程">4.3 Mermaid 图：评测流程</a></h3>
 <pre class="mermaid">flowchart TD
@@ -7139,10 +7139,10 @@ failure_reason
 <hr />
 <h2 id="4-概念图--流程图--架构图-17"><a class="header" href="#4-概念图--流程图--架构图-17">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-18-1-失败分类树与改进方向"><a class="header" href="#41-图-18-1-失败分类树与改进方向">4.1 图 18-1 失败分类树与改进方向</a></h3>
-<p><img src="chapters/../../assets/images/ch18_failure_taxonomy.svg" alt="图 18-1 失败分类树与改进方向" /></p>
+<p><img src="chapters/../assets/images/ch18_failure_taxonomy.svg" alt="图 18-1 失败分类树与改进方向" /></p>
 <p>这张图把失败分成四类：感知失败、策略失败、控制失败、环境失败。每一类失败都对应不同的改进动作：补采视觉数据、改策略阶段、调整控制参数或扩大场景随机化。</p>
 <h3 id="42-图-18-2-失败回收补采数据与-policy_v2-闭环"><a class="header" href="#42-图-18-2-失败回收补采数据与-policy_v2-闭环">4.2 图 18-2 失败回收、补采数据与 policy_v2 闭环</a></h3>
-<p><img src="chapters/../../assets/images/ch18_failure_loop_policy_compare.svg" alt="图 18-2 失败回收、补采数据与 policy_v2 闭环" /></p>
+<p><img src="chapters/../assets/images/ch18_failure_loop_policy_compare.svg" alt="图 18-2 失败回收、补采数据与 policy_v2 闭环" /></p>
 <p>这张图展示了本章的主线闭环：从 eval CSV 中筛出失败样本，做失败分类，生成补采计划，构建下一版数据集，训练 <code>policy_v2</code>，再用同一评测协议对比。</p>
 <h3 id="43-mermaid-图失败驱动数据闭环"><a class="header" href="#43-mermaid-图失败驱动数据闭环">4.3 Mermaid 图：失败驱动数据闭环</a></h3>
 <pre class="mermaid">flowchart TD
@@ -7495,7 +7495,7 @@ reason_counter = Counter(r.get("failure_reason", "unknown") for r in failures)
 <hr />
 <h2 id="3-从桌面任务到货架任务的六阶段演进"><a class="header" href="#3-从桌面任务到货架任务的六阶段演进">3. 从桌面任务到货架任务的六阶段演进</a></h2>
 <h3 id="31-图-19-1从桌面拣放到货架补货--陈列机器人的六阶段路径"><a class="header" href="#31-图-19-1从桌面拣放到货架补货--陈列机器人的六阶段路径">3.1 图 19-1：从桌面拣放到货架补货 / 陈列机器人的六阶段路径</a></h3>
-<p><img src="chapters/../../assets/images/ch19_desktop_to_shelf_robot_evolution.png" alt="图 19-1 从桌面拣放到货架补货 / 陈列机器人的六阶段演进路径" /></p>
+<p><img src="chapters/../assets/images/ch19_desktop_to_shelf_robot_evolution.png" alt="图 19-1 从桌面拣放到货架补货 / 陈列机器人的六阶段演进路径" /></p>
 <p>这张图是本章的主线图，它非常重要，因为它告诉你：</p>
 <ul>
 <li>不是一上来就做“全功能理货机器人”；</li>
@@ -7605,7 +7605,7 @@ reason_counter = Counter(r.get("failure_reason", "unknown") for r in failures)
 <hr />
 <h2 id="6-理货机器人的最小分层架构"><a class="header" href="#6-理货机器人的最小分层架构">6. 理货机器人的最小分层架构</a></h2>
 <h3 id="61-图-19-2货架陈列机器人架构"><a class="header" href="#61-图-19-2货架陈列机器人架构">6.1 图 19-2：货架陈列机器人架构</a></h3>
-<p><img src="chapters/../../assets/images/ch19_shelf_merchandising_robot_architecture.png" alt="图 19-2 货架陈列机器人架构" /></p>
+<p><img src="chapters/../assets/images/ch19_shelf_merchandising_robot_architecture.png" alt="图 19-2 货架陈列机器人架构" /></p>
 <p>这张图把理货机器人的最小系统结构分成了三层：</p>
 <ol>
 <li><strong>感知层</strong>：货架感知、商品检测、格口建模、异常检测；</li>
@@ -7965,7 +7965,7 @@ python scripts/shelf_anomaly_detection_demo.py \
 <hr />
 <h2 id="3-如何把主线项目转化成作品集"><a class="header" href="#3-如何把主线项目转化成作品集">3. 如何把主线项目转化成作品集</a></h2>
 <h3 id="31-图-20-1将机器人学习项目转化为作品集与职业材料"><a class="header" href="#31-图-20-1将机器人学习项目转化为作品集与职业材料">3.1 图 20-1：将机器人学习项目转化为作品集与职业材料</a></h3>
-<p><img src="chapters/../../assets/images/ch20_project_to_portfolio_map.png" alt="图 20-1 将机器人学习项目转化为作品集与职业材料" /></p>
+<p><img src="chapters/../assets/images/ch20_project_to_portfolio_map.png" alt="图 20-1 将机器人学习项目转化为作品集与职业材料" /></p>
 <p>这张图把本章最重要的收束逻辑画了出来：</p>
 <ul>
 <li>左边是机器人学习项目本身；</li>
@@ -8129,7 +8129,7 @@ python scripts/shelf_anomaly_detection_demo.py \
 <hr />
 <h2 id="8-自动驾驶--机器人算法工程师的迁移优势"><a class="header" href="#8-自动驾驶--机器人算法工程师的迁移优势">8. 自动驾驶 / 机器人算法工程师的迁移优势</a></h2>
 <h3 id="81-图-20-2从自动驾驶到具身智能的职业与学习路线图"><a class="header" href="#81-图-20-2从自动驾驶到具身智能的职业与学习路线图">8.1 图 20-2：从自动驾驶到具身智能的职业与学习路线图</a></h3>
-<p><img src="chapters/../../assets/images/ch20_career_learning_roadmap.png" alt="图 20-2 从自动驾驶到具身智能的职业与学习路线图" /></p>
+<p><img src="chapters/../assets/images/ch20_career_learning_roadmap.png" alt="图 20-2 从自动驾驶到具身智能的职业与学习路线图" /></p>
 <p>这张图把一个很重要的现实问题讲清楚了：</p>
 <ul>
 <li>你不是从零开始；</li>
@@ -9032,7 +9032,7 @@ mdbook build
 <pre><code class="language-text">assets/images/ch02_data_closed_loop_comparison.png
 </code></pre>
 <p>则图片引用可以写成：</p>
-<pre><code class="language-markdown">![图示](../../assets/images/ch02_data_closed_loop_comparison.png)
+<pre><code class="language-markdown">![图示](../assets/images/ch02_data_closed_loop_comparison.png)
 </code></pre>
 <p>为了减少混乱，建议最终整理时统一路径。</p>
 <hr />

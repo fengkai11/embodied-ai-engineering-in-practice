@@ -277,10 +277,10 @@
 <hr />
 <h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-图-18-1-失败分类树与改进方向"><a class="header" href="#41-图-18-1-失败分类树与改进方向">4.1 图 18-1 失败分类树与改进方向</a></h3>
-<p><img src="../../assets/images/ch18_failure_taxonomy.svg" alt="图 18-1 失败分类树与改进方向" /></p>
+<p><img src="../assets/images/ch18_failure_taxonomy.svg" alt="图 18-1 失败分类树与改进方向" /></p>
 <p>这张图把失败分成四类：感知失败、策略失败、控制失败、环境失败。每一类失败都对应不同的改进动作：补采视觉数据、改策略阶段、调整控制参数或扩大场景随机化。</p>
 <h3 id="42-图-18-2-失败回收补采数据与-policy_v2-闭环"><a class="header" href="#42-图-18-2-失败回收补采数据与-policy_v2-闭环">4.2 图 18-2 失败回收、补采数据与 policy_v2 闭环</a></h3>
-<p><img src="../../assets/images/ch18_failure_loop_policy_compare.svg" alt="图 18-2 失败回收、补采数据与 policy_v2 闭环" /></p>
+<p><img src="../assets/images/ch18_failure_loop_policy_compare.svg" alt="图 18-2 失败回收、补采数据与 policy_v2 闭环" /></p>
 <p>这张图展示了本章的主线闭环：从 eval CSV 中筛出失败样本，做失败分类，生成补采计划，构建下一版数据集，训练 <code>policy_v2</code>，再用同一评测协议对比。</p>
 <h3 id="43-mermaid-图失败驱动数据闭环"><a class="header" href="#43-mermaid-图失败驱动数据闭环">4.3 Mermaid 图：失败驱动数据闭环</a></h3>
 <pre class="mermaid">flowchart TD
