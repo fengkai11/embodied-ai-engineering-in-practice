@@ -1891,13 +1891,16 @@ python scripts/02_visualize_episode.py \
 <li>再训练。</li>
 </ol>
 <p>这张图很重要，因为它不是“玩具任务专用图”，而是后面真实机器人训练都适用的通用骨架。</p>
-<h3 id="43-mermaid-图bc-与-action-chunk-的输出差异"><a class="header" href="#43-mermaid-图bc-与-action-chunk-的输出差异">4.3 Mermaid 图：BC 与 action chunk 的输出差异</a></h3>
+<h3 id="43-图-4-3-toy-rollout-对比图bc-vs-chunk"><a class="header" href="#43-图-4-3-toy-rollout-对比图bc-vs-chunk">4.3 图 4-3 toy rollout 对比图（BC vs Chunk）</a></h3>
+<p><img src="chapters/../assets/images/ch04_toy_act_rollout.png" alt="图 4-3 toy rollout 对比图（BC vs Chunk）" /></p>
+<p>这张图来自 <code>reports/ch04_toy_act_rollout.png</code>，用于直观看到两类策略在 rollout 轨迹上的差异。</p>
+<h3 id="44-mermaid-图bc-与-action-chunk-的输出差异"><a class="header" href="#44-mermaid-图bc-与-action-chunk-的输出差异">4.4 Mermaid 图：BC 与 action chunk 的输出差异</a></h3>
 <pre class="mermaid">flowchart LR
     A[Observation_t / State_t] --&gt; B[Policy]
     B --&gt; C1[BC: Action_t]
     B --&gt; C2[Chunk: Action_t:t+k]
 </pre>
-<h3 id="44-mermaid-图模仿学习最小闭环"><a class="header" href="#44-mermaid-图模仿学习最小闭环">4.4 Mermaid 图：模仿学习最小闭环</a></h3>
+<h3 id="45-mermaid-图模仿学习最小闭环"><a class="header" href="#45-mermaid-图模仿学习最小闭环">4.5 Mermaid 图：模仿学习最小闭环</a></h3>
 <pre class="mermaid">flowchart TD
     A[示范轨迹] --&gt; B[数据清洗/切片]
     B --&gt; C[训练样本]
