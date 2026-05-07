@@ -524,7 +524,7 @@ python scripts/10_generate_portfolio_manifest.py \
 <hr />
 <h2 id="12-mermaid-图"><a class="header" href="#12-mermaid-图">12. Mermaid 图</a></h2>
 <h3 id="121-职业能力迁移图"><a class="header" href="#121-职业能力迁移图">12.1 职业能力迁移图</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[自动驾驶感知经验] --&gt; B[机器人感知]
     A --&gt; C[空间理解]
     A --&gt; D[数据闭环]
@@ -532,9 +532,9 @@ python scripts/10_generate_portfolio_manifest.py \
     C --&gt; E
     D --&gt; E
     E --&gt; F[具身智能工程师]
-</code></pre>
+</pre>
 <h3 id="122-项目作品集结构图"><a class="header" href="#122-项目作品集结构图">12.2 项目作品集结构图</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[robot-learning-shelf-demo] --&gt; B[README]
     A --&gt; C[实验报告]
     A --&gt; D[数据说明]
@@ -543,16 +543,16 @@ python scripts/10_generate_portfolio_manifest.py \
     A --&gt; G[简历项目描述]
     A --&gt; H[面试讲解材料]
     H --&gt; I[作品集输出]
-</code></pre>
+</pre>
 <h3 id="123-后续学习路线图"><a class="header" href="#123-后续学习路线图">12.3 后续学习路线图</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[当前主线项目] --&gt; B[感知与操作]
     A --&gt; C[数据与学习]
     A --&gt; D[系统与部署]
     B --&gt; E[多模态感知 / 6D 理解 / manipulation]
     C --&gt; F[采集 / 仿真 / 模型训练]
     D --&gt; G[ROS2 / MoveIt2 / 部署优化]
-</code></pre>
+</pre>
 <hr />
 <h2 id="13-常见错误"><a class="header" href="#13-常见错误">13. 常见错误</a></h2>
 <h3 id="131-作品集只放代码不放结果"><a class="header" href="#131-作品集只放代码不放结果">13.1 作品集只放代码，不放结果</a></h3>
@@ -671,6 +671,8 @@ python scripts/10_generate_portfolio_manifest.py \
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

@@ -320,7 +320,7 @@
 </ol>
 <p>同时，它也提醒你：即便任务失败，这仍然是一个 failure episode，而不是“无效数据”。很多有价值的学习信息，就藏在失败 episode 里。</p>
 <h3 id="43-mermaid-图episode-时间步视角"><a class="header" href="#43-mermaid-图episode-时间步视角">4.3 Mermaid 图：episode 时间步视角</a></h3>
-<pre><code class="language-mermaid">sequenceDiagram
+<pre class="mermaid">sequenceDiagram
     participant Env as Environment
     participant Obs as Observation
     participant Pol as Policy
@@ -333,16 +333,16 @@
     Pol-&gt;&gt;Act: 输出 action_t
     Act-&gt;&gt;Robot: 执行动作
     Robot-&gt;&gt;Env: 改变环境
-</code></pre>
+</pre>
 <p>这张图强调的是“一个时间步”内部发生的事情。</p>
 <h3 id="44-mermaid-图episodetrajectoryrollout-的关系"><a class="header" href="#44-mermaid-图episodetrajectoryrollout-的关系">4.4 Mermaid 图：Episode、Trajectory、Rollout 的关系</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[按时间组织的数据序列] --&gt; B[Trajectory]
     B --&gt; C[一次完整任务执行]
     C --&gt; D[Episode]
     D --&gt; E[用当前 policy 实际执行]
     E --&gt; F[Rollout]
-</code></pre>
+</pre>
 <p>这张图不是严格数学定义，而是帮助初学者建立概念层次。</p>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
@@ -619,6 +619,8 @@ python scripts/02_visualize_episode.py \
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

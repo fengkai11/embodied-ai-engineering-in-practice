@@ -283,7 +283,7 @@
 <p><img src="../../assets/images/ch18_failure_loop_policy_compare.svg" alt="图 18-2 失败回收、补采数据与 policy_v2 闭环" /></p>
 <p>这张图展示了本章的主线闭环：从 eval CSV 中筛出失败样本，做失败分类，生成补采计划，构建下一版数据集，训练 <code>policy_v2</code>，再用同一评测协议对比。</p>
 <h3 id="43-mermaid-图失败驱动数据闭环"><a class="header" href="#43-mermaid-图失败驱动数据闭环">4.3 Mermaid 图：失败驱动数据闭环</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[policy_v1 评测失败样本] --&gt; B[失败分类 taxonomy]
     B --&gt; C[统计主要失败类型]
     C --&gt; D[制定补采计划]
@@ -293,15 +293,15 @@
     G --&gt; H[同协议重新评测]
     H --&gt; I[policy_v1 / v2 对比]
     I --&gt; A
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图失败类型到行动"><a class="header" href="#44-mermaid-图失败类型到行动">4.4 Mermaid 图：失败类型到行动</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[perception_miss] --&gt; B[补采光照/遮挡/深度样本]
     C[grasp_offset] --&gt; D[补采对齐与 pre-grasp 修正]
     E[drop_during_transfer] --&gt; F[补采夹持稳定与慢速搬运]
     G[collision_risk] --&gt; H[补采避障与安全路径]
     I[timeout] --&gt; J[补采阶段切换与恢复]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-从-eval-csv-到-failure-database"><a class="header" href="#5-从-eval-csv-到-failure-database">5. 从 Eval CSV 到 Failure Database</a></h2>
 <p>第 17 章输出了：</p>
@@ -593,6 +593,8 @@ reason_counter = Counter(r.get("failure_reason", "unknown") for r in failures)
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

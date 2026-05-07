@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#1f5aa6"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="600.0" y="52" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0b3d78">图 18-1 失败分类树与改进方向</text>
+<text x="600.0" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#334155">先分类，再决定补数据、改策略、调控制还是扩大场景覆盖</text>
+<line x1="615" y1="190" x2="215" y2="260" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="615" y1="190" x2="475" y2="260" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="615" y1="190" x2="735" y2="260" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="615" y1="190" x2="995" y2="260" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="215" y1="350" x2="215" y2="470" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="475" y1="350" x2="475" y2="470" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="735" y1="350" x2="735" y2="470" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="995" y1="350" x2="995" y2="470" stroke="#1f5aa6" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="500" y="120" width="230" height="70" rx="18" fill="#eaf2ff" stroke="#1f5aa6" stroke-width="2"/>
+<text x="615.0" y="143.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">机器人失败样本</text>
+<text x="615.0" y="168.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">Failure Cases</text>
+<rect x="110" y="260" width="210" height="90" rx="18" fill="#fef3c7" stroke="#ca8a04" stroke-width="2"/>
+<text x="215.0" y="281.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">感知失败</text>
+<text x="215.0" y="306.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">检测偏移/遮挡</text>
+<text x="215.0" y="331.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">深度错误</text>
+<rect x="370" y="260" width="210" height="90" rx="18" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="475.0" y="281.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">策略失败</text>
+<text x="475.0" y="306.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">动作错误</text>
+<text x="475.0" y="331.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">阶段切换错误</text>
+<rect x="630" y="260" width="210" height="90" rx="18" fill="#fff1f2" stroke="#be123c" stroke-width="2"/>
+<text x="735.0" y="281.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">控制失败</text>
+<text x="735.0" y="306.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">不可达/碰撞</text>
+<text x="735.0" y="331.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">夹爪时序</text>
+<rect x="890" y="260" width="210" height="90" rx="18" fill="#ecfdf5" stroke="#16834a" stroke-width="2"/>
+<text x="995.0" y="281.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">环境失败</text>
+<text x="995.0" y="306.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">物体滑动</text>
+<text x="995.0" y="331.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">光照/台面变化</text>
+<rect x="110" y="470" width="210" height="90" rx="18" fill="#f8fbff" stroke="#1f5aa6" stroke-width="2"/>
+<text x="215.0" y="503.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">补采数据</text>
+<text x="215.0" y="528.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">遮挡/深度场景</text>
+<rect x="370" y="470" width="210" height="90" rx="18" fill="#f8fbff" stroke="#1f5aa6" stroke-width="2"/>
+<text x="475.0" y="503.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">改策略/加阶段</text>
+<text x="475.0" y="528.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">恢复动作</text>
+<rect x="630" y="470" width="210" height="90" rx="18" fill="#f8fbff" stroke="#1f5aa6" stroke-width="2"/>
+<text x="735.0" y="503.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">调控制参数</text>
+<text x="735.0" y="528.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">安全约束</text>
+<rect x="890" y="470" width="210" height="90" rx="18" fill="#f8fbff" stroke="#1f5aa6" stroke-width="2"/>
+<text x="995.0" y="503.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">场景随机化</text>
+<text x="995.0" y="528.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0f172a">环境覆盖</text>
+</svg>

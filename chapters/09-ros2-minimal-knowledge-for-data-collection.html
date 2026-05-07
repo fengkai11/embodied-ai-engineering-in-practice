@@ -289,18 +289,18 @@
 </ul>
 <p>也就是说，它让“在线 topic 世界”和“离线 episode 世界”形成了明确映射关系。</p>
 <h3 id="43-mermaid-图最小-pubsub-关系"><a class="header" href="#43-mermaid-图最小-pubsub-关系">4.3 Mermaid 图：最小 pub/sub 关系</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[camera_node] --&gt;|/camera/front/image_raw| E[data_recorder_node]
     B[robot_state_node] --&gt;|/joint_states| E
     C[teleop_node] --&gt;|/action_cmd| D[task_parser_node]
     D --&gt;|/task_info| E
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图ros2-到-episode-的桥接"><a class="header" href="#44-mermaid-图ros2-到-episode-的桥接">4.4 Mermaid 图：ROS2 到 episode 的桥接</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[ROS2 topics] --&gt; B[data recorder]
     B --&gt; C[raw log / rosbag]
     C --&gt; D[episode dataset]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-topic-命名不是小事"><a class="header" href="#51-topic-命名不是小事">5.1 topic 命名不是小事</a></h3>
@@ -508,6 +508,8 @@ python ros2_ws/src/shelf_demo_data_recorder/mock_ros2_pubsub_demo.py   --output_
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

@@ -292,21 +292,21 @@ z = d
 <p><img src="../../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png" alt="图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比" /></p>
 <p>这张图重点帮助你理解：相机安装方式不是部署细节，而是会直接影响标定链路、误差传播和遮挡模式的系统选择。</p>
 <h3 id="43-mermaid-图从视觉观测到抓取执行的最小链路"><a class="header" href="#43-mermaid-图从视觉观测到抓取执行的最小链路">4.3 Mermaid 图：从视觉观测到抓取执行的最小链路</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[像素 u,v + 深度 d] --&gt; B[相机坐标点 P_c]
     B --&gt; C[通过 T_base_camera 变换到 P_b]
     C --&gt; D[构造抓取位姿 T_grasp]
     D --&gt; E[发送给运动规划器]
     E --&gt; F[机械臂执行]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图主线项目中的坐标链"><a class="header" href="#44-mermaid-图主线项目中的坐标链">4.4 Mermaid 图：主线项目中的坐标链</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[world / map] --&gt; B[base_link]
     B --&gt; C[camera_link]
     B --&gt; D[end_effector]
     C --&gt; E[视觉估计 object_frame]
     E --&gt; F[在 base_link 中构造抓取位姿]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-先把参考坐标系固定下来再谈抓取策略"><a class="header" href="#51-先把参考坐标系固定下来再谈抓取策略">5.1 先把“参考坐标系”固定下来，再谈抓取策略</a></h3>
@@ -551,6 +551,8 @@ print('base point   =', p_b)
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

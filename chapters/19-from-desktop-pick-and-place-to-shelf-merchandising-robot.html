@@ -546,15 +546,15 @@ python scripts/shelf_anomaly_detection_demo.py \
 <hr />
 <h2 id="11-mermaid-图"><a class="header" href="#11-mermaid-图">11. Mermaid 图</a></h2>
 <h3 id="111-从桌面任务到理货机器人"><a class="header" href="#111-从桌面任务到理货机器人">11.1 从桌面任务到理货机器人</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[桌面小盒子抓取] --&gt; B[桌面商品扶正]
     B --&gt; C[货架异常检测]
     C --&gt; D[货架商品扶正]
     D --&gt; E[货架商品取放]
     E --&gt; F[移动底盘 + 机械臂]
-</code></pre>
+</pre>
 <h3 id="112-感知层到操作层的映射"><a class="header" href="#112-感知层到操作层的映射">11.2 感知层到操作层的映射</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[货架感知] --&gt; B[格口建模]
     B --&gt; C[异常检测]
     C --&gt; D{状态类型}
@@ -562,9 +562,9 @@ python scripts/shelf_anomaly_detection_demo.py \
     D --&gt;|misplaced| F[调整格口]
     D --&gt;|tilted| G[扶正与对齐]
     D --&gt;|normal| H[无需动作]
-</code></pre>
+</pre>
 <h3 id="113-理货机器人分层系统"><a class="header" href="#113-理货机器人分层系统">11.3 理货机器人分层系统</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[感知层] --&gt; B[操作层]
     B --&gt; C[系统层]
     A --&gt; A1[商品检测]
@@ -576,7 +576,7 @@ python scripts/shelf_anomaly_detection_demo.py \
     C --&gt; C1[移动底盘]
     C --&gt; C2[机械臂]
     C --&gt; C3[安全监控]
-</code></pre>
+</pre>
 <hr />
 <h2 id="12-常见错误"><a class="header" href="#12-常见错误">12. 常见错误</a></h2>
 <h3 id="121-一上来就做全自动理货机器人"><a class="header" href="#121-一上来就做全自动理货机器人">12.1 一上来就做“全自动理货机器人”</a></h3>
@@ -686,6 +686,8 @@ python scripts/shelf_anomaly_detection_demo.py \
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

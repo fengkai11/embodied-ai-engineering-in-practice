@@ -271,7 +271,7 @@
 </ul>
 <p>也就是说，数据质检不仅要能“找出坏样本”，还要能“看出整体分布是否合理”。</p>
 <h3 id="43-mermaid-图数据验证流水线"><a class="header" href="#43-mermaid-图数据验证流水线">4.3 Mermaid 图：数据验证流水线</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[读取数据集] --&gt; B[检查目录]
     B --&gt; C[检查 meta.json]
     C --&gt; D[检查 states/actions]
@@ -280,14 +280,14 @@
     F --&gt; G[检查 action 范围]
     G --&gt; H[检查 success/failure 标签]
     H --&gt; I[输出 dataset report]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图异常分类框架"><a class="header" href="#44-mermaid-图异常分类框架">4.4 Mermaid 图：异常分类框架</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[数据异常] --&gt; B[结构异常]
     A --&gt; C[时间异常]
     A --&gt; D[动作异常]
     A --&gt; E[标签异常]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-先有验证脚本再谈大规模采集"><a class="header" href="#51-先有验证脚本再谈大规模采集">5.1 先有验证脚本，再谈大规模采集</a></h3>
@@ -502,6 +502,8 @@ python scripts/04_validate_dataset.py   --dataset_dir datasets/dataset_v0_sample
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

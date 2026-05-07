@@ -268,7 +268,7 @@
 <hr />
 <h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
 <h3 id="41-传统机器人与机器人学习系统对比"><a class="header" href="#41-传统机器人与机器人学习系统对比">4.1 传统机器人与机器人学习系统对比</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     subgraph A[传统机器人系统]
         A1[固定工位]
         A2[规则/状态机]
@@ -286,11 +286,11 @@
         B1 --&gt; B2 --&gt; B3 --&gt; B4 --&gt; B5
         B5 --&gt; B2
     end
-</code></pre>
+</pre>
 <p>这张图不是说传统机器人简单，也不是说机器人学习一定更高级。它表达的是两者的工程假设不同。传统机器人倾向于通过工程约束降低环境复杂度；机器人学习则试图从数据中学习对变化环境的适应能力。</p>
 <p>在真实项目中，两者经常混合使用。比如本书后面会先实现规则式 pick-and-place expert，用它帮助我们理解任务流程、动作结构和失败类型；之后再进入遥操作数据采集和 ACT baseline 训练。规则不是学习的敌人，规则是构建学习系统的重要脚手架。</p>
 <h3 id="42-具身智能系统结构"><a class="header" href="#42-具身智能系统结构">4.2 具身智能系统结构</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[任务目标/语言指令] --&gt; B[观察输入]
     B --&gt; B1[外部相机 RGB/RGBD]
     B --&gt; B2[腕部相机]
@@ -314,11 +314,11 @@
     I --&gt; J[评测与失败分析]
     J --&gt; K[补采数据/再训练]
     K --&gt; D
-</code></pre>
+</pre>
 <p>这张图是全书的核心图之一。它说明具身智能系统不是一个单独模型，而是一条从观察到动作、从执行到数据、从失败到再训练的闭环链路。</p>
 <p>你可以把大模型放在其中的某些位置：例如理解语言指令、生成高层计划、解释失败原因、辅助标注数据、帮助写代码或生成实验报告。但机器人能不能完成任务，最终取决于 action 是否能在真实环境中执行，并且失败是否能被系统性回收。</p>
 <h3 id="43-本书主线项目路线图"><a class="header" href="#43-本书主线项目路线图">4.3 本书主线项目路线图</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[第1章: 项目初始化与方向认知] --&gt; B[第2章: 自动驾驶数据闭环迁移]
     B --&gt; C[第3-5章: 机器人学习核心概念]
     C --&gt; D[第6章: 定义 pick_box_to_bin 任务]
@@ -331,7 +331,7 @@
     J --&gt; K[第18章: 失败分类与补采]
     K --&gt; L[第19章: 扩展到货架理货]
     L --&gt; M[第20章: 作品集与职业转型]
-</code></pre>
+</pre>
 <p>这条路线刻意从小任务开始。第一个完整任务不是“整理房间”，也不是“通用家务机器人”，而是：</p>
 <pre><code class="language-text">桌面小盒子抓取并放入收纳盒
 </code></pre>
@@ -867,6 +867,8 @@ Project initialized successfully.
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

@@ -294,16 +294,16 @@
 <li>最后输出 episode dataset，并接上 validate dataset。</li>
 </ul>
 <h3 id="43-mermaid-图record--play--convert"><a class="header" href="#43-mermaid-图record--play--convert">4.3 Mermaid 图：record → play → convert</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[ROS2 topics] --&gt; B[rosbag record]
     B --&gt; C[bag file]
     C --&gt; D[rosbag play]
     C --&gt; E[convert script]
     E --&gt; F[episode dataset]
     F --&gt; G[validate dataset]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图转换脚本内部流程"><a class="header" href="#44-mermaid-图转换脚本内部流程">4.4 Mermaid 图：转换脚本内部流程</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[读取 bag] --&gt; B[按 topic 分组]
     B --&gt; C[时间同步]
     C --&gt; D[导出图像]
@@ -313,7 +313,7 @@
     E --&gt; G
     F --&gt; G
     G --&gt; H[写入 meta.json]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-recorder-与-rosbag-的关系"><a class="header" href="#51-recorder-与-rosbag-的关系">5.1 recorder 与 rosbag 的关系</a></h3>
@@ -533,6 +533,8 @@ python scripts/03_convert_rosbag_to_dataset.py   --bag_jsonl data/mock_rosbag/se
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

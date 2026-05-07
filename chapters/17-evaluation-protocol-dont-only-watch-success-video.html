@@ -293,7 +293,7 @@
 <p><img src="../../assets/images/ch17_metric_dashboard.svg" alt="图 17-2 评测指标关系图" /></p>
 <p>这张图强调：success rate 只是入口，completion time、collision rate、drop rate、intervention rate 和 failure reason distribution 共同决定策略是否真的可用。</p>
 <h3 id="43-mermaid-图评测流程"><a class="header" href="#43-mermaid-图评测流程">4.3 Mermaid 图：评测流程</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[policy_v1] --&gt; B[固定位置测试]
     A --&gt; C[随机位置测试]
     A --&gt; D[光照变化测试]
@@ -304,15 +304,15 @@
     E --&gt; F
     F --&gt; G[指标统计]
     G --&gt; H[评测报告]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图从评测到数据闭环"><a class="header" href="#44-mermaid-图从评测到数据闭环">4.4 Mermaid 图：从评测到数据闭环</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[评测结果] --&gt; B[失败样本]
     B --&gt; C[失败原因统计]
     C --&gt; D[定位主要瓶颈]
     D --&gt; E[制定补采计划]
     E --&gt; F[下一轮数据集]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-如何设计评测协议"><a class="header" href="#5-如何设计评测协议">5. 如何设计评测协议</a></h2>
 <h3 id="51-固定位置评测"><a class="header" href="#51-固定位置评测">5.1 固定位置评测</a></h3>
@@ -550,6 +550,8 @@ failure_reason
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

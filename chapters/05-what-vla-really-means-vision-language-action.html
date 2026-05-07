@@ -375,7 +375,7 @@
 <p><img src="../../assets/images/ch05_instruction_to_structured_task.png" alt="图 5-2 从自然语言指令到结构化机器人任务" /></p>
 <p>这张图把本章主线项目新增能力说得很直观：先把自然语言任务解析成结构化 JSON / YAML，再让后续策略系统使用它。</p>
 <h3 id="43-mermaid-图vla-输入输出结构"><a class="header" href="#43-mermaid-图vla-输入输出结构">4.3 Mermaid 图：VLA 输入输出结构</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[自然语言指令] --&gt; B[任务解析]
     C[视觉观察] --&gt; D[场景理解]
     E[机器人状态] --&gt; F[状态整理]
@@ -384,9 +384,9 @@
     F --&gt; G
     G --&gt; H[动作策略 / Policy]
     H --&gt; I[机器人动作]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图语言到结构化任务配置"><a class="header" href="#44-mermaid-图语言到结构化任务配置">4.4 Mermaid 图：语言到结构化任务配置</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[用户指令] --&gt; B[规则/LLM 解析器]
     B --&gt; C[task_name]
     B --&gt; D[object]
@@ -398,7 +398,7 @@
     E --&gt; H
     F --&gt; H
     G --&gt; H
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-为什么规则解析器仍然有价值"><a class="header" href="#51-为什么规则解析器仍然有价值">5.1 为什么规则解析器仍然有价值</a></h3>
@@ -673,6 +673,8 @@ python scripts/rule_based_task_parser.py \
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

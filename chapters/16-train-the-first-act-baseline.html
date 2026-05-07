@@ -302,7 +302,7 @@
 <li>右边是“整个 episode 中不断滚动执行 chunk”。</li>
 </ul>
 <h3 id="43-mermaid-图act-like-训练流程"><a class="header" href="#43-mermaid-图act-like-训练流程">4.3 Mermaid 图：ACT-like 训练流程</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[dataset_v0] --&gt; B[构建样本 X, Y]
     B --&gt; C[Observation Encoding]
     C --&gt; D[ACT-like Policy]
@@ -311,15 +311,15 @@
     F --&gt; G[Optimizer Update]
     G --&gt; H[Checkpoint policy_v1]
     H --&gt; I[Validation]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图policy-rollout"><a class="header" href="#44-mermaid-图policy-rollout">4.4 Mermaid 图：policy rollout</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[Observe o_t] --&gt; B[Predict action chunk a_t:t+K]
     B --&gt; C[Execute first k actions]
     C --&gt; D[Observe new state]
     D --&gt; E[Predict next chunk]
     E --&gt; F[Repeat until success / failure]
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-从-dataset_v0-到训练样本"><a class="header" href="#5-从-dataset_v0-到训练样本">5. 从 dataset_v0 到训练样本</a></h2>
 <h3 id="51-样本是如何构造的"><a class="header" href="#51-样本是如何构造的">5.1 样本是如何构造的</a></h3>
@@ -633,6 +633,8 @@ python scripts/06_train_act_on_dataset_v0.py \
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

@@ -354,15 +354,15 @@
 <p><img src="../../assets/images/ch07_episode_sync.png" alt="图 7-2 Episode 的时间同步与数据关系" /></p>
 <p>这张图非常关键，因为它解释了为什么 observation、state、action 与 timestamp 必须对齐。它也是后面“数据质检”章节的重要铺垫。</p>
 <h3 id="43-mermaid-图episode-目录结构"><a class="header" href="#43-mermaid-图episode-目录结构">4.3 Mermaid 图：episode 目录结构</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[episode_0001] --&gt; B[images/front]
     A --&gt; C[images/wrist]
     A --&gt; D[meta.json]
     A --&gt; E[states.jsonl]
     A --&gt; F[actions.jsonl]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图单时间步样本关系"><a class="header" href="#44-mermaid-图单时间步样本关系">4.4 Mermaid 图：单时间步样本关系</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[front_rgb_t]
     B[wrist_rgb_t]
     C[state_t]
@@ -375,7 +375,7 @@
     D --&gt; X
     E --&gt; X
     F --&gt; X
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-为什么使用-jsonl"><a class="header" href="#51-为什么使用-jsonl">5.1 为什么使用 JSONL</a></h3>
@@ -638,6 +638,8 @@ python scripts/01_generate_synthetic_episode.py
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

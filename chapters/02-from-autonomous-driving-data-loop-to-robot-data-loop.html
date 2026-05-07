@@ -319,24 +319,24 @@
 <p><img src="../../assets/images/ch02_skill_transfer_path.png" alt="图 2-2 自动驾驶工程师迁移到机器人学习工程师的能力路径" /></p>
 <p>这张图把“已有能力”和“待补能力”拆开了。很多人转型失败，不是因为能力不够，而是因为两边没有分开看：要么把自己想得太弱，要么把新领域想得太简单。</p>
 <h3 id="43-mermaid-图两个闭环的共性流程"><a class="header" href="#43-mermaid-图两个闭环的共性流程">4.3 Mermaid 图：两个闭环的共性流程</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[真实执行数据] --&gt; B[问题发现]
     B --&gt; C[样本结构化]
     C --&gt; D[模型/策略训练]
     D --&gt; E[评测与回归]
     E --&gt; F[失败回收]
     F --&gt; B
-</code></pre>
+</pre>
 <p>这是一张更抽象的图。它把自动驾驶和机器人学习都压缩到“真实执行—失败回收—再训练”这一条共同主线上。</p>
 <h3 id="44-mermaid-图自动驾驶对象到机器人对象的映射"><a class="header" href="#44-mermaid-图自动驾驶对象到机器人对象的映射">4.4 Mermaid 图：自动驾驶对象到机器人对象的映射</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[log] --&gt; B[episode]
     C[camera / lidar] --&gt; D[RGB / RGBD / wrist camera]
     E[vehicle state] --&gt; F[robot state]
     G[control command] --&gt; H[action]
     I[corner case] --&gt; J[failure case]
     K[replay evaluation] --&gt; L[rollout evaluation]
-</code></pre>
+</pre>
 <p>这张图可以视为本章最重要的“词汇翻译表”。后面很多章节，都会默认你已经理解这层映射。</p>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
@@ -656,6 +656,8 @@ python scripts/01_generate_synthetic_episode.py
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>

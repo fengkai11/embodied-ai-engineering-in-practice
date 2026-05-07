@@ -367,13 +367,13 @@
 </ol>
 <p>这张图很重要，因为它不是“玩具任务专用图”，而是后面真实机器人训练都适用的通用骨架。</p>
 <h3 id="43-mermaid-图bc-与-action-chunk-的输出差异"><a class="header" href="#43-mermaid-图bc-与-action-chunk-的输出差异">4.3 Mermaid 图：BC 与 action chunk 的输出差异</a></h3>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid">flowchart LR
     A[Observation_t / State_t] --&gt; B[Policy]
     B --&gt; C1[BC: Action_t]
     B --&gt; C2[Chunk: Action_t:t+k]
-</code></pre>
+</pre>
 <h3 id="44-mermaid-图模仿学习最小闭环"><a class="header" href="#44-mermaid-图模仿学习最小闭环">4.4 Mermaid 图：模仿学习最小闭环</a></h3>
-<pre><code class="language-mermaid">flowchart TD
+<pre class="mermaid">flowchart TD
     A[示范轨迹] --&gt; B[数据清洗/切片]
     B --&gt; C[训练样本]
     C --&gt; D[训练策略]
@@ -381,7 +381,7 @@
     E --&gt; F[失败分析]
     F --&gt; G[补充数据]
     G --&gt; D
-</code></pre>
+</pre>
 <hr />
 <h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
 <h3 id="51-为什么本章先用二维点任务"><a class="header" href="#51-为什么本章先用二维点任务">5.1 为什么本章先用二维点任务</a></h3>
@@ -616,6 +616,8 @@ reports/ch04_toy_act_rollout.png
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
 
 
     </div>
