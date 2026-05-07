@@ -1,0 +1,582 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 13 章：规则式 Pick-and-Place 专家策略 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/13-scripted-pick-and-place-expert-policy.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-13-章规则式-pick-and-place-专家策略"><a class="header" href="#第-13-章规则式-pick-and-place-专家策略">第 13 章：规则式 Pick-and-Place 专家策略</a></h1>
+<p>前面几章，我们已经一点点把主线任务的底座搭了起来：</p>
+<ul>
+<li>第 6–8 章明确了任务、episode 数据结构与质检方法；</li>
+<li>第 9–10 章把数据记录与转换链路接了起来；</li>
+<li>第 11 章解决了从视觉观测到抓取空间目标的变换问题；</li>
+<li>第 12 章又把机械臂、夹爪、控制抽象和规划流程理顺了。</li>
+</ul>
+<p>到这里，整个系统终于来到一个非常关键的节点：</p>
+<blockquote>
+<p>我们能不能先不用学习策略，而是写一个<strong>规则式 expert</strong>，把第一个 pick-and-place 任务真正跑起来？</p>
+</blockquote>
+<p>答案是：必须先做，而且非常值得做。</p>
+<p>因为对具身智能初学者而言，规则式 expert 不只是过渡方案，它有四个非常现实的价值：</p>
+<ol>
+<li>它能帮你验证任务定义、空间链路和控制接口是否连得通；</li>
+<li>它能生成第一批可用 episode，为后续模仿学习提供数据；</li>
+<li>它能让你看清一个抓取任务到底被拆成哪些阶段；</li>
+<li>它能把“策略”从抽象概念变成具体可执行的状态机。</li>
+</ol>
+<p>所以，本章不是在讲“传统方法过时了”，恰恰是在说明：<strong>没有规则 expert，很多人根本走不到学习策略那一步。</strong></p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下问题：</p>
+<ol>
+<li>为什么在模仿学习之前，应该先写一个规则式 expert？</li>
+<li><code>pick_box_to_bin</code> 这种任务应该拆成哪些阶段？</li>
+<li>如何把这些阶段组织成状态机？</li>
+<li>规则动作怎样保存为 episode？</li>
+<li>规则 expert 的数据和后续人类遥操作数据有什么关系？</li>
+<li>规则 expert 的局限在哪里？</li>
+<li>主线项目如何用脚本生成 10 条可验证的 scripted episodes？</li>
+</ol>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<h3 id="21-规则-expert-是工程闭环的冒烟测试"><a class="header" href="#21-规则-expert-是工程闭环的冒烟测试">2.1 规则 expert 是工程闭环的“冒烟测试”</a></h3>
+<p>自动驾驶里，我们常常会先写一个简单的基线，先验证模块间接口是否通；机器人学习同样需要这种基线。规则 expert 的意义在于：</p>
+<ul>
+<li>不用等遥操作系统完善；</li>
+<li>不用等大模型策略训练完成；</li>
+<li>先让感知、空间、控制、记录四条链路真正串一次。</li>
+</ul>
+<p>如果连规则 expert 都跑不通，那么大多数情况下不是“模型能力不够”，而是系统工程还没打透。</p>
+<h3 id="22-它能把任务结构暴露出来"><a class="header" href="#22-它能把任务结构暴露出来">2.2 它能把任务结构暴露出来</a></h3>
+<p>很多人说“做个 pick-and-place”，听起来像一句话，但真正写脚本时会发现，至少要拆成这些阶段：</p>
+<ul>
+<li>回到初始位姿；</li>
+<li>观察 / 估计目标；</li>
+<li>移动到目标上方；</li>
+<li>向下接近；</li>
+<li>关闭夹爪；</li>
+<li>抬升；</li>
+<li>平移到容器上方；</li>
+<li>放下；</li>
+<li>打开夹爪；</li>
+<li>回 home。</li>
+</ul>
+<p>也就是说，规则 expert 迫使你把任务从口头描述压缩成<strong>状态机 + 条件切换</strong>。</p>
+<h3 id="23-它能生成第一个像样的数据集"><a class="header" href="#23-它能生成第一个像样的数据集">2.3 它能生成第一个“像样”的数据集</a></h3>
+<p>第 7 章我们已经知道 episode 的格式；第 8 章也已经知道如何做质检。但如果没有真实 episode，前面的数据格式设计就还是停留在“教学样例”层面。</p>
+<p>规则 expert 的一个重要贡献，是让我们第一次拥有：</p>
+<ul>
+<li>一组连续动作；</li>
+<li>一组随动作变化的状态；</li>
+<li>一组图像帧；</li>
+<li>success / failure 标签；</li>
+<li>失败原因（<code>failure_reason</code>）。</li>
+</ul>
+<p>这正是后续模仿学习最需要的基本材料。</p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-规则式-expert-是什么"><a class="header" href="#31-规则式-expert-是什么">3.1 规则式 expert 是什么</a></h3>
+<p>本章所说的规则式 expert，本质上是一段带有任务先验的程序。它不靠学习得到策略，而是手工把任务拆成阶段，并为每个阶段写出：</p>
+<ul>
+<li>进入条件；</li>
+<li>执行动作；</li>
+<li>完成条件；</li>
+<li>异常处理。</li>
+</ul>
+<p>你可以把它理解为：一个<strong>可执行的任务剧本</strong>。</p>
+<h3 id="32-为什么状态机是最自然的表达方式"><a class="header" href="#32-为什么状态机是最自然的表达方式">3.2 为什么状态机是最自然的表达方式</a></h3>
+<p>对于 pick-and-place 这类操作任务，状态机非常适合，因为：</p>
+<ul>
+<li>阶段边界清晰；</li>
+<li>每个阶段有明显的动作语义；</li>
+<li>容易加入条件判断；</li>
+<li>易于记录和调试。</li>
+</ul>
+<p>在本章主线项目中，我们采用的最小状态机大致包含：</p>
+<ol>
+<li><code>Home</code></li>
+<li><code>MoveAboveObject</code></li>
+<li><code>MoveDown</code></li>
+<li><code>CloseGripper</code></li>
+<li><code>Lift</code></li>
+<li><code>MoveAboveBin</code></li>
+<li><code>MoveDownToBin</code></li>
+<li><code>OpenGripper</code></li>
+<li><code>ReturnHome</code></li>
+</ol>
+<h3 id="33-什么是-pre-grasp--grasp--place"><a class="header" href="#33-什么是-pre-grasp--grasp--place">3.3 什么是 pre-grasp / grasp / place</a></h3>
+<p>这些名字在具身智能任务里非常常见：</p>
+<ul>
+<li><strong>pre-grasp</strong>：位于目标上方的安全准备位姿；</li>
+<li><strong>grasp</strong>：真正接触并闭合夹爪的位姿；</li>
+<li><strong>lift</strong>：抓住后抬升到安全高度；</li>
+<li><strong>pre-place</strong>：位于放置容器上方的准备位姿；</li>
+<li><strong>place</strong>：把物体放到目标区域的位姿。</li>
+</ul>
+<p>把这些术语先标准化，后面你做人类遥操作数据采集或学习策略分析时就会轻松很多。</p>
+<h3 id="34-规则-expert-的数据为什么有价值"><a class="header" href="#34-规则-expert-的数据为什么有价值">3.4 规则 expert 的数据为什么有价值</a></h3>
+<p>它的价值不一定在于“足够强”，而在于“足够干净、足够可解释”：</p>
+<ul>
+<li>每一步动作来源清楚；</li>
+<li>每一阶段语义清楚；</li>
+<li>失败原因容易标；</li>
+<li>非常适合作为第一批教学数据。</li>
+</ul>
+<p>当然，它也有明显局限：</p>
+<ul>
+<li>泛化能力弱；</li>
+<li>很依赖场景先验；</li>
+<li>一旦目标位置变化复杂、遮挡严重或任务分支变多，脚本会迅速膨胀。</li>
+</ul>
+<p>但这不影响它在系统早期阶段的重要性。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-13-1-规则式-pick-and-place-状态机"><a class="header" href="#41-图-13-1-规则式-pick-and-place-状态机">4.1 图 13-1 规则式 Pick-and-Place 状态机</a></h3>
+<p><img src="../../assets/images/ch13_scripted_pick_and_place_state_machine.png" alt="图 13-1 规则式 Pick-and-Place 状态机" /></p>
+<p>这张图就是本章最核心的“任务剧本”。它把脚本策略从一堆 if/else 逻辑，变成了可视化的阶段流。</p>
+<h3 id="42-图-13-2-从规则-expert-rollout-到-episode-数据"><a class="header" href="#42-图-13-2-从规则-expert-rollout-到-episode-数据">4.2 图 13-2 从规则 Expert Rollout 到 Episode 数据</a></h3>
+<p><img src="../../assets/images/ch13_expert_rollout_to_episode.png" alt="图 13-2 从规则 Expert Rollout 到 Episode 数据" /></p>
+<p>这张图把本章与前面所有章节连接起来：</p>
+<ul>
+<li>输入端：观测与状态；</li>
+<li>中间：规则策略与机器人动作；</li>
+<li>记录端：图像、状态、动作、元数据；</li>
+<li>输出端：一个 episode 文件夹。</li>
+</ul>
+<h3 id="43-mermaid-图脚本策略执行流程"><a class="header" href="#43-mermaid-图脚本策略执行流程">4.3 Mermaid 图：脚本策略执行流程</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[读取场景 / 目标位姿] --&gt; B[构造 pre_grasp]
+    B --&gt; C[下移到 grasp]
+    C --&gt; D[关闭夹爪]
+    D --&gt; E[提升到安全高度]
+    E --&gt; F[移动到收纳盒上方]
+    F --&gt; G[下移到 place]
+    G --&gt; H[打开夹爪]
+    H --&gt; I[返回 home]
+</code></pre>
+<h3 id="44-mermaid-图规则策略到数据记录"><a class="header" href="#44-mermaid-图规则策略到数据记录">4.4 Mermaid 图：规则策略到数据记录</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[状态机] --&gt; B[MockRobotArm 执行]
+    B --&gt; C[记录 states.jsonl]
+    B --&gt; D[记录 actions.jsonl]
+    B --&gt; E[保存图像帧]
+    C --&gt; F[生成 meta.json]
+    D --&gt; F
+    E --&gt; F
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-规则-expert-不是为了替代学习而是为了清场"><a class="header" href="#51-规则-expert-不是为了替代学习而是为了清场">5.1 规则 expert 不是为了“替代学习”，而是为了“清场”</a></h3>
+<p>系统一开始最怕的，不是策略不够强，而是所有问题混在一起：</p>
+<ul>
+<li>是视觉错了？</li>
+<li>是空间变换错了？</li>
+<li>是夹爪时序错了？</li>
+<li>是记录脚本错了？</li>
+</ul>
+<p>规则 expert 的作用，就是先用最可控的方式把这些问题拆开。只要规则 expert 能稳定跑出一批合格数据，你就知道：</p>
+<ul>
+<li>基本动作链是通的；</li>
+<li>episode 记录是通的；</li>
+<li>success/failure 标注逻辑是通的；</li>
+<li>第 14 章进入遥操作采集时，你已经有对照基线了。</li>
+</ul>
+<h3 id="52-状态命名应该服务调试与数据分析"><a class="header" href="#52-状态命名应该服务调试与数据分析">5.2 状态命名应该服务调试与数据分析</a></h3>
+<p>如果你把每一步都写成 <code>step1, step2, step3</code>，后面分析数据会非常难。更好的方式是使用有语义的阶段名：</p>
+<ul>
+<li><code>pre_grasp</code></li>
+<li><code>approach</code></li>
+<li><code>grasp</code></li>
+<li><code>lift</code></li>
+<li><code>transfer</code></li>
+<li><code>place</code></li>
+<li><code>release</code></li>
+<li><code>return_home</code></li>
+</ul>
+<p>这样一来，你在查看 <code>states.jsonl</code> 或画时间线时，一眼就知道当前动作处在哪个阶段。</p>
+<h3 id="53-失败样本同样值得保留"><a class="header" href="#53-失败样本同样值得保留">5.3 失败样本同样值得保留</a></h3>
+<p>本章生成的数据集中，除了成功轨迹，也保留了少量失败 episode，并为其标注 <code>failure_reason</code>。这很重要，因为真实机器人学习并不只依赖成功样本。失败样本可以帮助你：</p>
+<ul>
+<li>分析哪一步最容易出错；</li>
+<li>后续训练成功判别器或 reward model；</li>
+<li>对比规则 expert 与人类遥操作之间的差异。</li>
+</ul>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章为主线项目新增：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  scripts/
+    scripted_pick_and_place.py
+  datasets/
+    dataset_v1_scripted/
+      episode_1001/
+      ...
+      episode_1010/
+  reports/
+    ch13_scripted_rollout_summary.md
+    ch13_dataset_v1_scripted_report.json
+    ch13_dataset_v1_scripted_report.md
+    ch13_dataset_v1_scripted_action_distribution.png
+</code></pre>
+<p>这些产出意味着：</p>
+<ul>
+<li>项目第一次拥有一个真正可执行的脚本 expert；</li>
+<li>项目第一次拥有一个以规则策略生成的批量 episode 数据集；</li>
+<li>数据集已经通过第 8 章的通用质检脚本验证。</li>
+</ul>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1运行脚本-expert-生成-10-条-episode"><a class="header" href="#71-示例-1运行脚本-expert-生成-10-条-episode">7.1 示例 1：运行脚本 expert 生成 10 条 episode</a></h3>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/scripted_pick_and_place.py \
+  --output_dir datasets/dataset_v1_scripted \
+  --num_episodes 10 \
+  --seed 42 \
+  --fail_mode mixed \
+  --summary_md reports/ch13_scripted_rollout_summary.md
+</code></pre>
+<p>该命令会生成：</p>
+<ul>
+<li><code>episode_1001</code> 到 <code>episode_1010</code>；</li>
+<li>每条 episode 的 <code>images/front</code> 与 <code>images/wrist</code>；</li>
+<li><code>states.jsonl</code>、<code>actions.jsonl</code>、<code>meta.json</code>；</li>
+<li>一份执行汇总 <code>ch13_scripted_rollout_summary.md</code>。</li>
+</ul>
+<h3 id="72-示例-2验证规则数据集"><a class="header" href="#72-示例-2验证规则数据集">7.2 示例 2：验证规则数据集</a></h3>
+<pre><code class="language-bash">python scripts/04_validate_dataset.py \
+  --dataset_dir datasets/dataset_v1_scripted \
+  --output_json reports/ch13_dataset_v1_scripted_report.json \
+  --output_md reports/ch13_dataset_v1_scripted_report.md \
+  --plot_path reports/ch13_dataset_v1_scripted_action_distribution.png
+</code></pre>
+<p>当前整合包中的验证结果为：</p>
+<ul>
+<li><code>total_episodes = 10</code></li>
+<li><code>ok_episodes = 10</code></li>
+<li><code>bad_episodes = 0</code></li>
+</ul>
+<p>这说明数据格式、时间戳、图像数量与动作范围都满足当前教学版的质检约束。</p>
+<h3 id="73-示例-3失败样本-grasp_offset_too_large"><a class="header" href="#73-示例-3失败样本-grasp_offset_too_large">7.3 示例 3：失败样本 <code>grasp_offset_too_large</code></a></h3>
+<p>在 <code>mixed</code> 模式下，脚本会保留少量失败 episode。比如一个抓取偏移失败，其典型表现是：</p>
+<ul>
+<li><code>pre_grasp</code> 与 <code>grasp</code> 在 x 方向存在固定偏差；</li>
+<li>夹爪闭合后，物体并未随末端移动；</li>
+<li><code>meta.json</code> 中 <code>success = false</code>；</li>
+<li><code>failure_reason = grasp_offset_too_large</code>。</li>
+</ul>
+<p>这类样本非常适合作为后续误差分析材料。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<p>本章练习代码位于：</p>
+<pre><code class="language-text">scripts/scripted_pick_and_place.py
+</code></pre>
+<p>其中状态机主干非常值得反复阅读：</p>
+<pre><code class="language-python">plan = [
+    ('reset', HOME_POSE, 0.0, 'Episode start'),
+    ('observe', HOME_POSE, 0.0, 'Observe scene'),
+    ('pre_grasp', pose_from_xyz(pre_grasp_xyz), 0.0, 'Move above object'),
+    ('approach', pose_from_xyz(grasp_xyz), 0.0, 'Move down'),
+    ('grasp', pose_from_xyz(grasp_xyz), -1.0, 'Close gripper'),
+    ('lift', pose_from_xyz(lift_xyz), 0.0, 'Lift object'),
+    ('transfer', pose_from_xyz(pre_place_xyz), 0.0, 'Move above bin'),
+    ('place', pose_from_xyz(place_xyz), 0.0, 'Move down to bin'),
+    ('release', pose_from_xyz(place_xyz), 1.0, 'Open gripper'),
+    ('return_home', HOME_POSE, 0.0, 'Return home'),
+]
+</code></pre>
+<p>建议你做三个小练习：</p>
+<ol>
+<li>增加一个 <code>pause_observe</code> 状态，让系统在接近前多停留一帧；</li>
+<li>增加 <code>collision_risk_detected</code> 的分支处理，不只是记录失败，而是提前中止；</li>
+<li>增加一个 <code>retract_after_release</code> 状态，使放下后先抬高再回 home。</li>
+</ol>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-generate_episode"><a class="header" href="#91-generate_episode">9.1 <code>generate_episode()</code></a></h3>
+<p>这是整章最关键的函数。它做了四件事：</p>
+<ol>
+<li>随机生成一个简化场景中的目标位置；</li>
+<li>根据场景位置构造一条抓取计划；</li>
+<li>逐步执行计划，并记录状态与动作；</li>
+<li>将结果落盘成 episode 目录。</li>
+</ol>
+<h3 id="92-render_frame"><a class="header" href="#92-render_frame">9.2 <code>render_frame()</code></a></h3>
+<p>为了降低依赖，这个函数使用非常简化的方式绘制教学图像帧。它不是为了逼真渲染，而是为了让读者看到：</p>
+<ul>
+<li>episode 里图像是如何随阶段变化的；</li>
+<li>即使没有真实相机，我们也能先把数据闭环跑起来。</li>
+</ul>
+<h3 id="93-failure_reason"><a class="header" href="#93-failure_reason">9.3 <code>failure_reason</code></a></h3>
+<p>本章脚本不仅记录 <code>success</code>，还尽量让失败原因结构化，例如：</p>
+<ul>
+<li><code>object_dropped_during_transfer</code></li>
+<li><code>grasp_offset_too_large</code></li>
+<li><code>collision_risk_detected</code></li>
+</ul>
+<p>这对后面做失败分析、构建奖励模型或人机对比很有帮助。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="101-把规则-expert-写成一串不可读的硬编码"><a class="header" href="#101-把规则-expert-写成一串不可读的硬编码">10.1 把规则 expert 写成一串不可读的硬编码</a></h3>
+<p>如果所有数值都散落在代码里、所有阶段都没有名字，后面你很难调试，也很难把动作序列解释给别人。状态机的价值，正在于把结构显式化。</p>
+<h3 id="102-只保留成功样本"><a class="header" href="#102-只保留成功样本">10.2 只保留成功样本</a></h3>
+<p>这会让你失去很多有价值的系统信号。即使是教学数据，也建议保留少量带失败原因的轨迹。</p>
+<h3 id="103-episode-记录与控制动作不同步"><a class="header" href="#103-episode-记录与控制动作不同步">10.3 episode 记录与控制动作不同步</a></h3>
+<p>如果图像帧、状态和动作没有同步保存，后面模仿学习阶段会出现“看着像对的，训练却不稳定”的问题。规则 expert 早期就应该养成同步记录的习惯。</p>
+<h3 id="104-误以为规则数据可以直接替代真实示教数据"><a class="header" href="#104-误以为规则数据可以直接替代真实示教数据">10.4 误以为规则数据可以直接替代真实示教数据</a></h3>
+<p>规则数据适合做起步和基线，但它无法覆盖更复杂的变化场景，也难以体现人类操作的柔性与修正行为。所以它更像“第一层脚手架”，而不是最终答案。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<ol>
+<li>画出 <code>pick_box_to_bin</code> 的状态机，并解释每个状态的进入 / 退出条件；</li>
+<li>给 <code>scripted_pick_and_place.py</code> 增加一个失败恢复分支；</li>
+<li>手动打开某条 episode，观察 <code>states.jsonl</code> 中 <code>phase</code> 字段如何变化；</li>
+<li>比较成功 episode 与失败 episode 的 <code>meta.json</code>；</li>
+<li>思考：规则 expert 数据与人类遥操作数据相比，各自更适合解决什么问题？</li>
+</ol>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>完成本章后，项目新增：</p>
+<ul>
+<li>规则策略脚本：<code>scripts/scripted_pick_and_place.py</code></li>
+<li>规则数据集：<code>datasets/dataset_v1_scripted/</code></li>
+<li>规则执行汇总：<code>reports/ch13_scripted_rollout_summary.md</code></li>
+<li>数据集验证报告：
+<ul>
+<li><code>reports/ch13_dataset_v1_scripted_report.json</code></li>
+<li><code>reports/ch13_dataset_v1_scripted_report.md</code></li>
+<li><code>reports/ch13_dataset_v1_scripted_action_distribution.png</code></li>
+</ul>
+</li>
+<li>第 13 章配图：
+<ul>
+<li><code>images/ch13_scripted_pick_and_place_state_machine.png</code></li>
+<li><code>images/ch13_expert_rollout_to_episode.png</code></li>
+</ul>
+</li>
+</ul>
+<p>到此为止，主线项目已经真正拥有了“自动生成初始训练数据”的能力。</p>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>本章最重要的结论是：</p>
+<blockquote>
+<p>规则式 expert 不是落后的替代品，而是具身智能工程早期最重要的系统验证器与数据生成器之一。</p>
+</blockquote>
+<p>通过它，我们第一次把前面 1–12 章的内容真正串成了一条可执行链：</p>
+<ul>
+<li>有任务；</li>
+<li>有空间目标；</li>
+<li>有控制动作；</li>
+<li>有状态机；</li>
+<li>有 episode；</li>
+<li>有 success / failure；</li>
+<li>有数据质检。</li>
+</ul>
+<p>下一章开始，我们会继续往“真实数据”方向推进，进入遥操作数据采集。这时你会发现：有了规则 expert 作为对照基线，后续所有示教与学习过程都会更容易理解，也更容易诊断问题。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/12-robot-arm-gripper-kinematics-and-moveit2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/14-teleoperation-data-collection-the-source-of-robot-learning.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/12-robot-arm-gripper-kinematics-and-moveit2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/14-teleoperation-data-collection-the-source-of-robot-learning.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 19 章：从桌面抓取扩展到货架理货机器人 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/19-from-desktop-pick-and-place-to-shelf-merchandising-robot.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-19-章从桌面抓取扩展到货架理货机器人"><a class="header" href="#第-19-章从桌面抓取扩展到货架理货机器人">第 19 章：从桌面抓取扩展到货架理货机器人</a></h1>
+<p>到第 18 章为止，我们已经把主线项目推进到了一个非常关键的位置：</p>
+<ul>
+<li>有了任务定义；</li>
+<li>有了 episode 数据结构；</li>
+<li>有了 scripted 数据与 teleop 数据；</li>
+<li>有了第一版 <code>dataset_v0</code>；</li>
+<li>有了 <code>policy_v1</code>、评测协议、失败分析与第二轮闭环。</li>
+</ul>
+<p>如果你只把这些内容当成“桌面小实验”，那本书就停留在了入门层。</p>
+<p>但如果你进一步追问：</p>
+<blockquote>
+<p>这条主线如何走向更接近真实商业价值与职业机会的场景？</p>
+</blockquote>
+<p>那么一个非常自然的下一步，就是从<strong>桌面抓取任务</strong>走向<strong>货架理货 / 补货 / 陈列机器人</strong>。</p>
+<p>这一步非常重要。因为它代表了从“单个小技能”到“复杂系统任务”的跃迁：</p>
+<ul>
+<li>从单物体，到多商品；</li>
+<li>从稀疏桌面，到密集货架；</li>
+<li>从单次抓放，到持续理货；</li>
+<li>从机械臂独立执行，到移动底盘 + 机械臂协同；</li>
+<li>从受控环境，到更接近真实零售与仓储现场。</li>
+</ul>
+<p>对于自动驾驶 / 机器人算法工程师来说，这个章节还有一层更现实的意义：</p>
+<blockquote>
+<p>货架理货任务，是把你已有的感知、空间理解、数据闭环能力，迁移到具身智能应用方向的一个典型桥梁。</p>
+</blockquote>
+<p>本章不会假装一步到位做出完整商用理货机器人，而是从工程视角告诉你：<strong>为什么桌面任务是合理起点、为什么理货场景应该先做感知层、以及如何从 v1 项目扩展到更大的任务族。</strong></p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点回答以下问题：</p>
+<ol>
+<li>桌面抓取任务为什么不足以代表真实机器人能力？</li>
+<li>货架理货任务与桌面任务的核心差异是什么？</li>
+<li>为什么理货机器人通常先做“看懂货架”，再做“操作货架”？</li>
+<li>缺货检测、错放检测、倾倒检测、商品扶正、货架取放之间是什么关系？</li>
+<li>移动底盘 + 机械臂系统的最小架构应该如何理解？</li>
+<li>如何把当前主线项目扩展到货架场景，而不是推倒重来？</li>
+</ol>
+<hr />
+<h2 id="2-为什么要从桌面任务走向货架任务"><a class="header" href="#2-为什么要从桌面任务走向货架任务">2. 为什么要从桌面任务走向货架任务</a></h2>
+<h3 id="21-桌面任务是教学起点不是业务终点"><a class="header" href="#21-桌面任务是教学起点不是业务终点">2.1 桌面任务是教学起点，不是业务终点</a></h3>
+<p>前面的桌面 pick-and-place 任务非常有价值，因为它帮助我们理解：</p>
+<ul>
+<li>action / observation / state 的定义；</li>
+<li>数据集是如何构造出来的；</li>
+<li>模型是如何训练和评测的；</li>
+<li>失败如何被记录与回收。</li>
+</ul>
+<p>但桌面任务也有明显局限：</p>
+<ul>
+<li>物体数量少；</li>
+<li>遮挡少；</li>
+<li>目标选择简单；</li>
+<li>场景变化少；</li>
+<li>任务语义浅。</li>
+</ul>
+<p>你可以把它理解为具身智能里的“Hello World”。</p>
+<h3 id="22-货架理货更接近真实职业机会"><a class="header" href="#22-货架理货更接近真实职业机会">2.2 货架理货更接近真实职业机会</a></h3>
+<p>相比桌面小任务，货架理货更接近真实落地场景，因为它天然包含：</p>
+<ul>
+<li><strong>感知问题</strong>：商品检测、格口建模、缺货识别、错位识别；</li>
+<li><strong>操作问题</strong>：商品扶正、抓取、补货、放置；</li>
+<li><strong>系统问题</strong>：机械臂、移动底盘、任务调度、安全监控；</li>
+<li><strong>业务问题</strong>：缺货率、陈列规范、执行效率、持续巡检。</li>
+</ul>
+<p>这类问题在：</p>
+<ul>
+<li>零售；</li>
+<li>仓储；</li>
+<li>理货；</li>
+<li>商品陈列；</li>
+<li>医药 / 便利店 / 小型仓配场景；</li>
+</ul>
+<p>都有明显的现实需求。</p>
+<h3 id="23-为什么它对转型者很重要"><a class="header" href="#23-为什么它对转型者很重要">2.3 为什么它对转型者很重要</a></h3>
+<p>如果你来自自动驾驶感知、泊车感知、空间理解或数据闭环方向，那么货架机器人场景非常适合作为转型桥梁，因为你已有的很多能力都能复用：</p>
+<ul>
+<li>相机 / 激光雷达 / 多模态感知经验；</li>
+<li>目标检测、分割、跟踪与分类能力；</li>
+<li>空间理解与场景表示能力；</li>
+<li>评测协议与数据闭环思维。</li>
+</ul>
+<p>不同的是，在机器人场景里，你不仅要“看懂”，还要“动手”。</p>
+<hr />
+<h2 id="3-从桌面任务到货架任务的六阶段演进"><a class="header" href="#3-从桌面任务到货架任务的六阶段演进">3. 从桌面任务到货架任务的六阶段演进</a></h2>
+<h3 id="31-图-19-1从桌面拣放到货架补货--陈列机器人的六阶段路径"><a class="header" href="#31-图-19-1从桌面拣放到货架补货--陈列机器人的六阶段路径">3.1 图 19-1：从桌面拣放到货架补货 / 陈列机器人的六阶段路径</a></h3>
+<p><img src="../../assets/images/ch19_desktop_to_shelf_robot_evolution.png" alt="图 19-1 从桌面拣放到货架补货 / 陈列机器人的六阶段演进路径" /></p>
+<p>这张图是本章的主线图，它非常重要，因为它告诉你：</p>
+<ul>
+<li>不是一上来就做“全功能理货机器人”；</li>
+<li>而是从简单、受控、可重复的小任务逐步扩展；</li>
+<li>每扩展一步，都对应新的感知复杂度、系统复杂度和环境复杂度。</li>
+</ul>
+<p>六个阶段可以概括为：</p>
+<ol>
+<li>桌面小盒子抓取；</li>
+<li>桌面商品扶正；</li>
+<li>货架异常检测；</li>
+<li>货架商品扶正；</li>
+<li>货架商品取放；</li>
+<li>移动底盘 + 机械臂的理货系统。</li>
+</ol>
+<h3 id="32-这六个阶段为什么合理"><a class="header" href="#32-这六个阶段为什么合理">3.2 这六个阶段为什么合理</a></h3>
+<p>因为它遵循了一个工程上非常稳妥的原则：</p>
+<blockquote>
+<p>先做纯感知可评测，再做局部操作，再做系统协同。</p>
+</blockquote>
+<p>换句话说，理货机器人不应该一开始就追求“边移动边看边抓边补货”，而应该按层推进：</p>
+<ul>
+<li>先判断货架状态；</li>
+<li>再决定该不该操作；</li>
+<li>再确定怎么操作；</li>
+<li>再决定是否需要移动；</li>
+<li>最后再做全链路协同。</li>
+</ul>
+<hr />
+<h2 id="4-货架任务与桌面任务的核心差异"><a class="header" href="#4-货架任务与桌面任务的核心差异">4. 货架任务与桌面任务的核心差异</a></h2>
+<h3 id="41-目标密度更高"><a class="header" href="#41-目标密度更高">4.1 目标密度更高</a></h3>
+<p>桌面任务里，目标通常只有 1–3 个；而货架场景里，商品会：</p>
+<ul>
+<li>密集摆放；</li>
+<li>外观相似；</li>
+<li>大量重复；</li>
+<li>相互遮挡；</li>
+<li>存在层级结构（格口、层板、区域）。</li>
+</ul>
+<h3 id="42-任务语义更强"><a class="header" href="#42-任务语义更强">4.2 任务语义更强</a></h3>
+<p>桌面任务更多是“抓住这个物体并放到那里”。</p>
+<p>而货架任务中，系统不仅要做动作，还要理解：</p>
+<ul>
+<li>哪个格口缺货；</li>
+<li>哪个商品放错位置；</li>
+<li>哪个商品倾倒；</li>
+<li>哪个商品朝向异常；</li>
+<li>哪些问题优先级更高。</li>
+</ul>
+<p>这意味着系统需要的不只是几何理解，还包括<strong>位置语义与业务语义</strong>。</p>
+<h3 id="43-操作约束更多"><a class="header" href="#43-操作约束更多">4.3 操作约束更多</a></h3>
+<p>在货架场景中，机械臂操作往往会受到更多约束：</p>
+<ul>
+<li>货架空间狭窄；</li>
+<li>邻近商品容易碰撞；</li>
+<li>抓取空间被遮挡；</li>
+<li>放置动作对精度要求更高；</li>
+<li>商品类型更丰富。</li>
+</ul>
+<h3 id="44-系统边界更大"><a class="header" href="#44-系统边界更大">4.4 系统边界更大</a></h3>
+<p>桌面任务可以只看机械臂；而货架任务常常必须引入：</p>
+<ul>
+<li>移动底盘；</li>
+<li>巡检策略；</li>
+<li>任务调度；</li>
+<li>安全监控；</li>
+<li>与库存或上层任务系统的接口。</li>
+</ul>
+<hr />
+<h2 id="5-为什么理货机器人应先做感知层再做操作层"><a class="header" href="#5-为什么理货机器人应先做感知层再做操作层">5. 为什么理货机器人应先做感知层，再做操作层</a></h2>
+<p>很多刚转向具身智能的工程师会忍不住先想“怎么抓”。</p>
+<p>但在理货场景里，真正的第一步其实是：</p>
+<blockquote>
+<p>先知道“哪里有问题”，再讨论“如何处理问题”。</p>
+</blockquote>
+<h3 id="51-感知是动作的前提"><a class="header" href="#51-感知是动作的前提">5.1 感知是动作的前提</a></h3>
+<p>如果系统连这些都不知道：</p>
+<ul>
+<li>缺的是哪个商品；</li>
+<li>错的是哪个格口；</li>
+<li>倾倒的是哪一件商品；</li>
+<li>商品离目标位姿差多少；</li>
+</ul>
+<p>那么任何操作规划都无从谈起。</p>
+<h3 id="52-感知层可以先独立形成业务价值"><a class="header" href="#52-感知层可以先独立形成业务价值">5.2 感知层可以先独立形成业务价值</a></h3>
+<p>这点非常现实。即使你还没有做出成熟的机械臂操作系统，仅仅是：</p>
+<ul>
+<li>缺货检测；</li>
+<li>错放检测；</li>
+<li>倾倒检测；</li>
+<li>格口占用检测；</li>
+</ul>
+<p>也已经可以形成一个有价值的“巡检 / 货架状态感知”模块。</p>
+<p>这也是很多理货机器人项目实际的推进顺序：</p>
+<ol>
+<li>先做感知与状态理解；</li>
+<li>再做局部可控操作；</li>
+<li>最后做全链路自动化。</li>
+</ol>
+<h3 id="53-对工程落地来说分层能大幅降低风险"><a class="header" href="#53-对工程落地来说分层能大幅降低风险">5.3 对工程落地来说，分层能大幅降低风险</a></h3>
+<p>如果你把“感知是否正确”和“操作是否正确”混在一起，调试会非常困难。分层之后，你可以分别回答：</p>
+<ul>
+<li>是看错了，还是抓错了？</li>
+<li>是格口建模错了，还是动作规划错了？</li>
+<li>是商品状态判断错了，还是执行阶段碰撞了？</li>
+</ul>
+<hr />
+<h2 id="6-理货机器人的最小分层架构"><a class="header" href="#6-理货机器人的最小分层架构">6. 理货机器人的最小分层架构</a></h2>
+<h3 id="61-图-19-2货架陈列机器人架构"><a class="header" href="#61-图-19-2货架陈列机器人架构">6.1 图 19-2：货架陈列机器人架构</a></h3>
+<p><img src="../../assets/images/ch19_shelf_merchandising_robot_architecture.png" alt="图 19-2 货架陈列机器人架构" /></p>
+<p>这张图把理货机器人的最小系统结构分成了三层：</p>
+<ol>
+<li><strong>感知层</strong>：货架感知、商品检测、格口建模、异常检测；</li>
+<li><strong>操作层</strong>：扶正策略、抓取位姿生成、取放执行；</li>
+<li><strong>系统层</strong>：移动底盘、机械臂、夹爪、任务调度、安全监控。</li>
+</ol>
+<p>这三个层级是理解真实机器人系统最有效的心智模型之一。</p>
+<h3 id="62-感知层先回答发生了什么"><a class="header" href="#62-感知层先回答发生了什么">6.2 感知层：先回答“发生了什么”</a></h3>
+<p>感知层的目标不是直接输出动作，而是输出结构化场景理解。例如：</p>
+<pre><code class="language-json">{
+  "shelf_id": "shelf_A",
+  "slots": [
+    {"slot_id": "A1", "expected_sku": "tea_01", "observed_sku": "tea_01", "status": "normal"},
+    {"slot_id": "A2", "expected_sku": "tea_02", "observed_sku": null, "status": "missing"},
+    {"slot_id": "A3", "expected_sku": "juice_01", "observed_sku": "juice_02", "status": "misplaced"}
+  ]
+}
+</code></pre>
+<p>这个结构就是“操作层”的输入基础。</p>
+<h3 id="63-操作层决定怎么处理问题"><a class="header" href="#63-操作层决定怎么处理问题">6.3 操作层：决定“怎么处理问题”</a></h3>
+<p>操作层并不一定是一套大模型。它可以是：</p>
+<ul>
+<li>规则策略；</li>
+<li>任务树；</li>
+<li>小型 policy；</li>
+<li>局部抓取 / 扶正技能组合。</li>
+</ul>
+<p>例如，当感知层输出 <code>missing</code>、<code>misplaced</code>、<code>tilted</code> 时：</p>
+<ul>
+<li><code>missing</code> -&gt; 补货；</li>
+<li><code>misplaced</code> -&gt; 调整到正确格口；</li>
+<li><code>tilted</code> -&gt; 扶正并对齐。</li>
+</ul>
+<h3 id="64-系统层把任务真正执行出来"><a class="header" href="#64-系统层把任务真正执行出来">6.4 系统层：把任务真正执行出来</a></h3>
+<p>系统层负责把操作层决策转化为真实系统动作，包括：</p>
+<ul>
+<li>移动到底盘目标位姿；</li>
+<li>机械臂运动规划；</li>
+<li>夹爪动作；</li>
+<li>安全约束；</li>
+<li>执行状态监控。</li>
+</ul>
+<hr />
+<h2 id="7-货架场景里的典型子任务拆解"><a class="header" href="#7-货架场景里的典型子任务拆解">7. 货架场景里的典型子任务拆解</a></h2>
+<h3 id="71-缺货检测missing"><a class="header" href="#71-缺货检测missing">7.1 缺货检测（missing）</a></h3>
+<p>这是最容易形成独立价值的子任务之一。它关注：</p>
+<ul>
+<li>某个格口是否为空；</li>
+<li>占用率是否低于阈值；</li>
+<li>是否需要触发补货任务。</li>
+</ul>
+<h3 id="72-错放检测misplaced"><a class="header" href="#72-错放检测misplaced">7.2 错放检测（misplaced）</a></h3>
+<p>这个任务不仅要检测“有货”，还要检测“货对不对”。</p>
+<p>在实际系统里，它通常需要：</p>
+<ul>
+<li>SKU 分类；</li>
+<li>格口定义；</li>
+<li>目标 SKU 与观测 SKU 的对比。</li>
+</ul>
+<h3 id="73-倾倒--歪斜检测tilted"><a class="header" href="#73-倾倒--歪斜检测tilted">7.3 倾倒 / 歪斜检测（tilted）</a></h3>
+<p>这个任务跟本书前面的 <code>straighten_box</code> 很自然地衔接起来。桌面任务中的“把歪掉的盒子摆正”，在货架环境里，就变成了：</p>
+<ul>
+<li>检测商品姿态是否异常；</li>
+<li>输出扶正目标；</li>
+<li>规划扶正动作。</li>
+</ul>
+<h3 id="74-商品扶正"><a class="header" href="#74-商品扶正">7.4 商品扶正</a></h3>
+<p>相比简单抓取，扶正任务更强调：</p>
+<ul>
+<li>接触式操作；</li>
+<li>轻推与抓取的组合；</li>
+<li>对齐目标位姿；</li>
+<li>避免扰动相邻商品。</li>
+</ul>
+<h3 id="75-商品取放--补货"><a class="header" href="#75-商品取放--补货">7.5 商品取放 / 补货</a></h3>
+<p>这是货架任务里的操作核心之一。它比桌面 pick-and-place 更复杂，因为：</p>
+<ul>
+<li>取放目标更密集；</li>
+<li>可抓取方向更受限制；</li>
+<li>路径规划与避障要求更高；</li>
+<li>任务常常与库存系统和移动路径联动。</li>
+</ul>
+<hr />
+<h2 id="8-主线项目如何扩展到货架方向"><a class="header" href="#8-主线项目如何扩展到货架方向">8. 主线项目如何扩展到货架方向</a></h2>
+<p>这一章不是另起炉灶，而是继续在 <code>robot-learning-shelf-demo</code> 上演进。</p>
+<h3 id="81-本章新增文件"><a class="header" href="#81-本章新增文件">8.1 本章新增文件</a></h3>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  scripts/
+    shelf_anomaly_detection_demo.py
+  reports/
+    ch19_shelf_anomaly_report.json
+    ch19_shelf_anomaly_report.md
+  configs/
+    task_straighten_box.yaml
+</code></pre>
+<h3 id="82-为什么-task_straighten_boxyaml-仍然重要"><a class="header" href="#82-为什么-task_straighten_boxyaml-仍然重要">8.2 为什么 <code>task_straighten_box.yaml</code> 仍然重要</a></h3>
+<p>很多人看到“货架理货”就会觉得前面那个桌面扶正配置没用了。其实恰恰相反：</p>
+<blockquote>
+<p>桌面扶正任务是货架扶正任务的技能前身。</p>
+</blockquote>
+<p>你可以把它理解为：</p>
+<ul>
+<li>v1：桌面环境中的单物体扶正；</li>
+<li>v2：货架环境中的单商品扶正；</li>
+<li>v3：货架中的异常检测 + 局部操作；</li>
+<li>v4：货架中的多任务调度与移动操作。</li>
+</ul>
+<h3 id="83-新增的-shelf_anomaly_detection_demopy"><a class="header" href="#83-新增的-shelf_anomaly_detection_demopy">8.3 新增的 <code>shelf_anomaly_detection_demo.py</code></a></h3>
+<p>本章新增脚本并不试图做真实视觉算法，而是先建立一个<strong>任务结构化表达</strong>：</p>
+<ul>
+<li>给定格口期望；</li>
+<li>给定观测结果；</li>
+<li>输出 <code>normal / missing / misplaced / tilted</code>；</li>
+<li>生成一个异常检测报告。</li>
+</ul>
+<p>这个教学化脚本的价值在于：</p>
+<ul>
+<li>帮你先把任务边界和数据结构说清楚；</li>
+<li>帮你为后续接入视觉模型预留接口；</li>
+<li>帮你把“感知层 -&gt; 操作层”的中间结构显式化。</li>
+</ul>
+<hr />
+<h2 id="9-示例"><a class="header" href="#9-示例">9. 示例</a></h2>
+<h3 id="91-示例-1运行货架异常检测-demo"><a class="header" href="#91-示例-1运行货架异常检测-demo">9.1 示例 1：运行货架异常检测 demo</a></h3>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/shelf_anomaly_detection_demo.py \
+  --output_json reports/ch19_shelf_anomaly_report.json \
+  --output_md reports/ch19_shelf_anomaly_report.md
+</code></pre>
+<p>当前整合包里，这个脚本已经执行过，并生成了报告。</p>
+<h3 id="92-示例-2本章-demo-的异常统计结果"><a class="header" href="#92-示例-2本章-demo-的异常统计结果">9.2 示例 2：本章 demo 的异常统计结果</a></h3>
+<p>当前演示数据中共有 6 个格口，统计结果如下：</p>
+<ul>
+<li><code>normal = 3</code></li>
+<li><code>missing = 1</code></li>
+<li><code>misplaced = 1</code></li>
+<li><code>tilted = 1</code></li>
+</ul>
+<p>因此系统给出的优先动作是：</p>
+<pre><code class="language-text">priority_action = restock_missing_items
+</code></pre>
+<p>这很合理，因为缺货往往是理货任务中优先级最高的问题之一。</p>
+<h3 id="93-示例-3格口数据结构"><a class="header" href="#93-示例-3格口数据结构">9.3 示例 3：格口数据结构</a></h3>
+<p>本章一个非常关键的设计是：把货架理解为一组格口（slot）。</p>
+<p>下面是简化的格口表达：</p>
+<pre><code class="language-json">{
+  "slot_id": "A2",
+  "expected_sku": "tea_02",
+  "observed_sku": null,
+  "tilt_deg": 0.0,
+  "occupancy": 0.0,
+  "status": "missing"
+}
+</code></pre>
+<p>这个表达很重要，因为它把“视觉输出”转化成了“任务结构输入”。</p>
+<hr />
+<h2 id="10-练习代码"><a class="header" href="#10-练习代码">10. 练习代码</a></h2>
+<p>本章练习代码位于：</p>
+<pre><code class="language-text">scripts/shelf_anomaly_detection_demo.py
+</code></pre>
+<p>它的核心函数很值得注意：</p>
+<pre><code class="language-python">def classify_slot(slot: ShelfSlot, tilt_threshold_deg: float = 10.0) -&gt; SlotResult:
+    if slot.occupancy &lt; 0.2 or slot.observed_sku is None:
+        return SlotResult(..., 'missing', ...)
+    if slot.observed_sku != slot.expected_sku:
+        return SlotResult(..., 'misplaced', ...)
+    if slot.tilt_deg &gt; tilt_threshold_deg:
+        return SlotResult(..., 'tilted', ...)
+    return SlotResult(..., 'normal', ...)
+</code></pre>
+<p>这段代码虽然简单，但它完整体现了“货架异常检测”的最小结构：</p>
+<ul>
+<li>有格口；</li>
+<li>有期望；</li>
+<li>有观测；</li>
+<li>有规则输出；</li>
+<li>有报告。</li>
+</ul>
+<p>接下来你完全可以把这里的规则逻辑替换成：</p>
+<ul>
+<li>视觉检测模型；</li>
+<li>位姿估计模型；</li>
+<li>多模态感知结果；</li>
+<li>或更复杂的异常识别器。</li>
+</ul>
+<hr />
+<h2 id="11-mermaid-图"><a class="header" href="#11-mermaid-图">11. Mermaid 图</a></h2>
+<h3 id="111-从桌面任务到理货机器人"><a class="header" href="#111-从桌面任务到理货机器人">11.1 从桌面任务到理货机器人</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[桌面小盒子抓取] --&gt; B[桌面商品扶正]
+    B --&gt; C[货架异常检测]
+    C --&gt; D[货架商品扶正]
+    D --&gt; E[货架商品取放]
+    E --&gt; F[移动底盘 + 机械臂]
+</code></pre>
+<h3 id="112-感知层到操作层的映射"><a class="header" href="#112-感知层到操作层的映射">11.2 感知层到操作层的映射</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[货架感知] --&gt; B[格口建模]
+    B --&gt; C[异常检测]
+    C --&gt; D{状态类型}
+    D --&gt;|missing| E[补货任务]
+    D --&gt;|misplaced| F[调整格口]
+    D --&gt;|tilted| G[扶正与对齐]
+    D --&gt;|normal| H[无需动作]
+</code></pre>
+<h3 id="113-理货机器人分层系统"><a class="header" href="#113-理货机器人分层系统">11.3 理货机器人分层系统</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[感知层] --&gt; B[操作层]
+    B --&gt; C[系统层]
+    A --&gt; A1[商品检测]
+    A --&gt; A2[格口建模]
+    A --&gt; A3[异常检测]
+    B --&gt; B1[扶正策略]
+    B --&gt; B2[抓取位姿生成]
+    B --&gt; B3[取放执行]
+    C --&gt; C1[移动底盘]
+    C --&gt; C2[机械臂]
+    C --&gt; C3[安全监控]
+</code></pre>
+<hr />
+<h2 id="12-常见错误"><a class="header" href="#12-常见错误">12. 常见错误</a></h2>
+<h3 id="121-一上来就做全自动理货机器人"><a class="header" href="#121-一上来就做全自动理货机器人">12.1 一上来就做“全自动理货机器人”</a></h3>
+<p>这样通常会把感知、操作、导航、调度、安全混在一起，导致系统难以拆解、难以评测、难以迭代。</p>
+<h3 id="122-不做格口建模"><a class="header" href="#122-不做格口建模">12.2 不做格口建模</a></h3>
+<p>如果没有明确的格口结构，系统就很难回答“这个商品到底算不算错位、缺货、倾倒”。</p>
+<h3 id="123-直接把检测结果输出成动作"><a class="header" href="#123-直接把检测结果输出成动作">12.3 直接把检测结果输出成动作</a></h3>
+<p>感知输出和动作之间最好有一层中间结构，例如：</p>
+<ul>
+<li>shelf state；</li>
+<li>anomaly state；</li>
+<li>task list。</li>
+</ul>
+<p>这样后续调试和扩展会容易得多。</p>
+<h3 id="124-忽略任务优先级"><a class="header" href="#124-忽略任务优先级">12.4 忽略任务优先级</a></h3>
+<p>真实理货任务里，不同异常的处理优先级不同。通常：</p>
+<ul>
+<li>缺货 &gt; 错放 &gt; 倾倒 &gt; 轻微对齐偏差。</li>
+</ul>
+<p>如果没有优先级，系统就很难进行合理调度。</p>
+<hr />
+<h2 id="13-本章练习"><a class="header" href="#13-本章练习">13. 本章练习</a></h2>
+<ol>
+<li>将 <code>shelf_anomaly_detection_demo.py</code> 扩展成支持更多格口与更多 SKU；</li>
+<li>为每个格口增加 <code>confidence</code> 字段；</li>
+<li>增加 <code>priority_score</code>，把缺货、错放、倾倒排序；</li>
+<li>把桌面 <code>straighten_box</code> 任务改写成“货架商品扶正任务”；</li>
+<li>思考：为什么理货机器人更适合先做感知层，再做操作层？</li>
+</ol>
+<hr />
+<h2 id="14-本章产出"><a class="header" href="#14-本章产出">14. 本章产出</a></h2>
+<p>完成本章后，项目新增：</p>
+<ul>
+<li>第 19 章配图：
+<ul>
+<li><code>images/ch19_desktop_to_shelf_robot_evolution.png</code></li>
+<li><code>images/ch19_shelf_merchandising_robot_architecture.png</code></li>
+</ul>
+</li>
+<li>练习脚本：<code>scripts/shelf_anomaly_detection_demo.py</code></li>
+<li>报告：
+<ul>
+<li><code>reports/ch19_shelf_anomaly_report.json</code></li>
+<li><code>reports/ch19_shelf_anomaly_report.md</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="15-小结"><a class="header" href="#15-小结">15. 小结</a></h2>
+<p>本章最重要的结论是：</p>
+<blockquote>
+<p>从桌面抓取走向货架理货，不是简单把场景换大，而是把机器人系统从单技能演示，推进到感知、决策、执行、移动协同的复杂工程问题。</p>
+</blockquote>
+<p>通过本章，你应该已经理解：</p>
+<ul>
+<li>桌面任务是起点，不是终点；</li>
+<li>货架任务更接近真实业务与职业机会；</li>
+<li>理货机器人应先做感知层，再做操作层；</li>
+<li>格口建模与异常检测是整个系统的关键中间表示；</li>
+<li>当前主线项目可以自然扩展到货架理货方向，而不需要推倒重来。</li>
+</ul>
+<p>下一章，我们将收束全书，把这套项目沉淀为 GitHub 作品集、简历项目、面试讲解材料和后续学习路线，让“学习 demo”真正变成“职业资产”。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/18-failure-analysis-and-second-data-loop.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/20-portfolio-career-opportunities-and-next-learning-roadmap.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/18-failure-analysis-and-second-data-loop.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/20-portfolio-career-opportunities-and-next-learning-roadmap.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

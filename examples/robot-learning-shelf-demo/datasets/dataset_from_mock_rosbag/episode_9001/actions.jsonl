@@ -1,6 +1,0 @@
-{"t": 0, "timestamp": 20.0, "delta_ee_xyzrpy": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "start"}
-{"t": 1, "timestamp": 20.04, "delta_ee_xyzrpy": [0.02, 0.0, 0.0, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "observe"}
-{"t": 2, "timestamp": 20.08, "delta_ee_xyzrpy": [0.02, 0.0, -0.03, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "approach"}
-{"t": 3, "timestamp": 20.12, "delta_ee_xyzrpy": [0.02, -0.01, 0.0, 0.0, 0.0, 0.0], "gripper_delta": -1.0, "comment": "close"}
-{"t": 4, "timestamp": 20.16, "delta_ee_xyzrpy": [0.02, -0.01, 0.06, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "transfer"}
-{"t": 5, "timestamp": 20.2, "delta_ee_xyzrpy": [0.02, -0.01, 0.0, 0.0, 0.0, 0.0], "gripper_delta": 1.0, "comment": "release"}

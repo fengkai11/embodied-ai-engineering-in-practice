@@ -1,0 +1,640 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 16 章：训练第一个 ACT Baseline - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/16-train-the-first-act-baseline.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-16-章训练第一个-act-baseline"><a class="header" href="#第-16-章训练第一个-act-baseline">第 16 章：训练第一个 ACT Baseline</a></h1>
+<p>到这里，我们终于走到了一个非常有成就感的位置：</p>
+<ul>
+<li>前面十几章，我们一直在补系统地基；</li>
+<li>我们定义了任务；</li>
+<li>明确了 observation / action / state / episode；</li>
+<li>理解了 imitation learning 和 VLA 的基本概念；</li>
+<li>建了数据格式；</li>
+<li>做了数据质检；</li>
+<li>采了 teleop 数据；</li>
+<li>组装出了第一版 <code>dataset_v0</code>。</li>
+</ul>
+<p>现在，终于可以问那个大家最关心的问题了：</p>
+<blockquote>
+<p>如何用这些数据，训练第一个会输出动作序列的策略 baseline？</p>
+</blockquote>
+<p>这一章，我们选择的对象是 <strong>ACT（Action Chunking Transformer）路线的教学化 baseline</strong>。</p>
+<p>请注意：</p>
+<ul>
+<li>本章不是要复现论文级别完整 ACT；</li>
+<li>也不是要做最强策略；</li>
+<li>而是要让你真正理解：<strong>一个 action chunk 策略是如何从数据集走向训练、再走向 rollout 评测的。</strong></li>
+</ul>
+<p>因此，本章会采用一个<strong>ACT-like 教学实现</strong>：</p>
+<ul>
+<li>输入：当前观测特征；</li>
+<li>输出：固定长度的 action chunk；</li>
+<li>训练：监督学习最小化预测动作与真实动作之间的误差；</li>
+<li>评测：查看 val loss 和 rollout preview。</li>
+</ul>
+<p>它不追求最强性能，但非常适合用来建立“第一条训练主线”。</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下问题：</p>
+<ol>
+<li>ACT baseline 的训练输入输出是什么？</li>
+<li>什么是 action chunk，为什么它有用？</li>
+<li>为什么 policy rollout 不是只预测一步？</li>
+<li>如何从 <code>dataset_v0</code> 构造训练样本？</li>
+<li>如何记录 loss、checkpoint 和训练报告？</li>
+<li>为什么 baseline 是起点，而不是最终系统？</li>
+</ol>
+<hr />
+<h2 id="2-为什么选-act-路线做第一版-baseline"><a class="header" href="#2-为什么选-act-路线做第一版-baseline">2. 为什么选 ACT 路线做第一版 baseline</a></h2>
+<h3 id="21-从单步动作预测到动作块预测"><a class="header" href="#21-从单步动作预测到动作块预测">2.1 从单步动作预测到动作块预测</a></h3>
+<p>最朴素的行为克隆，会做这样的事情：</p>
+<ul>
+<li>输入当前观测；</li>
+<li>预测当前动作。</li>
+</ul>
+<p>这当然可以，但它有一个明显问题：</p>
+<ul>
+<li>连续控制时，单步策略容易抖；</li>
+<li>动作之间缺少连贯性；</li>
+<li>每一步都重新决策，可能导致局部不稳定。</li>
+</ul>
+<p>ACT 路线的一个关键改进是：</p>
+<blockquote>
+<p>在时刻 <code>t</code>，不是只预测一步动作，而是预测未来 <code>K</code> 步动作，形成一个 <code>action chunk</code>。</p>
+</blockquote>
+<p>这会带来几个好处：</p>
+<ul>
+<li>轨迹更连贯；</li>
+<li>推理频率可以降低；</li>
+<li>多步目标更容易编码进输出；</li>
+<li>对抓取、搬运、放置这类局部连续动作更友好。</li>
+</ul>
+<h3 id="22-为什么这很适合-pick-and-place-主线"><a class="header" href="#22-为什么这很适合-pick-and-place-主线">2.2 为什么这很适合 pick-and-place 主线</a></h3>
+<p>pick-and-place 任务中，很多阶段本来就天然是一个局部动作片段：</p>
+<ul>
+<li>向目标接近；</li>
+<li>下降并对齐；</li>
+<li>闭合夹爪；</li>
+<li>抬起；</li>
+<li>移动到容器；</li>
+<li>放置。</li>
+</ul>
+<p>因此，用 action chunk 的方式理解策略，会比“只预测下一步”更符合操作任务直觉。</p>
+<hr />
+<h2 id="3-act-基础概念"><a class="header" href="#3-act-基础概念">3. ACT 基础概念</a></h2>
+<h3 id="31-observationaction-chunkloss"><a class="header" href="#31-observationaction-chunkloss">3.1 Observation、Action Chunk、Loss</a></h3>
+<p>本章的 ACT-like baseline 可以抽象成：</p>
+<ul>
+<li><strong>输入 observation</strong>：当前时刻的观测特征；</li>
+<li><strong>输出 action chunk</strong>：未来 <code>K</code> 步动作向量拼接结果；</li>
+<li><strong>loss</strong>：预测动作块与真实动作块之间的均方误差。</li>
+</ul>
+<h3 id="32-本章的教学简化"><a class="header" href="#32-本章的教学简化">3.2 本章的教学简化</a></h3>
+<p>真实 ACT 往往涉及：</p>
+<ul>
+<li>更复杂的时序编码；</li>
+<li>transformer 结构；</li>
+<li>更规范的多模态编码器；</li>
+<li>更完善的 rollout 与 deployment 逻辑。</li>
+</ul>
+<p>为了让全书主线能在本地教学环境里直接跑起来，本章采取的简化是：</p>
+<ol>
+<li>用 episode 中的状态字段构造一个 16 维特征；</li>
+<li>用线性模型学习 observation -&gt; action chunk；</li>
+<li>用 numpy 做训练与 checkpoint；</li>
+<li>用 matplotlib 画 loss curve。</li>
+</ol>
+<p>这里的目标不是“比论文更强”，而是让你<strong>真正看懂训练链路</strong>。</p>
+<h3 id="33-什么是-policy-rollout"><a class="header" href="#33-什么是-policy-rollout">3.3 什么是 policy rollout</a></h3>
+<p>训练阶段你看到的是：</p>
+<ul>
+<li>输入样本；</li>
+<li>输出预测；</li>
+<li>计算 loss。</li>
+</ul>
+<p>但部署阶段真正发生的是：</p>
+<ol>
+<li>观察当前状态；</li>
+<li>预测一个 action chunk；</li>
+<li>执行其中前若干步；</li>
+<li>再次观测；</li>
+<li>重复以上过程，直到任务结束。</li>
+</ol>
+<p>这就是 policy rollout。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-16-1-act-baseline-训练流程"><a class="header" href="#41-图-16-1-act-baseline-训练流程">4.1 图 16-1 ACT Baseline 训练流程</a></h3>
+<p><img src="../../assets/images/ch16_act_training_flow.png" alt="图 16-1 ACT Baseline 训练流程" /></p>
+<p>这张图展示了从 <code>dataset_v0</code> 到 <code>policy_v1</code> 的主流程：</p>
+<ul>
+<li>dataset_v0 -&gt; DataLoader</li>
+<li>Observation Encoder</li>
+<li>ACT-like Policy</li>
+<li>Predicted Action Chunk</li>
+<li>Loss</li>
+<li>Optimizer Update</li>
+<li>Checkpoint</li>
+<li>Validation</li>
+</ul>
+<h3 id="42-图-16-2-action-chunk-与-policy-rollout"><a class="header" href="#42-图-16-2-action-chunk-与-policy-rollout">4.2 图 16-2 action chunk 与 policy rollout</a></h3>
+<p><img src="../../assets/images/ch16_action_chunk_and_policy_rollout.png" alt="图 16-2 action chunk 与 policy rollout" /></p>
+<p>这张图非常重要，因为它把两个概念清晰分开了：</p>
+<ul>
+<li>左边是“单次推理预测一个 chunk”；</li>
+<li>右边是“整个 episode 中不断滚动执行 chunk”。</li>
+</ul>
+<h3 id="43-mermaid-图act-like-训练流程"><a class="header" href="#43-mermaid-图act-like-训练流程">4.3 Mermaid 图：ACT-like 训练流程</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[dataset_v0] --&gt; B[构建样本 X, Y]
+    B --&gt; C[Observation Encoding]
+    C --&gt; D[ACT-like Policy]
+    D --&gt; E[Predicted Action Chunk]
+    E --&gt; F[Loss]
+    F --&gt; G[Optimizer Update]
+    G --&gt; H[Checkpoint policy_v1]
+    H --&gt; I[Validation]
+</code></pre>
+<h3 id="44-mermaid-图policy-rollout"><a class="header" href="#44-mermaid-图policy-rollout">4.4 Mermaid 图：policy rollout</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[Observe o_t] --&gt; B[Predict action chunk a_t:t+K]
+    B --&gt; C[Execute first k actions]
+    C --&gt; D[Observe new state]
+    D --&gt; E[Predict next chunk]
+    E --&gt; F[Repeat until success / failure]
+</code></pre>
+<hr />
+<h2 id="5-从-dataset_v0-到训练样本"><a class="header" href="#5-从-dataset_v0-到训练样本">5. 从 dataset_v0 到训练样本</a></h2>
+<h3 id="51-样本是如何构造的"><a class="header" href="#51-样本是如何构造的">5.1 样本是如何构造的</a></h3>
+<p>在本章的教学实现中，我们把每一个训练样本定义为：</p>
+<ul>
+<li>输入 <code>x</code>：当前时刻的状态特征；</li>
+<li>输出 <code>y</code>：未来 <code>K=4</code> 步动作拼接向量。</li>
+</ul>
+<p>输入特征由以下部分组成：</p>
+<ul>
+<li>末端位姿 xyz；</li>
+<li>夹爪开合状态；</li>
+<li>物体位置 xyz；</li>
+<li>bin 位置 xyz；</li>
+<li>物体相对末端位姿；</li>
+<li>bin 相对末端位姿。</li>
+</ul>
+<p>总计得到 16 维输入特征。</p>
+<h3 id="52-输出动作定义"><a class="header" href="#52-输出动作定义">5.2 输出动作定义</a></h3>
+<p>本章使用的动作向量为：</p>
+<ul>
+<li><code>dx</code></li>
+<li><code>dy</code></li>
+<li><code>dz</code></li>
+<li><code>gripper_delta</code></li>
+</ul>
+<p>也就是说，一个 4 步 chunk 的输出维度为：</p>
+<pre><code class="language-text">4 steps × 4 dims = 16 dims
+</code></pre>
+<h3 id="53-为什么这是合理的简化"><a class="header" href="#53-为什么这是合理的简化">5.3 为什么这是合理的简化</a></h3>
+<p>因为本书当前的主线任务是一个相对简单的 pick-and-place 教学场景：</p>
+<ul>
+<li>主要关注末端三维移动；</li>
+<li>不强行引入复杂姿态旋转；</li>
+<li>夹爪开合作为关键离散/连续控制量保留。</li>
+</ul>
+<p>这样做可以让读者把注意力集中在：</p>
+<ul>
+<li>chunk prediction 的核心机制；</li>
+<li>数据到训练样本的转换；</li>
+<li>loss / checkpoint / rollout 的工程逻辑。</li>
+</ul>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章新增：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  scripts/
+    06_train_act_on_dataset_v0.py
+  reports/
+    ch16_act_dataset_v0_report.json
+    ch16_act_dataset_v0_report.md
+    ch16_act_dataset_v0_loss_curve.png
+    ch16_policy_v1_linear_chunk.npz
+</code></pre>
+<p>这意味着主线项目第一次具备了：</p>
+<ul>
+<li>从数据集构建训练样本；</li>
+<li>训练一个 ACT-like baseline；</li>
+<li>保存 checkpoint；</li>
+<li>输出训练曲线与验证报告。</li>
+</ul>
+<p>到这里，“数据 -&gt; 模型 -&gt; 评测”的第一条闭环才真正成立。</p>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1运行训练"><a class="header" href="#71-示例-1运行训练">7.1 示例 1：运行训练</a></h3>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/06_train_act_on_dataset_v0.py \
+  --dataset_root datasets/dataset_v0 \
+  --chunk_size 4 \
+  --epochs 80 \
+  --lr 0.06 \
+  --weight_decay 0.0001 \
+  --checkpoint_path reports/ch16_policy_v1_linear_chunk.npz \
+  --report_json reports/ch16_act_dataset_v0_report.json \
+  --curve_path reports/ch16_act_dataset_v0_loss_curve.png
+</code></pre>
+<p>该命令已在当前整合包中执行。</p>
+<h3 id="72-示例-2本章训练结果"><a class="header" href="#72-示例-2本章训练结果">7.2 示例 2：本章训练结果</a></h3>
+<p>当前教学版 baseline 的报告如下：</p>
+<ul>
+<li><code>feature_dim = 16</code></li>
+<li><code>output_dim = 16</code></li>
+<li><code>chunk_size = 4</code></li>
+<li><code>num_train_samples = 618</code></li>
+<li><code>num_val_samples = 259</code></li>
+<li><code>epochs = 80</code></li>
+<li><code>final_train_loss = 0.004891</code></li>
+<li><code>final_val_loss = 0.003368</code></li>
+<li><code>first_step_val_loss = 0.002745</code></li>
+</ul>
+<p>这里需要注意两点：</p>
+<ol>
+<li>这个结果说明“主线训练流程跑通了”；</li>
+<li>它不代表系统已经具备真实部署性能。</li>
+</ol>
+<h3 id="73-示例-3rollout-preview-如何看"><a class="header" href="#73-示例-3rollout-preview-如何看">7.3 示例 3：rollout preview 如何看</a></h3>
+<p>训练报告还给出了一个验证 episode 的 rollout preview。例如在 <code>episode_00012</code> 上：</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: right">t</th><th>pred_first_action</th><th>gt_first_action</th></tr></thead><tbody>
+<tr><td style="text-align: right">0</td><td>[0.0063, 0.0083, -0.0045, -0.0467]</td><td>[0.0, 0.0, 0.0, 0.0]</td></tr>
+<tr><td style="text-align: right">2</td><td>[0.0280, 0.0289, -0.0089, -0.1482]</td><td>[0.0681, 0.1216, -0.0700, 0.0]</td></tr>
+<tr><td style="text-align: right">4</td><td>[-0.0142, 0.0041, 0.0100, -0.3482]</td><td>[0.0, 0.0, 0.0, -1.0]</td></tr>
+</tbody></table>
+</div>
+<p>这类结果说明：</p>
+<ul>
+<li>策略已经学到了一定的动作趋势；</li>
+<li>但与真实动作仍有偏差；</li>
+<li>尤其在抓取/开合这类离散切换动作上，误差更明显。</li>
+</ul>
+<p>这正是 baseline 的价值：它为后续改进指出方向。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<p>本章练习代码位于：</p>
+<pre><code class="language-text">scripts/06_train_act_on_dataset_v0.py
+</code></pre>
+<p>这份代码的核心逻辑可以概括为：</p>
+<ol>
+<li>从 <code>dataset_v0/train</code> 和 <code>dataset_v0/val</code> 加载 episode；</li>
+<li>把每个时刻转换成 <code>(observation, action_chunk)</code> 样本；</li>
+<li>对输入特征做归一化；</li>
+<li>用一个轻量线性模型做 chunk 预测；</li>
+<li>记录 train / val loss；</li>
+<li>保存 checkpoint 与训练曲线。</li>
+</ol>
+<p>最关键的样本构造代码如下：</p>
+<pre><code class="language-python">for t in range(T - chunk_size):
+    x = feature_from_state(states[t])
+    chunk = [action_vec(actions[t + k]) for k in range(chunk_size)]
+    y = np.concatenate(chunk, axis=0)
+    samples.append(Sample(x=x, y=y))
+</code></pre>
+<p>这段代码很值得反复体会，因为它把“连续控制轨迹”转换成了“监督学习样本”。</p>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-feature_from_state"><a class="header" href="#91-feature_from_state">9.1 <code>feature_from_state()</code></a></h3>
+<p>这个函数从单步状态里提取训练输入特征。它把：</p>
+<ul>
+<li>绝对位姿；</li>
+<li>相对位姿；</li>
+<li>夹爪状态；</li>
+</ul>
+<p>组合成一个更适合学习的输入向量。</p>
+<p>这跟自动驾驶里做 feature engineering 的思路是一致的：</p>
+<blockquote>
+<p>即使最终你会走向更强的端到端模型，先把可解释的中间表征做清楚，仍然非常有价值。</p>
+</blockquote>
+<h3 id="92-load_split"><a class="header" href="#92-load_split">9.2 <code>load_split()</code></a></h3>
+<p>它负责把 episode 目录转成训练样本集合。这一步其实就相当于在构建一个最小 DataLoader。</p>
+<h3 id="93-train_linear_chunk_model"><a class="header" href="#93-train_linear_chunk_model">9.3 <code>train_linear_chunk_model()</code></a></h3>
+<p>这里使用的是一个非常轻量的线性模型加梯度下降训练。为什么不直接上 Transformer？</p>
+<p>因为本章目标是建立以下因果链：</p>
+<ul>
+<li>数据样本长什么样；</li>
+<li>action chunk 是什么；</li>
+<li>loss 怎么计算；</li>
+<li>checkpoint 怎么保存；</li>
+<li>rollout preview 怎么生成。</li>
+</ul>
+<p>等你把这条因果链看懂，再替换成更强的模型就会容易得多。</p>
+<h3 id="94-rollout_preview"><a class="header" href="#94-rollout_preview">9.4 <code>rollout_preview()</code></a></h3>
+<p>它并不是一个完整物理 rollout，而是一个教学型预览工具。它告诉你：</p>
+<ul>
+<li>在某个时刻，模型认为下一步最应该做什么；</li>
+<li>这个预测与真实动作差多少；</li>
+<li>误差主要发生在什么阶段。</li>
+</ul>
+<hr />
+<h2 id="10-为什么-baseline-只是起点"><a class="header" href="#10-为什么-baseline-只是起点">10. 为什么 baseline 只是起点</a></h2>
+<h3 id="101-baseline-的任务是搭闭环不是赢-benchmark"><a class="header" href="#101-baseline-的任务是搭闭环不是赢-benchmark">10.1 baseline 的任务是“搭闭环”，不是“赢 benchmark”</a></h3>
+<p>第一版 baseline 最重要的价值，不是把分数刷到最高，而是：</p>
+<ul>
+<li>证明数据链路可用；</li>
+<li>证明训练脚本可跑；</li>
+<li>证明 loss 能下降；</li>
+<li>证明 checkpoint 可以保存；</li>
+<li>证明 rollout 逻辑可以建立。</li>
+</ul>
+<h3 id="102-真实系统还差什么"><a class="header" href="#102-真实系统还差什么">10.2 真实系统还差什么</a></h3>
+<p>从当前 baseline 到真实机器人系统，中间至少还差：</p>
+<ul>
+<li>更强的观测编码；</li>
+<li>多视角图像输入；</li>
+<li>更长时序建模；</li>
+<li>更复杂动作空间；</li>
+<li>更真实 rollout 环境；</li>
+<li>安全与恢复机制；</li>
+<li>在线闭环学习。</li>
+</ul>
+<h3 id="103-为什么要尽早训练一个-baseline"><a class="header" href="#103-为什么要尽早训练一个-baseline">10.3 为什么要尽早训练一个 baseline</a></h3>
+<p>因为没有 baseline，你的系统问题几乎无法被分层定位。你会不知道问题到底出在：</p>
+<ul>
+<li>数据；</li>
+<li>模型；</li>
+<li>特征；</li>
+<li>split；</li>
+<li>还是 rollout。</li>
+</ul>
+<p>而一旦有了 baseline，就可以逐步问：</p>
+<ul>
+<li>数据增强能不能提升？</li>
+<li>teleop 数据比例要不要调？</li>
+<li>chunk 长度变大有没有帮助？</li>
+<li>线性模型换成 MLP / Transformer 是否收益明显？</li>
+</ul>
+<hr />
+<h2 id="11-常见错误"><a class="header" href="#11-常见错误">11. 常见错误</a></h2>
+<h3 id="111-还没理解样本构造就急着换大模型"><a class="header" href="#111-还没理解样本构造就急着换大模型">11.1 还没理解样本构造，就急着换大模型</a></h3>
+<p>如果你连 <code>(observation, action_chunk)</code> 是如何从 episode 里构造出来的都没吃透，那即使换成更大的模型，也很难真正理解结果。</p>
+<h3 id="112-loss-很低就误以为系统可部署"><a class="header" href="#112-loss-很低就误以为系统可部署">11.2 loss 很低就误以为系统可部署</a></h3>
+<p>loss 低只说明离线拟合还可以，不代表真实 rollout 成功率一定高。</p>
+<h3 id="113-忽略-val-集"><a class="header" href="#113-忽略-val-集">11.3 忽略 val 集</a></h3>
+<p>很多人训练时只看 train loss，这样会让你很难区分模型是真的学到了规律，还是只是记住了训练样本。</p>
+<h3 id="114-checkpoint-不带数据版本信息"><a class="header" href="#114-checkpoint-不带数据版本信息">11.4 checkpoint 不带数据版本信息</a></h3>
+<p>如果你只保存 <code>policy_best.pt</code> 之类的名字，却不记录它对应的 dataset 版本，后面实验对比几乎一定混乱。</p>
+<hr />
+<h2 id="12-本章练习"><a class="header" href="#12-本章练习">12. 本章练习</a></h2>
+<ol>
+<li>把线性模型替换成两层 MLP；</li>
+<li>把 <code>chunk_size</code> 从 4 改为 8，观察 loss 变化；</li>
+<li>将 <code>feature_from_state()</code> 改成更丰富的输入特征；</li>
+<li>为训练脚本增加 test 集评测；</li>
+<li>思考：为什么 action chunk 常常比单步动作预测更适合操作任务？</li>
+</ol>
+<hr />
+<h2 id="13-本章产出"><a class="header" href="#13-本章产出">13. 本章产出</a></h2>
+<p>完成本章后，项目新增：</p>
+<ul>
+<li>训练脚本：<code>scripts/06_train_act_on_dataset_v0.py</code></li>
+<li>训练报告：
+<ul>
+<li><code>reports/ch16_act_dataset_v0_report.json</code></li>
+<li><code>reports/ch16_act_dataset_v0_report.md</code></li>
+</ul>
+</li>
+<li>训练曲线：<code>reports/ch16_act_dataset_v0_loss_curve.png</code></li>
+<li>第一版 checkpoint：<code>reports/ch16_policy_v1_linear_chunk.npz</code></li>
+<li>第 16 章配图：
+<ul>
+<li><code>images/ch16_act_training_flow.png</code></li>
+<li><code>images/ch16_action_chunk_and_policy_rollout.png</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="14-小结"><a class="header" href="#14-小结">14. 小结</a></h2>
+<p>本章最重要的结论是：</p>
+<blockquote>
+<p>baseline 的意义，不是一步到位，而是让“数据 -&gt; 训练 -&gt; rollout -&gt; 分析”第一次形成闭环。</p>
+</blockquote>
+<p>通过本章，你应该掌握：</p>
+<ul>
+<li>ACT-like baseline 的训练输入输出；</li>
+<li>action chunk 的核心思想；</li>
+<li>如何从 <code>dataset_v0</code> 构造监督学习样本；</li>
+<li>如何记录 loss、checkpoint 和训练报告；</li>
+<li>为什么 baseline 是系统演进的起点，而不是终点。</li>
+</ul>
+<p>到第 16 章为止，本书主线项目已经完成了一条极其关键的基础闭环：</p>
+<ul>
+<li>定义任务；</li>
+<li>建立数据格式；</li>
+<li>采集 scripted / teleop 数据；</li>
+<li>构建第一版数据集；</li>
+<li>训练第一个可工作的策略 baseline。</li>
+</ul>
+<p>后续章节，我们将继续进入评测、失败回收、闭环迭代与更高阶系统设计，让这个基础闭环真正走向“工程化可持续演进”。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/15-build-the-first-trainable-dataset-v0.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/17-evaluation-protocol-dont-only-watch-success-video.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/15-build-the-first-trainable-dataset-v0.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/17-evaluation-protocol-dont-only-watch-success-video.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

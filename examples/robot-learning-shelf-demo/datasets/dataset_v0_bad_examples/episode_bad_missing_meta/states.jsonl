@@ -1,7 +1,0 @@
-{"t": 0, "timestamp": 12.0, "ee_pose_xyzrpy": [0.3, -0.1, 0.25, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.42, 0.05, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "reset"}
-{"t": 1, "timestamp": 12.04, "ee_pose_xyzrpy": [0.3, -0.1, 0.25, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.42, 0.05, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "observe"}
-{"t": 2, "timestamp": 12.08, "ee_pose_xyzrpy": [0.42, 0.05, 0.18, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.42, 0.05, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "pre_grasp"}
-{"t": 3, "timestamp": 12.12, "ee_pose_xyzrpy": [0.42, 0.05, 0.05, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.42, 0.05, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "approach"}
-{"t": 4, "timestamp": 12.16, "ee_pose_xyzrpy": [0.42, 0.05, 0.05, 3.14, 0.0, 0.0], "gripper_open": false, "object_pose_xyz": [0.42, 0.05, 0.05], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "grasp"}
-{"t": 5, "timestamp": 12.2, "ee_pose_xyzrpy": [0.62, -0.08, 0.18, 3.14, 0.0, 0.0], "gripper_open": false, "object_pose_xyz": [0.62, -0.08, 0.18], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "transfer"}
-{"t": 6, "timestamp": 12.24, "ee_pose_xyzrpy": [0.62, -0.08, 0.1, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.62, -0.08, 0.04], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "release"}

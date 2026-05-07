@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>附录 F：从教学 Demo 到真机系统的差距清单 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/appendix/appendix-f-demo-to-real-robot-gap-checklist.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="附录-f从教学-demo-到真机系统的差距清单"><a class="header" href="#附录-f从教学-demo-到真机系统的差距清单">附录 F：从教学 Demo 到真机系统的差距清单</a></h1>
+<p>本附录用于提醒读者：本书主线项目已经完成了完整教学闭环，但它不等于真实商用机器人系统。真实系统会引入大量硬件、感知、控制、安全和部署问题。</p>
+<hr />
+<h2 id="f1-硬件差距"><a class="header" href="#f1-硬件差距">F.1 硬件差距</a></h2>
+<p>教学 demo 中很多物理细节被简化，而真机会遇到：</p>
+<ul>
+<li>机械臂关节限制；</li>
+<li>电机响应延迟；</li>
+<li>夹爪夹持力不足；</li>
+<li>工具中心点误差；</li>
+<li>线缆干扰；</li>
+<li>急停与安全 IO；</li>
+<li>长时间运行发热和磨损。</li>
+</ul>
+<p>检查清单：</p>
+<pre><code class="language-text">[ ] 机械臂型号与自由度确认
+[ ] 末端执行器参数确认
+[ ] TCP 标定
+[ ] 夹爪开合范围确认
+[ ] 急停开关测试
+[ ] 电源与通信稳定性检查
+</code></pre>
+<hr />
+<h2 id="f2-感知差距"><a class="header" href="#f2-感知差距">F.2 感知差距</a></h2>
+<p>教学数据常常是干净图像，而真实环境中会遇到：</p>
+<ul>
+<li>深度噪声；</li>
+<li>光照变化；</li>
+<li>反光；</li>
+<li>遮挡；</li>
+<li>运动模糊；</li>
+<li>多相机时间同步；</li>
+<li>相机外参漂移。</li>
+</ul>
+<p>检查清单：</p>
+<pre><code class="language-text">[ ] 相机内参标定
+[ ] 相机外参标定
+[ ] 深度尺度确认
+[ ] 多相机同步检查
+[ ] 典型光照条件测试
+[ ] 遮挡场景测试
+</code></pre>
+<hr />
+<h2 id="f3-控制差距"><a class="header" href="#f3-控制差距">F.3 控制差距</a></h2>
+<p>教学项目中的 mock control 不代表真实执行：</p>
+<ul>
+<li>IK 可能无解；</li>
+<li>轨迹可能碰撞；</li>
+<li>末端位姿可能不可达；</li>
+<li>夹爪闭合时机可能不准；</li>
+<li>机械臂执行误差会积累；</li>
+<li>控制频率和策略频率可能不一致。</li>
+</ul>
+<p>检查清单：</p>
+<pre><code class="language-text">[ ] IK 成功率统计
+[ ] 轨迹碰撞检测
+[ ] 工作空间边界确认
+[ ] 控制频率确认
+[ ] 夹爪时序测试
+[ ] 执行误差记录
+</code></pre>
+<hr />
+<h2 id="f4-数据差距"><a class="header" href="#f4-数据差距">F.4 数据差距</a></h2>
+<p>真实 teleop 数据比教学数据复杂得多：</p>
+<ul>
+<li>操作员质量不同；</li>
+<li>示范轨迹有噪声；</li>
+<li>时间戳对齐困难；</li>
+<li>失败标签不一致；</li>
+<li>数据量不足；</li>
+<li>数据版本混乱。</li>
+</ul>
+<p>检查清单：</p>
+<pre><code class="language-text">[ ] episode 格式固定
+[ ] 成功/失败标签规范
+[ ] failure_reason 枚举固定
+[ ] operator_id 记录
+[ ] 数据集版本号记录
+[ ] 数据卡片生成
+</code></pre>
+<hr />
+<h2 id="f5-评测差距"><a class="header" href="#f5-评测差距">F.5 评测差距</a></h2>
+<p>真实机器人评测不能只看单次视频：</p>
+<ul>
+<li>必须重复 trials；</li>
+<li>必须固定协议；</li>
+<li>必须记录失败原因；</li>
+<li>必须区分训练场景与泛化场景；</li>
+<li>必须保留原始日志。</li>
+</ul>
+<p>检查清单：</p>
+<pre><code class="language-text">[ ] 固定位置评测
+[ ] 随机位置评测
+[ ] 光照变化评测
+[ ] 物体变化评测
+[ ] failure_reason 统计
+[ ] 实验报告输出
+</code></pre>
+<hr />
+<h2 id="f6-部署差距"><a class="header" href="#f6-部署差距">F.6 部署差距</a></h2>
+<p>从 notebook / script 到真实部署还需要：</p>
+<ul>
+<li>实时推理；</li>
+<li>模型压缩；</li>
+<li>ROS2 节点化；</li>
+<li>日志系统；</li>
+<li>监控与报警；</li>
+<li>安全边界；</li>
+<li>远程维护。</li>
+</ul>
+<p>检查清单：</p>
+<pre><code class="language-text">[ ] 策略推理延迟测量
+[ ] ROS2 节点部署
+[ ] 日志落盘
+[ ] 异常处理
+[ ] 人工接管机制
+[ ] 版本回滚机制
+</code></pre>
+<hr />
+<h2 id="f7-本书项目如何继续走向真机"><a class="header" href="#f7-本书项目如何继续走向真机">F.7 本书项目如何继续走向真机</a></h2>
+<p>推荐路线：</p>
+<ol>
+<li>把 mock robot arm 替换为仿真机械臂；</li>
+<li>接入真实或仿真的相机；</li>
+<li>接入 MoveIt2；</li>
+<li>做真实 teleop；</li>
+<li>重新构建 dataset_v1；</li>
+<li>训练更强 baseline；</li>
+<li>做真实评测和失败分析。</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../appendix/appendix-e-act-diffusion-policy-bc-comparison.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../appendix/appendix-g-mdbook-github-publishing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../appendix/appendix-e-act-diffusion-policy-bc-comparison.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../appendix/appendix-g-mdbook-github-publishing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

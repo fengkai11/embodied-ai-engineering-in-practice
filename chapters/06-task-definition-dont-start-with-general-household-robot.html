@@ -1,0 +1,699 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 6 章：任务定义：不要一上来做通用家务机器人 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/06-task-definition-dont-start-with-general-household-robot.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-6-章任务定义不要一上来做通用家务机器人"><a class="header" href="#第-6-章任务定义不要一上来做通用家务机器人">第 6 章：任务定义：不要一上来做通用家务机器人</a></h1>
+<p>到了这一章，本书主线项目终于从“概念理解”进入“正式建模”。</p>
+<p>前几章我们已经完成了几件非常关键的事情：</p>
+<ul>
+<li>明确了具身智能不是“机器人 + LLM”的口号，而是任务、数据、策略、评测和失败回收构成的闭环；</li>
+<li>建立了 observation、state、action、policy、episode 这些基础概念；</li>
+<li>理解了模仿学习、BC、ACT 与 VLA 在学习路径中的相对位置；</li>
+<li>让主线项目第一次具备了“语言 → 结构化任务”的入口。</li>
+</ul>
+<p>但到目前为止，我们仍然还没有真正回答一个更底层、更现实的问题：</p>
+<blockquote>
+<p><strong>机器人到底要做什么？</strong></p>
+</blockquote>
+<p>很多初学者在这里会犯一个非常典型的错误：一开始就说自己要做“家务机器人”“整理桌面机器人”“理货机器人”“厨房机器人”。这些说法在产品讨论里没有错，但在训练与工程实现里，它们几乎都<strong>太大、太泛、太模糊</strong>，无法直接成为可训练任务。</p>
+<p>所以本章的目标很明确：</p>
+<ol>
+<li>说明为什么“整理桌面”“做家务”不是可直接训练的任务；</li>
+<li>讲清楚一个可执行任务到底由哪些要素构成；</li>
+<li>用主线项目 <code>pick_box_to_bin</code> 给出第一个真正正式、可验证、可采集、可评测的任务定义；</li>
+<li>把自然语言任务进一步落成 YAML 任务配置；</li>
+<li>给出一个任务配置校验脚本，让任务定义第一次具备“工程边界”。</li>
+</ol>
+<p>这一步极其重要。因为从本章开始，主线项目第一次拥有了真正意义上的“任务合同”。</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下九个问题：</p>
+<ol>
+<li>为什么“整理桌面”“做家务”“理货”不是可直接训练的任务？</li>
+<li>一个可执行任务至少应包含哪些要素？</li>
+<li>什么叫初始状态与目标状态？</li>
+<li>成功标准与失败标准为什么必须写清楚？</li>
+<li>动作空间为什么是任务定义的一部分，而不是后面再想？</li>
+<li>为什么随机化变量必须在任务定义阶段就考虑？</li>
+<li>任务定义会怎样反向影响 episode 采集和评测协议？</li>
+<li><code>pick_box_to_bin</code> 的 v1 / v2 / v3 应如何演进？</li>
+<li>如何用 YAML 将任务定义写成工程可用的配置文件？</li>
+</ol>
+<p>这些问题看起来像“文档问题”，但实际上它们决定了后面所有的数据、训练和评测能不能成立。</p>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<h3 id="21-任务定义模糊后面一切都会跟着模糊"><a class="header" href="#21-任务定义模糊后面一切都会跟着模糊">2.1 任务定义模糊，后面一切都会跟着模糊</a></h3>
+<p>如果你不把任务定义清楚，那么：</p>
+<ul>
+<li>数据采集的人不知道该怎样演示；</li>
+<li>写规则控制的人不知道怎样判断“完成了没有”；</li>
+<li>做模仿学习的人不知道标签边界在哪里；</li>
+<li>做 rollout 评测的人不知道成功率到底怎么算；</li>
+<li>失败样本回收的人也很难区分，是“模型没学会”，还是“任务从一开始就没定义清楚”。</li>
+</ul>
+<p>所以，任务定义不是文档装饰，而是整个闭环的上游约束。</p>
+<h3 id="22-工程上最怕的不是任务小而是任务边界不清"><a class="header" href="#22-工程上最怕的不是任务小而是任务边界不清">2.2 工程上最怕的不是任务小，而是任务边界不清</a></h3>
+<p>很多初学者会担心：“是不是我做得太小了？”</p>
+<p>其实刚开始最危险的不是任务太小，而是任务太泛。一个任务即使小，只要它：</p>
+<ul>
+<li>边界清楚；</li>
+<li>可采集；</li>
+<li>可执行；</li>
+<li>可评测；</li>
+<li>可迭代；</li>
+</ul>
+<p>它就是一个好任务。</p>
+<p>相反，哪怕你说自己在做“通用家务机器人”，只要你说不清：</p>
+<ul>
+<li>要处理什么物体；</li>
+<li>在什么工作空间中；</li>
+<li>动作能输出什么；</li>
+<li>什么时候算成功；</li>
+<li>失败如何记录；</li>
+</ul>
+<p>那它就不是一个可以训练的任务，而只是一个愿景。</p>
+<h3 id="23-自动驾驶工程师在这里有天然优势"><a class="header" href="#23-自动驾驶工程师在这里有天然优势">2.3 自动驾驶工程师在这里有天然优势</a></h3>
+<p>如果你有自动驾驶背景，会发现这件事其实并不陌生。</p>
+<p>自动驾驶里，很多能力也不是一句“自动驾驶”就能概括，而是被拆成：</p>
+<ul>
+<li>车道保持；</li>
+<li>跟车；</li>
+<li>变道；</li>
+<li>泊车入库；</li>
+<li>障碍物绕行；</li>
+<li>特定场景触发逻辑。</li>
+</ul>
+<p>具身智能也是一样。真正落地时，必须先把“大目标”拆成“小闭环任务”。</p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-什么是模糊任务什么是可执行任务"><a class="header" href="#31-什么是模糊任务什么是可执行任务">3.1 什么是模糊任务，什么是可执行任务</a></h3>
+<p>先看几个常见但模糊的任务表述：</p>
+<ul>
+<li>整理桌面；</li>
+<li>做家务；</li>
+<li>收拾房间；</li>
+<li>理货；</li>
+<li>分拣杂物。</li>
+</ul>
+<p>这些表述的问题并不是它们不重要，而是它们都包含了太多隐含子任务。例如“整理桌面”至少可能包含：</p>
+<ul>
+<li>识别桌面物体；</li>
+<li>抓取小盒子；</li>
+<li>把盒子放入收纳盒；</li>
+<li>把歪掉的盒子摆正；</li>
+<li>把垃圾扔进垃圾盒；</li>
+<li>把散乱的物品推齐；</li>
+<li>区分哪些物体应该保留、哪些应该丢弃。</li>
+</ul>
+<p>这说明“整理桌面”更像一个<strong>任务集合</strong>，而不是一个单一训练任务。</p>
+<p>可执行任务则必须再往下走一步，变成类似：</p>
+<ul>
+<li>从桌面抓取一个小盒子并放入右侧收纳盒；</li>
+<li>将歪掉的小盒子摆正；</li>
+<li>把蓝色瓶子移动到桌面中央；</li>
+<li>将指定区域中的垃圾块放入垃圾桶。</li>
+</ul>
+<p>也就是说，可执行任务必须具有：</p>
+<ol>
+<li>明确对象；</li>
+<li>明确目标；</li>
+<li>明确工作空间；</li>
+<li>明确动作边界；</li>
+<li>明确成功/失败标准。</li>
+</ol>
+<h3 id="32-任务定义的八个关键要素"><a class="header" href="#32-任务定义的八个关键要素">3.2 任务定义的八个关键要素</a></h3>
+<p>本书建议把一个任务定义最少拆成以下八部分：</p>
+<ol>
+<li><strong>任务名称（task_name）</strong>：唯一标识任务；</li>
+<li><strong>初始状态（initial state）</strong>：任务开始时环境和机器人处于什么状态；</li>
+<li><strong>目标状态（goal state）</strong>：任务完成后应满足什么条件；</li>
+<li><strong>动作空间（action space）</strong>：机器人允许输出什么动作；</li>
+<li><strong>成功标准（success criteria）</strong>：什么时候算任务成功；</li>
+<li><strong>失败标准（failure criteria）</strong>：什么时候判定失败；</li>
+<li><strong>随机化变量（randomization）</strong>：训练和评测中哪些因素会变化；</li>
+<li><strong>评测协议（evaluation）</strong>：如何跑评测、记录哪些指标。</li>
+</ol>
+<p>这八部分并不是形式主义，而是为了让任务真正可复现、可采集、可训练。</p>
+<h3 id="33-初始状态与目标状态"><a class="header" href="#33-初始状态与目标状态">3.3 初始状态与目标状态</a></h3>
+<p>很多人写任务时只会写“抓起盒子并放入收纳盒”，但真正可执行时，至少还要回答：</p>
+<ul>
+<li>盒子起始在桌面的什么范围？</li>
+<li>收纳盒起始在什么位置？</li>
+<li>机器人起始位姿是什么？</li>
+<li>夹爪是开还是合？</li>
+<li>盒子一开始是不是已经在收纳盒中？</li>
+<li>是否允许环境中有其他干扰物？</li>
+</ul>
+<p>这些都属于初始状态的一部分。</p>
+<p>目标状态则要回答：</p>
+<ul>
+<li>盒子是否在收纳盒内？</li>
+<li>盒子是否稳定静止？</li>
+<li>夹爪是否已经释放？</li>
+<li>盒子是否保持竖直？</li>
+<li>是否要求 2 秒内不再移动？</li>
+</ul>
+<p>如果这些条件不写清楚，后续 success/failure 标签就会很混乱。</p>
+<h3 id="34-成功标准与失败标准"><a class="header" href="#34-成功标准与失败标准">3.4 成功标准与失败标准</a></h3>
+<p>对于 <code>pick_box_to_bin</code>，一个好的成功标准示例可能是：</p>
+<ul>
+<li>物体有至少 80% 体积进入目标收纳盒；</li>
+<li>物体在释放后保持稳定 2 秒；</li>
+<li>夹爪已经打开；</li>
+<li>物体未翻倒。</li>
+</ul>
+<p>失败标准示例则可能包括：</p>
+<ul>
+<li>物体在转移过程中掉落；</li>
+<li>物体掉出工作空间；</li>
+<li>发生明显碰撞；</li>
+<li>超时未完成。</li>
+</ul>
+<p>请注意：成功标准与失败标准必须是<strong>可记录、可检查、可复核</strong>的，而不是凭感觉判断。</p>
+<h3 id="35-动作空间为什么必须提前定义"><a class="header" href="#35-动作空间为什么必须提前定义">3.5 动作空间为什么必须提前定义</a></h3>
+<p>动作空间决定了策略到底在学什么。例如在主线项目里，我们当前选择的是：</p>
+<pre><code class="language-text">delta_end_effector_pose_with_gripper
+</code></pre>
+<p>也就是：</p>
+<ul>
+<li>末端位姿增量（dx, dy, dz, droll, dpitch, dyaw）</li>
+<li>夹爪动作增量（gripper_delta）</li>
+</ul>
+<p>如果你不在任务定义里把动作空间写明，后面 episode 的 actions.jsonl、训练脚本的输出头、rollout 的控制器接口都会飘。</p>
+<h3 id="36-随机化变量为什么不是以后再说"><a class="header" href="#36-随机化变量为什么不是以后再说">3.6 随机化变量为什么不是“以后再说”</a></h3>
+<p>很多初学者习惯先做完全固定场景，等任务勉强跑通后再考虑随机化。这没问题，但<strong>随机化变量必须在任务定义阶段就被预留出来</strong>，否则后面很难平滑扩展。</p>
+<p>例如 <code>pick_box_to_bin</code> 可以逐步引入：</p>
+<ul>
+<li>物体位置随机化；</li>
+<li>收纳盒位置随机化；</li>
+<li>物体颜色随机化；</li>
+<li>光照变化；</li>
+<li>干扰物随机出现。</li>
+</ul>
+<p>如果这些变量在任务定义中完全缺失，那么任务演进从 v1 到 v2 / v3 时就会很痛苦。</p>
+<h3 id="37-v1--v2--v3-的任务演进思路"><a class="header" href="#37-v1--v2--v3-的任务演进思路">3.7 v1 / v2 / v3 的任务演进思路</a></h3>
+<p>本书建议把任务版本显式写出来，而不是把所有难度一次性堆进去。</p>
+<ul>
+<li><strong>v1</strong>：固定场景。单个盒子、单个收纳盒、位置固定、成功标准宽松；</li>
+<li><strong>v2</strong>：位置与外观随机化。盒子位置变动、颜色变动；</li>
+<li><strong>v3</strong>：更强随机化与更严格标准。收纳盒位置也随机，增加光照变化、干扰物和更严格成功标准。</li>
+</ul>
+<p>这种分阶段任务设计很重要，因为它让数据采集、训练和评测都可以稳定迭代，而不会一上来就陷入复杂度泥潭。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-6-1-从模糊目标到可执行任务"><a class="header" href="#41-图-6-1-从模糊目标到可执行任务">4.1 图 6-1 从模糊目标到可执行任务</a></h3>
+<p><img src="../../assets/images/ch06_task_decomposition_and_versions.png" alt="图 6-1 从模糊目标到可执行任务" /></p>
+<p>这张图做了三件事：</p>
+<ol>
+<li>把“整理桌面 / 做家务”这样的模糊目标拆成可执行子任务；</li>
+<li>给出可执行任务定义的关键要素；</li>
+<li>用 <code>pick_box_to_bin</code> 展示 v1 / v2 / v3 的演进路径。</li>
+</ol>
+<p>如果你只记住本章一张图，我建议就记住这张。因为它实际上把任务定义的“问题空间”和“演进路径”都讲清楚了。</p>
+<h3 id="42-图-6-2-从自然语言任务到-yaml-配置"><a class="header" href="#42-图-6-2-从自然语言任务到-yaml-配置">4.2 图 6-2 从自然语言任务到 YAML 配置</a></h3>
+<p><img src="../../assets/images/ch06_task_yaml_config.png" alt="图 6-2 从自然语言任务到 YAML 配置" /></p>
+<p>这张图强调的是：自然语言指令必须进一步规格化，变成可执行任务配置。它是第 5 章“语言 → 结构化任务”的延续，也是本章“结构化任务 → 正式配置文件”的落地。</p>
+<h3 id="43-mermaid-图模糊任务拆解"><a class="header" href="#43-mermaid-图模糊任务拆解">4.3 Mermaid 图：模糊任务拆解</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[整理桌面] --&gt; B[识别桌面物体]
+    A --&gt; C[抓取小盒子]
+    A --&gt; D[放入收纳盒]
+    A --&gt; E[摆正歪盒子]
+    A --&gt; F[丢弃垃圾]
+    A --&gt; G[推齐物体]
+</code></pre>
+<h3 id="44-mermaid-图任务定义要素结构"><a class="header" href="#44-mermaid-图任务定义要素结构">4.4 Mermaid 图：任务定义要素结构</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[task_name]
+    B[initial_state]
+    C[goal_state]
+    D[action_space]
+    E[success_criteria]
+    F[failure_criteria]
+    G[randomization]
+    H[evaluation]
+    A --&gt; X[完整任务定义]
+    B --&gt; X
+    C --&gt; X
+    D --&gt; X
+    E --&gt; X
+    F --&gt; X
+    G --&gt; X
+    H --&gt; X
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-为什么任务定义是第一份正式合同"><a class="header" href="#51-为什么任务定义是第一份正式合同">5.1 为什么任务定义是“第一份正式合同”</a></h3>
+<p>主线项目进入本章后，第一次出现了一个很重要的变化：</p>
+<blockquote>
+<p>后面的数据、代码、评测，不再只是围绕“一个想法”，而是围绕“一个明确任务配置”。</p>
+</blockquote>
+<p>这就是任务定义的合同价值。它把下面这些环节串了起来：</p>
+<ul>
+<li>采集什么数据；</li>
+<li>episode 如何标注；</li>
+<li>success / failure 怎么判断；</li>
+<li>rollout 用什么指标评估；</li>
+<li>训练边界在哪里；</li>
+<li>后续如何演化到更难版本。</li>
+</ul>
+<h3 id="52-为什么-yaml-很合适"><a class="header" href="#52-为什么-yaml-很合适">5.2 为什么 YAML 很合适</a></h3>
+<p>YAML 不是唯一选择，但它非常适合当前阶段，因为它：</p>
+<ul>
+<li>可读性强；</li>
+<li>容易手工维护；</li>
+<li>结构清晰；</li>
+<li>可以直接被脚本加载校验；</li>
+<li>便于作为后续任务库的一部分长期积累。</li>
+</ul>
+<p>本章主线项目会新增两个配置文件：</p>
+<ul>
+<li><code>configs/task_pick_box_to_bin.yaml</code></li>
+<li><code>configs/task_straighten_box.yaml</code></li>
+</ul>
+<p>其中前者是主线任务的正式定义，后者用于提醒你：一旦任务定义体系建立起来，扩展新任务会容易很多。</p>
+<h3 id="53-为什么要有校验脚本"><a class="header" href="#53-为什么要有校验脚本">5.3 为什么要有校验脚本</a></h3>
+<p>任务定义如果只是“写在文档里”，仍然可能逐渐失控。比如：</p>
+<ul>
+<li>忘记写 failure_criteria；</li>
+<li>success_criteria 写得过于空泛；</li>
+<li>observation.modalities 漏了；</li>
+<li>action_space 没有 bounds；</li>
+<li>没有 timeout 规则。</li>
+</ul>
+<p>因此，本章新增 <code>scripts/validate_task_config.py</code>，用于做最小静态校验。</p>
+<p>请注意，这个脚本的目的不是一次性验证“物理正确性”，而是先做最基本的<strong>字段完整性和结构合理性检查</strong>。这对于工程工作流来说非常有价值。</p>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章为主线项目新增：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  configs/
+    task_pick_box_to_bin.yaml
+    task_straighten_box.yaml
+  scripts/
+    validate_task_config.py
+</code></pre>
+<p>这意味着主线项目第一次具备了：</p>
+<ol>
+<li>正式任务配置；</li>
+<li>任务版本边界；</li>
+<li>配置静态校验能力。</li>
+</ol>
+<p>这是进入“标准数据格式”和“数据质检”前的必要步骤。</p>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1一个不合格的任务定义"><a class="header" href="#71-示例-1一个不合格的任务定义">7.1 示例 1：一个不合格的任务定义</a></h3>
+<p>错误写法：</p>
+<pre><code class="language-text">任务：整理桌面
+成功标准：桌面看起来更整洁
+</code></pre>
+<p>它的问题在于：</p>
+<ul>
+<li>没有具体操作对象；</li>
+<li>没有工作空间范围；</li>
+<li>没有动作空间；</li>
+<li>没有成功的可测量标准；</li>
+<li>没有失败定义；</li>
+<li>没有随机化边界。</li>
+</ul>
+<p>这样的任务定义几乎无法直接进入数据采集与训练。</p>
+<h3 id="72-示例-2合格的-pick_box_to_bin"><a class="header" href="#72-示例-2合格的-pick_box_to_bin">7.2 示例 2：合格的 <code>pick_box_to_bin</code></a></h3>
+<p>一个合格的 <code>pick_box_to_bin</code> 任务至少应该明确：</p>
+<ul>
+<li>物体是小盒子；</li>
+<li>目标是指定收纳盒；</li>
+<li>初始状态下物体在桌面、收纳盒为空、机器人在 reset pose；</li>
+<li>动作空间是末端位姿增量 + 夹爪控制；</li>
+<li>成功标准是物体进入收纳盒并稳定停住；</li>
+<li>失败标准包含掉落、出界和超时。</li>
+</ul>
+<p>这些信息在 <code>configs/task_pick_box_to_bin.yaml</code> 中都会被结构化保存。</p>
+<h3 id="73-示例-3场景随机化变量表"><a class="header" href="#73-示例-3场景随机化变量表">7.3 示例 3：场景随机化变量表</a></h3>
+<p>对本书主线项目，建议至少显式记录：</p>
+<div class="table-wrapper"><table><thead><tr><th>随机化项</th><th>作用</th><th>初始建议</th></tr></thead><tbody>
+<tr><td>object_xy_jitter</td><td>增加位置鲁棒性</td><td>5 cm</td></tr>
+<tr><td>bin_xy_jitter</td><td>避免策略过拟合固定收纳盒位置</td><td>3 cm</td></tr>
+<tr><td>object_color</td><td>支持视觉泛化</td><td>红/蓝/绿/黄</td></tr>
+<tr><td>lighting_variation</td><td>避免对单一光照过拟合</td><td>mild</td></tr>
+<tr><td>distractor_objects</td><td>提升抗干扰能力</td><td>v3 再加入</td></tr>
+</tbody></table>
+</div>
+<h3 id="74-示例-4为什么评测协议要前置设计"><a class="header" href="#74-示例-4为什么评测协议要前置设计">7.4 示例 4：为什么评测协议要前置设计</a></h3>
+<p>如果你不在任务定义里提前写清楚评测协议，那么后面很容易出现：</p>
+<ul>
+<li>每个人对成功率的计算方式不同；</li>
+<li>一个同样的失败 case 被不同人打成不同标签；</li>
+<li>没有固定的 trial 数，导致结果不可比；</li>
+<li>没有 failure reason 分类，改进方向模糊。</li>
+</ul>
+<p>所以，本书建议把 <code>evaluation</code> 也写进任务配置。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<h3 id="81-任务配置文件"><a class="header" href="#81-任务配置文件">8.1 任务配置文件</a></h3>
+<p>本章最重要的产物之一是：</p>
+<pre><code class="language-text">configs/task_pick_box_to_bin.yaml
+</code></pre>
+<p>该文件定义了：</p>
+<ul>
+<li>工作空间；</li>
+<li>物体与目标容器；</li>
+<li>初始状态；</li>
+<li>目标状态；</li>
+<li>动作空间；</li>
+<li>observation modalities；</li>
+<li>success / failure criteria；</li>
+<li>随机化变量；</li>
+<li>评测协议。</li>
+</ul>
+<h3 id="82-任务配置校验脚本"><a class="header" href="#82-任务配置校验脚本">8.2 任务配置校验脚本</a></h3>
+<p>脚本：<code>scripts/validate_task_config.py</code></p>
+<p>推荐运行方式：</p>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/validate_task_config.py \
+  --config configs/task_pick_box_to_bin.yaml \
+  --output reports/ch06_task_pick_box_to_bin_validation.json
+</code></pre>
+<p>运行后你会得到一个类似这样的报告：</p>
+<pre><code class="language-json">{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "summary": {
+    "task_name": "pick_box_to_bin",
+    "version": "v1",
+    "observation_modalities": ["top_rgb", "wrist_rgb", "robot_state"],
+    "action_mode": "delta_end_effector_pose_with_gripper"
+  }
+}
+</code></pre>
+<p>这说明当前配置至少在字段层面是完整的。</p>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-这段代码解决什么问题"><a class="header" href="#91-这段代码解决什么问题">9.1 这段代码解决什么问题</a></h3>
+<p><code>validate_task_config.py</code> 解决的是：<strong>如何让任务定义第一次变成一个可自动检查的工程对象。</strong></p>
+<h3 id="92-校验逻辑分三层"><a class="header" href="#92-校验逻辑分三层">9.2 校验逻辑分三层</a></h3>
+<p>第一层：检查顶层字段是否齐全，例如：</p>
+<ul>
+<li><code>task_name</code></li>
+<li><code>version</code></li>
+<li><code>description</code></li>
+<li><code>initial_state</code></li>
+<li><code>goal_state</code></li>
+<li><code>action_space</code></li>
+<li><code>observation</code></li>
+<li><code>success_criteria</code></li>
+<li><code>failure_criteria</code></li>
+</ul>
+<p>第二层：检查关键子字段，例如：</p>
+<ul>
+<li><code>action_space.mode</code></li>
+<li><code>action_space.action_dim</code></li>
+<li><code>observation.modalities</code></li>
+</ul>
+<p>第三层：给出工程性 warning，例如：</p>
+<ul>
+<li>是否缺少 <code>timeout_sec</code></li>
+<li>是否没有 randomization</li>
+<li>是否没有 action limits</li>
+</ul>
+<h3 id="93-为什么-warning-也重要"><a class="header" href="#93-为什么-warning-也重要">9.3 为什么 warning 也重要</a></h3>
+<p>很多配置并不是“完全错误”，但会让后续流程变脆弱。例如：</p>
+<ul>
+<li>没有 randomization，不代表不能跑；</li>
+<li>但意味着训练泛化性很差；</li>
+<li>没有 timeout，不一定立刻崩；</li>
+<li>但 rollout 评测就会模糊。</li>
+</ul>
+<p>因此，把 error 和 warning 分开，是更符合工程实际的做法。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="错误-1把大愿景当成训练任务"><a class="header" href="#错误-1把大愿景当成训练任务">错误 1：把大愿景当成训练任务</a></h3>
+<p>“家务机器人”“整理桌面机器人”都是方向，不是第一阶段训练任务。</p>
+<h3 id="错误-2只有成功标准没有失败标准"><a class="header" href="#错误-2只有成功标准没有失败标准">错误 2：只有成功标准，没有失败标准</a></h3>
+<p>没有失败定义，数据标签、回收分析和评测报告都会混乱。</p>
+<h3 id="错误-3动作空间不写清楚"><a class="header" href="#错误-3动作空间不写清楚">错误 3：动作空间不写清楚</a></h3>
+<p>不写 action mode，后面的 episode 数据和训练输出就难以统一。</p>
+<h3 id="错误-4把随机化理解成后面再说"><a class="header" href="#错误-4把随机化理解成后面再说">错误 4：把随机化理解成“后面再说”</a></h3>
+<p>随机化可以后面逐步增加，但变量类别应当在任务定义阶段就被考虑。</p>
+<h3 id="错误-5任务配置只写给人看不写给代码用"><a class="header" href="#错误-5任务配置只写给人看不写给代码用">错误 5：任务配置只写给人看，不写给代码用</a></h3>
+<p>真正有价值的任务定义，应该能被脚本加载、校验、版本化、长期维护。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<h3 id="练习-1基础练习"><a class="header" href="#练习-1基础练习">练习 1：基础练习</a></h3>
+<p>把“理货”拆成至少 8 个可执行子任务。</p>
+<h3 id="练习-2工程练习"><a class="header" href="#练习-2工程练习">练习 2：工程练习</a></h3>
+<p>在 <code>task_pick_box_to_bin.yaml</code> 中增加一个 <code>distractor_objects</code> 配置，并为 v3 版本预留字段。</p>
+<h3 id="练习-3工程练习"><a class="header" href="#练习-3工程练习">练习 3：工程练习</a></h3>
+<p>补充 <code>task_straighten_box.yaml</code> 的 success / failure criteria，使其和 <code>pick_box_to_bin</code> 一样完整。</p>
+<h3 id="练习-4进阶练习"><a class="header" href="#练习-4进阶练习">练习 4：进阶练习</a></h3>
+<p>扩展 <code>validate_task_config.py</code>，使其支持：</p>
+<ul>
+<li>检查 <code>evaluation.metrics</code> 是否为空；</li>
+<li>检查 <code>instruction_templates</code> 至少包含一条自然语言示例；</li>
+<li>检查随机化字段数是否过少。</li>
+</ul>
+<h3 id="练习-5思考练习"><a class="header" href="#练习-5思考练习">练习 5：思考练习</a></h3>
+<p>任务定义不清，会如何影响：</p>
+<ul>
+<li>episode 采集；</li>
+<li>success / failure 标签；</li>
+<li>rollout 评测；</li>
+<li>模型训练？</li>
+</ul>
+<p>请分别展开说明。</p>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>本章应当产出：</p>
+<ol>
+<li>第一个正式任务配置 <code>task_pick_box_to_bin.yaml</code>；</li>
+<li>一个辅助任务配置 <code>task_straighten_box.yaml</code>；</li>
+<li>一个最小任务配置校验脚本 <code>validate_task_config.py</code>；</li>
+<li>对“模糊任务 → 可执行任务”的清晰理解；</li>
+<li>对任务 v1 / v2 / v3 演进路径的初步方法论。</li>
+</ol>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>这一章最重要的结论可以概括成一句话：</p>
+<blockquote>
+<p><strong>不要一上来做通用家务机器人，要先做边界清晰、可采集、可评测、可迭代的小任务。</strong></p>
+</blockquote>
+<p>对主线项目来说，<code>pick_box_to_bin</code> 的价值不在于它“简单”，而在于它是一个足够小、又足够完整的任务闭环起点。它能接住：</p>
+<ul>
+<li>语言任务入口；</li>
+<li>任务配置；</li>
+<li>episode 采集；</li>
+<li>success / failure 标签；</li>
+<li>模仿学习 baseline；</li>
+<li>rollout 评测。</li>
+</ul>
+<p>下一章，我们就顺着这条线继续推进：既然任务已经正式定义好了，那么**一条 Episode 到底应该长什么样？**换句话说，我们要开始把“任务定义”真正落到“数据格式”。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/05-what-vla-really-means-vision-language-action.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/07-robot-data-format-what-does-an-episode-look-like.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/05-what-vla-really-means-vision-language-action.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/07-robot-data-format-what-does-an-episode-look-like.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

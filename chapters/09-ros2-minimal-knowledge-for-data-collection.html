@@ -1,0 +1,515 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 9 章：ROS2 最小知识体系：为数据采集服务 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/09-ros2-minimal-knowledge-for-data-collection.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-9-章ros2-最小知识体系为数据采集服务"><a class="header" href="#第-9-章ros2-最小知识体系为数据采集服务">第 9 章：ROS2 最小知识体系：为数据采集服务</a></h1>
+<p>前一章我们已经知道，机器人学习的数据不能只会“生成”，还必须会“检查”。但当你真正从离线 toy 数据走向真实机器人系统时，很快就会碰到一个更现实的问题：这些图像、关节状态、动作命令、任务信息，究竟是通过什么方式在系统里流动的？</p>
+<p>对于大多数现代机器人系统来说，这个答案就是 <strong>ROS2</strong>。不过，本章并不是一本完整的 ROS2 教程。我们的目标更聚焦：只讲那些<strong>为了数据采集与主线项目推进必须掌握的最小 ROS2 知识体系</strong>。</p>
+<p>也就是说，我们关心 ROS2，不是为了背概念，而是为了回答这些问题：</p>
+<ul>
+<li>什么是 node、topic、message？</li>
+<li>相机图像、关节状态、动作命令应该分别挂在哪些 topic 上？</li>
+<li>数据记录节点应该订阅哪些流？</li>
+<li>主线项目从 ROS2 数据流到 episode 数据结构之间是什么关系？</li>
+</ul>
+<p>如果说第 8 章解决的是“数据进来后怎么检查”，那么本章解决的就是“数据在系统里是怎么流过来的”。</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下问题：</p>
+<ol>
+<li>什么是 node、topic、message、service、action、launch、parameter？</li>
+<li>为什么 ROS2 是机器人数据采集的重要中间层？</li>
+<li>主线项目中哪些信息适合放在 topic 上？</li>
+<li>相机、关节状态、动作命令、任务解析节点之间如何通信？</li>
+<li>数据记录节点在整体系统中扮演什么角色？</li>
+<li>ROS2 topic 与 episode 字段之间应该如何映射？</li>
+<li>为什么时间戳在 ROS2 里同样关键？</li>
+<li>如何用最小 pub/sub 示例理解数据流？</li>
+<li>在没有 ROS2 运行环境时，如何用纯 Python 模拟这个过程？</li>
+</ol>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<h3 id="21-机器人系统本质上是分布式数据流系统"><a class="header" href="#21-机器人系统本质上是分布式数据流系统">2.1 机器人系统本质上是分布式数据流系统</a></h3>
+<p>对于初学者来说，机器人很容易被误解成“一个程序控制一个机械臂”。但工程上，真实机器人系统通常由很多节点组成：</p>
+<ul>
+<li>相机节点负责采图；</li>
+<li>状态节点负责发布关节与末端状态；</li>
+<li>任务解析节点负责解释任务指令；</li>
+<li>控制节点负责发动作命令；</li>
+<li>数据记录节点负责把多条数据流统一记录下来。</li>
+</ul>
+<p>所以，从系统角度看，机器人更像一个<strong>分布式、异步、多模态数据流系统</strong>。ROS2 的价值就在于为这些模块提供了统一通信基础设施。</p>
+<h3 id="22-只会离线数据不理解在线数据流工程就接不上"><a class="header" href="#22-只会离线数据不理解在线数据流工程就接不上">2.2 只会离线数据，不理解在线数据流，工程就接不上</a></h3>
+<p>前面几章我们使用的是离线生成的 episode，这对学习核心概念很有帮助。但如果你不理解数据在线是如何产生的，就很难继续推进：</p>
+<ul>
+<li>不知道相机图像从哪里来；</li>
+<li>不知道动作命令怎么广播给执行器；</li>
+<li>不知道 recorder 为什么要订阅多个 topic；</li>
+<li>不知道后续 rosbag 是怎么记录这些流的。</li>
+</ul>
+<p>所以，本章是连接“离线学习世界”和“真实机器人系统世界”的桥梁。</p>
+<h3 id="23-ros2-对自动驾驶工程师也并不陌生"><a class="header" href="#23-ros2-对自动驾驶工程师也并不陌生">2.3 ROS2 对自动驾驶工程师也并不陌生</a></h3>
+<p>如果你有自动驾驶背景，可以把 ROS2 topic 类比为：</p>
+<ul>
+<li>一类轻量级、异步的消息总线；</li>
+<li>类似各模块之间发布 / 订阅的实时数据流；</li>
+<li>在概念上有点像多 topic 的车端 log 流。</li>
+</ul>
+<p>当然，ROS2 还有更丰富的生态和节点管理能力，但从主线项目角度，这个类比足以帮助你快速建立直觉。</p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-node执行具体功能的进程"><a class="header" href="#31-node执行具体功能的进程">3.1 node：执行具体功能的进程</a></h3>
+<p>ROS2 中最重要的基本单元之一是 <strong>node</strong>。你可以把它理解为一个执行具体职责的进程或模块。例如：</p>
+<ul>
+<li><code>camera_node</code>：采集相机图像；</li>
+<li><code>robot_state_node</code>：发布机器人关节状态；</li>
+<li><code>teleop_node</code>：接收人工控制并发布动作指令；</li>
+<li><code>task_parser_node</code>：解析任务输入；</li>
+<li><code>data_recorder_node</code>：订阅多个 topic 并保存数据。</li>
+</ul>
+<p>也就是说，node 回答的是：<strong>是谁在干这件事？</strong></p>
+<h3 id="32-topic节点之间异步传递数据的通道"><a class="header" href="#32-topic节点之间异步传递数据的通道">3.2 topic：节点之间异步传递数据的通道</a></h3>
+<p>topic 是 ROS2 中最常用的通信方式之一。它适合多对多、异步的数据分发。比如：</p>
+<ul>
+<li><code>/camera/front/image_raw</code>：前视相机图像；</li>
+<li><code>/camera/wrist/image_raw</code>：腕部相机图像；</li>
+<li><code>/joint_states</code>：关节状态；</li>
+<li><code>/action_cmd</code>：动作命令；</li>
+<li><code>/task_info</code>：任务解析结果。</li>
+</ul>
+<p>topic 回答的是：<strong>数据通过哪条通道传递？</strong></p>
+<h3 id="33-message在-topic-中传递的数据格式"><a class="header" href="#33-message在-topic-中传递的数据格式">3.3 message：在 topic 中传递的数据格式</a></h3>
+<p>仅有 topic 名称还不够，还要知道“上面流动的数据长什么样”。这就是 message 的角色。例如：</p>
+<ul>
+<li>图像用 <code>sensor_msgs/Image</code>；</li>
+<li>关节状态用 <code>sensor_msgs/JointState</code>；</li>
+<li>简单字符串命令可用 <code>std_msgs/String</code>；</li>
+<li>任务信息则可以定义自定义消息 <code>TaskInfo.msg</code>。</li>
+</ul>
+<p>在主线项目中，我们新增了：</p>
+<pre><code class="language-text">ros2_ws/src/shelf_demo_msgs/msg/TaskInfo.msg
+</code></pre>
+<p>它用于承载解析后的任务信息，例如 instruction、task_name、target_object、target_container。</p>
+<h3 id="34-serviceactionlaunchparameter-的最小理解"><a class="header" href="#34-serviceactionlaunchparameter-的最小理解">3.4 service、action、launch、parameter 的最小理解</a></h3>
+<p>虽然本章重点是 topic，但还需要知道其他几个 ROS2 概念：</p>
+<ul>
+<li><strong>service</strong>：更像一次请求 / 响应，适合短事务；</li>
+<li><strong>action</strong>：适合需要反馈和可中断的长任务；</li>
+<li><strong>launch</strong>：用于同时启动多个 node；</li>
+<li><strong>parameter</strong>：用于配置 node 行为。</li>
+</ul>
+<p>在主线项目当前阶段，topic 是最核心的；但从系统视角，你至少要知道这些概念的位置。</p>
+<h3 id="35-数据记录节点为什么重要"><a class="header" href="#35-数据记录节点为什么重要">3.5 数据记录节点为什么重要</a></h3>
+<p>在具身学习项目里，<code>data_recorder_node</code> 往往是一个非常关键但容易被忽视的模块。它负责：</p>
+<ul>
+<li>订阅多条 topic；</li>
+<li>记录时间戳；</li>
+<li>对齐不同模态；</li>
+<li>最终将在线数据整理成 episode 或 rosbag 的基础材料。</li>
+</ul>
+<p>所以 recorder 可以被看作连接“在线机器人系统”和“离线训练数据”的桥梁。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-9-1-ros2-节点与-topic-通信图"><a class="header" href="#41-图-9-1-ros2-节点与-topic-通信图">4.1 图 9-1 ROS2 节点与 Topic 通信图</a></h3>
+<p><img src="../../assets/images/ch09_ros2_node_topic_communication.png" alt="图 9-1 ROS2 节点与 Topic 通信图" /></p>
+<p>这张图展示了主线项目中的最小通信骨架：</p>
+<ul>
+<li><code>camera_node</code> 发布图像；</li>
+<li><code>robot_state_node</code> 发布关节状态；</li>
+<li><code>teleop_node</code> 发布动作命令；</li>
+<li><code>task_parser_node</code> 解析任务并发布 <code>/task_info</code>；</li>
+<li><code>data_recorder_node</code> 订阅这些数据并输出 episode dataset。</li>
+</ul>
+<h3 id="42-图-9-2-ros2-topic-到-episode-字段映射"><a class="header" href="#42-图-9-2-ros2-topic-到-episode-字段映射">4.2 图 9-2 ROS2 Topic 到 Episode 字段映射</a></h3>
+<p><img src="../../assets/images/ch09_ros2_topic_to_episode_mapping.png" alt="图 9-2 ROS2 Topic 到 Episode 字段映射" /></p>
+<p>这张图非常关键，因为它直接把 ROS2 数据流和前面几章定义的 episode 结构连接了起来：</p>
+<ul>
+<li>相机 topic → <code>images/*.png</code></li>
+<li><code>/joint_states</code> → <code>states.jsonl</code></li>
+<li><code>/action_cmd</code> → <code>actions.jsonl</code></li>
+<li><code>/task_info</code> → <code>meta.json</code></li>
+</ul>
+<p>也就是说，它让“在线 topic 世界”和“离线 episode 世界”形成了明确映射关系。</p>
+<h3 id="43-mermaid-图最小-pubsub-关系"><a class="header" href="#43-mermaid-图最小-pubsub-关系">4.3 Mermaid 图：最小 pub/sub 关系</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[camera_node] --&gt;|/camera/front/image_raw| E[data_recorder_node]
+    B[robot_state_node] --&gt;|/joint_states| E
+    C[teleop_node] --&gt;|/action_cmd| D[task_parser_node]
+    D --&gt;|/task_info| E
+</code></pre>
+<h3 id="44-mermaid-图ros2-到-episode-的桥接"><a class="header" href="#44-mermaid-图ros2-到-episode-的桥接">4.4 Mermaid 图：ROS2 到 episode 的桥接</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[ROS2 topics] --&gt; B[data recorder]
+    B --&gt; C[raw log / rosbag]
+    C --&gt; D[episode dataset]
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-topic-命名不是小事"><a class="header" href="#51-topic-命名不是小事">5.1 topic 命名不是小事</a></h3>
+<p>主线项目中推荐的 topic 命名要尽量做到：</p>
+<ul>
+<li>语义清楚；</li>
+<li>层次一致；</li>
+<li>便于扩展。</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><code>/camera/front/image_raw</code></li>
+<li><code>/camera/wrist/image_raw</code></li>
+<li><code>/joint_states</code></li>
+<li><code>/action_cmd</code></li>
+<li><code>/task_info</code></li>
+</ul>
+<p>好的命名会直接降低后面 recorder 配置和 rosbag 记录时的心智成本。</p>
+<h3 id="52-为什么要先画通信图"><a class="header" href="#52-为什么要先画通信图">5.2 为什么要先画通信图</a></h3>
+<p>当系统中节点多起来后，如果不先画通信图，很容易出现：</p>
+<ul>
+<li>某个 topic 重复发布；</li>
+<li>recorder 忘订阅关键 topic；</li>
+<li>某条 topic 的 message 类型选错；</li>
+<li>某些数据需要 service / action，但你误用了 topic。</li>
+</ul>
+<p>所以，通信图本身就是一种系统设计工具。</p>
+<h3 id="53-没有-ros2-环境时如何学习"><a class="header" href="#53-没有-ros2-环境时如何学习">5.3 没有 ROS2 环境时如何学习</a></h3>
+<p>很多读者此时并没有完整 ROS2 环境。如果因为环境门槛过高而停住，就很可惜。因此，本章在主线项目中新增了一个<strong>纯 Python 的 mock pub/sub demo</strong>，让你先理解信息流，而不是先被环境细节拦住。</p>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章为主线项目新增：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  ros2_ws/src/
+    shelf_demo_msgs/
+      msg/TaskInfo.msg
+    shelf_demo_data_recorder/
+      mock_ros2_pubsub_demo.py
+      launch/shelf_demo_record.launch.py
+  reports/
+    ch09_mock_ros2_demo.json
+</code></pre>
+<p>这些新增内容的作用是：</p>
+<ul>
+<li>建立主线项目的最小 ROS2 topic 设计；</li>
+<li>提供自定义消息示例；</li>
+<li>提供 recorder 的教学版 mock demo；</li>
+<li>为下一章 rosbag 记录与转换做准备。</li>
+</ul>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1前视相机-topic"><a class="header" href="#71-示例-1前视相机-topic">7.1 示例 1：前视相机 topic</a></h3>
+<pre><code class="language-text">/camera/front/image_raw
+sensor_msgs/Image
+</code></pre>
+<p>该 topic 用于传输前视 RGB 图像，是数据采集中的主要视觉观测源之一。最终它会对应到 episode 的 <code>images/front/*.png</code>。</p>
+<h3 id="72-示例-2关节状态-topic"><a class="header" href="#72-示例-2关节状态-topic">7.2 示例 2：关节状态 topic</a></h3>
+<pre><code class="language-text">/joint_states
+sensor_msgs/JointState
+</code></pre>
+<p>这条 topic 用于描述机器人当前的关节状态。对于主线项目，我们在教学版数据中更关心的是：末端位姿、夹爪状态、phase 等结构化信息。它们最终会被整理进 <code>states.jsonl</code>。</p>
+<h3 id="73-示例-3动作命令-topic"><a class="header" href="#73-示例-3动作命令-topic">7.3 示例 3：动作命令 topic</a></h3>
+<pre><code class="language-text">/action_cmd
+std_msgs/String 或自定义消息
+</code></pre>
+<p>在真实系统中，动作命令可能会更结构化；但在本章教学阶段，我们先用简化形式建立直觉：动作命令同样是系统中非常关键的一条数据流，它最终会映射到 <code>actions.jsonl</code>。</p>
+<h3 id="74-示例-4任务解析-topic"><a class="header" href="#74-示例-4任务解析-topic">7.4 示例 4：任务解析 topic</a></h3>
+<p>任务指令可能来自人、来自上层规划器，也可能来自语言解析模块。经过 <code>task_parser_node</code> 处理后，形成 <code>/task_info</code>，最终进入 <code>meta.json</code> 或 episode 级元信息。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<h3 id="81-自定义消息示例"><a class="header" href="#81-自定义消息示例">8.1 自定义消息示例</a></h3>
+<p>本章新增：</p>
+<pre><code class="language-text">ros2_ws/src/shelf_demo_msgs/msg/TaskInfo.msg
+</code></pre>
+<p>内容示例：</p>
+<pre><code class="language-text">string instruction
+string task_name
+string target_object
+string target_container
+</code></pre>
+<h3 id="82-最小-pubsub-教学示例"><a class="header" href="#82-最小-pubsub-教学示例">8.2 最小 pub/sub 教学示例</a></h3>
+<p>运行方式：</p>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python ros2_ws/src/shelf_demo_data_recorder/mock_ros2_pubsub_demo.py   --output_json reports/ch09_mock_ros2_demo.json
+</code></pre>
+<p>它不会依赖真实 ROS2 运行环境，而是用纯 Python 模拟：</p>
+<ul>
+<li>发布图像消息；</li>
+<li>发布关节状态；</li>
+<li>发布动作命令；</li>
+<li>发布任务信息；</li>
+<li>由 recorder 汇总计数并生成报告。</li>
+</ul>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-为什么先做纯-python-mock"><a class="header" href="#91-为什么先做纯-python-mock">9.1 为什么先做纯 Python mock</a></h3>
+<p>如果一开始就要求所有读者把 ROS2 环境装好、workspace 配好、依赖拉齐，学习节奏很容易被打断。本章通过 mock demo 先让你理解：</p>
+<ul>
+<li>topic 是什么；</li>
+<li>recorder 为什么要订阅多条流；</li>
+<li>数据是如何被汇总的。</li>
+</ul>
+<p>这是一种“先理解结构，再落地环境”的学习顺序。</p>
+<h3 id="92-taskinfomsg-的价值"><a class="header" href="#92-taskinfomsg-的价值">9.2 <code>TaskInfo.msg</code> 的价值</a></h3>
+<p>很多初学者只会把任务当成一条字符串，但一旦进入工程场景，你就会发现：</p>
+<ul>
+<li><code>instruction</code></li>
+<li><code>task_name</code></li>
+<li><code>target_object</code></li>
+<li><code>target_container</code></li>
+</ul>
+<p>这些字段分开存，比塞进一句话更利于后续解析、记录和训练。自定义消息的存在，就是为了让系统里的信息表达更明确。</p>
+<h3 id="93-data_recorder_node-为什么是中心节点"><a class="header" href="#93-data_recorder_node-为什么是中心节点">9.3 <code>data_recorder_node</code> 为什么是中心节点</a></h3>
+<p>在图 9-1 中你会发现，真正把系统串起来的，是 <code>data_recorder_node</code>。因为它是把：</p>
+<ul>
+<li>图像流；</li>
+<li>状态流；</li>
+<li>动作流；</li>
+<li>任务流；</li>
+</ul>
+<p>汇聚起来的地方。没有 recorder，系统可以运行；但没有 recorder，就很难形成训练数据。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="错误-1把-ros2-学成术语背诵"><a class="header" href="#错误-1把-ros2-学成术语背诵">错误 1：把 ROS2 学成“术语背诵”</a></h3>
+<p>对主线项目来说，更重要的是理解 topic 与 recorder 的数据关系，而不是先背一堆命令。</p>
+<h3 id="错误-2topic-设计没有围绕数据采集目标"><a class="header" href="#错误-2topic-设计没有围绕数据采集目标">错误 2：topic 设计没有围绕数据采集目标</a></h3>
+<p>很多 topic 设计看似完整，但和最终 episode 没有明确映射，后面会很混乱。</p>
+<h3 id="错误-3没有统一时间戳策略"><a class="header" href="#错误-3没有统一时间戳策略">错误 3：没有统一时间戳策略</a></h3>
+<p>topic 可以异步，但记录时必须有统一时间基准，否则后面很难对齐。</p>
+<h3 id="错误-4忽略任务信息流"><a class="header" href="#错误-4忽略任务信息流">错误 4：忽略任务信息流</a></h3>
+<p>只记录图像和关节状态，而忽略任务信息，会让训练样本缺少上下文。</p>
+<h3 id="错误-5recorder-只是存日志没有考虑后续转换"><a class="header" href="#错误-5recorder-只是存日志没有考虑后续转换">错误 5：recorder 只是“存日志”，没有考虑后续转换</a></h3>
+<p>好的 recorder 设计，从一开始就会考虑后面如何转成 episode。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<ol>
+<li>解释 topic 与 service 的区别；</li>
+<li>为主线项目再设计 5 个可能有用的 topic；</li>
+<li>扩展 <code>TaskInfo.msg</code>，增加 <code>session_id</code> 与 <code>operator_id</code>；</li>
+<li>修改 mock demo，使 recorder 同时统计每个 topic 的首个与末个时间戳；</li>
+<li>思考：为什么机器人数据采集需要时间戳？</li>
+</ol>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>本章应当产出：</p>
+<ol>
+<li>一套主线项目最小 ROS2 topic 设计；</li>
+<li>一个自定义消息示例；</li>
+<li>一个纯 Python mock ROS2 pub/sub 教学示例；</li>
+<li>对 recorder 节点角色的清晰理解；</li>
+<li>对“ROS2 是数据采集基础设施”这一认识。</li>
+</ol>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>这一章最重要的结论可以概括成一句话：</p>
+<blockquote>
+<p><strong>对于具身智能项目来说，ROS2 最核心的价值之一，是把多模态、多节点的数据流组织成一个可记录、可扩展、可分析的系统。</strong></p>
+</blockquote>
+<p>理解了这一点，你就不会再把 ROS2 仅仅看成一个“机器人框架”，而会把它看成主线项目数据闭环中的通信骨架。</p>
+<p>下一章，我们就顺势进入一个非常自然的问题：既然 topic 已经有了，数据也在系统里流动，那么如何把它们记录下来，并转成真正能用于训练的 episode？答案就是 <strong>rosbag 与数据记录流程</strong>。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/08-data-validation-and-visualization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/10-rosbag-and-robot-data-recording.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/08-data-validation-and-visualization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/10-rosbag-and-robot-data-recording.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

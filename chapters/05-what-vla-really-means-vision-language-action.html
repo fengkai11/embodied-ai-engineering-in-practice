@@ -1,0 +1,680 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 5 章：VLA 的本质：Vision-Language-Action - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/05-what-vla-really-means-vision-language-action.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-5-章vla-的本质vision-language-action"><a class="header" href="#第-5-章vla-的本质vision-language-action">第 5 章：VLA 的本质：Vision-Language-Action</a></h1>
+<p>如果说第 4 章解决的是“机器人策略如何从示范中学习动作”，那么第 5 章要解决的，就是另一个同样容易被误解的问题：<strong>VLA 到底是什么？</strong></p>
+<p>在今天的技术传播环境里，VLA 这个词经常被说得很神奇。很多演示视频会给人一种印象：</p>
+<ul>
+<li>机器人看到了画面；</li>
+<li>人给了它一句自然语言；</li>
+<li>它就像人一样理解了任务；</li>
+<li>然后顺利完成动作。</li>
+</ul>
+<p>于是，很多人会不自觉地把 VLA 理解成“能聊天的机器人模型”。但这种理解是危险的，因为它会把“理解”和“执行”混在一起。</p>
+<p>本章的核心目标，就是把这件事彻底讲清楚：</p>
+<ul>
+<li>VLM 擅长理解和描述；</li>
+<li>VLA 的关键则是从视觉、语言与机器人状态，映射到<strong>可执行动作</strong>；</li>
+<li>语言理解本身，并不能替代机器人动作数据；</li>
+<li>结构化任务解析，是自然语言走向机器人执行的重要中间层。</li>
+</ul>
+<p>我们还会回答一个非常现实的问题：为什么本书在当前阶段并不急着复现大型 VLA，而是先推进任务定义、数据闭环与 ACT baseline？</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下八个问题：</p>
+<ol>
+<li>Vision-Language-Action 中的 Vision、Language、Action 分别指什么？</li>
+<li>VLM 与 VLA 的差异到底在哪里？</li>
+<li>为什么会“看图说话”不等于“会控制机器人”？</li>
+<li>为什么互联网视觉语言知识不能直接变成可靠机器人动作？</li>
+<li>大规模机器人动作数据为什么如此关键？</li>
+<li>GR00T、Gemini Robotics、π0、Open X-Embodiment、LeRobot 这些名字，在学习路径中分别应该如何理解？</li>
+<li>为什么语言指令通常要先转成结构化任务，而不是直接让机器人“自由发挥”？</li>
+<li>在主线项目中，如何先实现一个规则版的 task parser，作为“语言 → 结构化任务”的雏形？</li>
+</ol>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<p>如果不把 VLA 说清楚，读者在后续学习中很容易掉进两个极端。</p>
+<h3 id="极端一把-vla-神化"><a class="header" href="#极端一把-vla-神化">极端一：把 VLA 神化</a></h3>
+<p>这种极端通常表现为：</p>
+<ul>
+<li>认为只要有了强大的视觉语言模型，机器人就自然会做动作；</li>
+<li>认为语言理解几乎可以替代任务定义；</li>
+<li>认为只要“模型足够大”，动作策略、控制边界、episode 数据和 rollout 评测都不再重要。</li>
+</ul>
+<p>这显然不符合工程现实。一个机器人系统能否完成任务，最终还是要看：</p>
+<ul>
+<li>action 是否可执行；</li>
+<li>机器人状态是否纳入决策；</li>
+<li>真实动作数据是否足够；</li>
+<li>失败是否能被回收与迭代。</li>
+</ul>
+<h3 id="极端二把-vla-贬成噱头"><a class="header" href="#极端二把-vla-贬成噱头">极端二：把 VLA 贬成“噱头”</a></h3>
+<p>另一种极端则认为：</p>
+<ul>
+<li>VLA 只是把文字提示加到模型里；</li>
+<li>机器人还是老一套，只不过包了一层 LLM；</li>
+<li>语言根本没什么价值。</li>
+</ul>
+<p>这同样不准确。语言对机器人系统的价值并不在于“陪你聊天”，而在于：</p>
+<ul>
+<li>它可以表达任务目标；</li>
+<li>它可以提供高层约束；</li>
+<li>它可以帮助统一多任务表述；</li>
+<li>它可以支持更一般化的人机交互接口。</li>
+</ul>
+<p>所以，本章的重要性就在于：<strong>把 VLA 放回正确的位置。既不神化，也不低估。</strong></p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-vision-language-action-分别是什么"><a class="header" href="#31-vision-language-action-分别是什么">3.1 Vision-Language-Action 分别是什么</a></h3>
+<p>一个 VLA 系统的名字本身已经说明了它的三类核心输入输出元素：</p>
+<h4 id="vision"><a class="header" href="#vision">Vision</a></h4>
+<p>Vision 指视觉输入，通常包括：</p>
+<ul>
+<li>相机 RGB 图像；</li>
+<li>RGBD；</li>
+<li>多视角图像；</li>
+<li>腕部相机图像；</li>
+<li>有时也包括由视觉提取的中间表征。</li>
+</ul>
+<h4 id="language"><a class="header" href="#language">Language</a></h4>
+<p>Language 指自然语言任务描述，例如：</p>
+<ul>
+<li>“把红色盒子放进右边收纳盒”；</li>
+<li>“把歪掉的盒子摆正”；</li>
+<li>“把桌面上的垃圾放进垃圾盒”。</li>
+</ul>
+<p>语言的价值在于表达任务目标与约束，而不是直接代替控制器。</p>
+<h4 id="action"><a class="header" href="#action">Action</a></h4>
+<p>Action 指机器人可执行的动作输出。它可能是：</p>
+<ul>
+<li>关节角目标；</li>
+<li>末端位姿；</li>
+<li>位姿增量；</li>
+<li>夹爪开合；</li>
+<li>动作块；</li>
+<li>更底层的控制命令。</li>
+</ul>
+<p>因此，VLA 与 VLM 的最本质差别就在这里：<strong>VLA 的输出不是文本，而是动作。</strong></p>
+<h3 id="32-vlm-与-vla理解与执行的分界线"><a class="header" href="#32-vlm-与-vla理解与执行的分界线">3.2 VLM 与 VLA：理解与执行的分界线</a></h3>
+<p>VLM（视觉语言模型）擅长做的事情通常包括：</p>
+<ul>
+<li>看图描述；</li>
+<li>回答图像相关问题；</li>
+<li>识别场景中的物体和关系；</li>
+<li>根据语言进行视觉理解。</li>
+</ul>
+<p>例如，给它一张桌面图片，它可以回答：</p>
+<ul>
+<li>红色盒子在右侧；</li>
+<li>蓝色盒子在左侧；</li>
+<li>桌面上有两个盒子和一个机械臂。</li>
+</ul>
+<p>这些能力很重要，但它们并不直接等于动作能力。</p>
+<p>VLA 则进一步要求模型完成：</p>
+<ul>
+<li>基于视觉观察；</li>
+<li>结合语言任务；</li>
+<li>再结合机器人状态；</li>
+<li>最终输出一串能被机器人执行的动作序列。</li>
+</ul>
+<p>所以，你可以把它们的差异概括成：</p>
+<ul>
+<li><strong>VLM：从图像与语言到文本；</strong></li>
+<li><strong>VLA：从图像、语言与状态到动作。</strong></li>
+</ul>
+<h3 id="33-为什么互联网知识不能直接变成机器人动作"><a class="header" href="#33-为什么互联网知识不能直接变成机器人动作">3.3 为什么互联网知识不能直接变成机器人动作</a></h3>
+<p>很多视觉语言模型训练于海量互联网图文数据。这给了它们极强的常识理解与视觉语义能力，但机器人动作并不只是“知道世界是什么”。</p>
+<p>机器人动作还需要：</p>
+<ul>
+<li>知道自己当前的关节状态；</li>
+<li>知道夹爪是否开合；</li>
+<li>知道目标在三维空间中的相对关系；</li>
+<li>知道控制输出会如何改变环境；</li>
+<li>知道哪些动作是安全的、可执行的。</li>
+</ul>
+<p>这些信息，很多都不在互联网图文里。更重要的是，真实机器人动作数据远比互联网图文稀缺，因此动作头（action head）学到的能力更加珍贵，也更依赖高质量示范数据。</p>
+<h3 id="34-robot-action-data-为什么稀缺"><a class="header" href="#34-robot-action-data-为什么稀缺">3.4 robot action data 为什么稀缺</a></h3>
+<p>机器人动作数据比图像文本数据稀缺，主要有五个原因：</p>
+<ol>
+<li><strong>采集成本高</strong>：需要真实机器人、相机、控制系统与人工示范；</li>
+<li><strong>数据结构复杂</strong>：不仅有图像，还有状态、动作、时间戳、成功标签；</li>
+<li><strong>时序同步要求高</strong>：不同模态必须在时间上对齐；</li>
+<li><strong>任务覆盖难</strong>：不同场景、物体和约束组合很多；</li>
+<li><strong>失败也有成本</strong>：真机试错不如纯文本数据便宜。</li>
+</ol>
+<p>这也是为什么大规模机器人数据集如此重要。没有足够高质量动作数据，VLA 很难真正学会“执行”。</p>
+<h3 id="35-open-x-embodimentlerobotgr00tgemini-roboticsπ0-在学习路径中的位置"><a class="header" href="#35-open-x-embodimentlerobotgr00tgemini-roboticsπ0-在学习路径中的位置">3.5 Open X-Embodiment、LeRobot、GR00T、Gemini Robotics、π0 在学习路径中的位置</a></h3>
+<p>这些名字常常会同时出现，但它们并不处在同一层次。</p>
+<ul>
+<li><strong>Open X-Embodiment</strong>：更像大规模具身数据与研究生态的重要代表；</li>
+<li><strong>LeRobot</strong>：更贴近工程实践与开源训练流程，是个人学习者更容易接近的入口；</li>
+<li><strong>GR00T、Gemini Robotics、π0</strong>：代表更大规模、更系统化的机器人基础模型或 VLA 方向探索。</li>
+</ul>
+<p>对于个人工程师来说，正确的顺序不是直接“复现大模型”，而是：</p>
+<ol>
+<li>理解任务定义；</li>
+<li>跑通数据闭环；</li>
+<li>做出 BC / ACT baseline；</li>
+<li>再去理解大型 VLA 为什么成立、缺什么数据、解决什么问题。</li>
+</ol>
+<h3 id="36-语言指令为什么要先结构化"><a class="header" href="#36-语言指令为什么要先结构化">3.6 语言指令为什么要先结构化</a></h3>
+<p>假设用户说：</p>
+<pre><code class="language-text">把红色盒子放进右边收纳盒。
+</code></pre>
+<p>对人来说，这句话似乎很自然。但对机器人系统来说，其中仍然有很多隐含内容需要明确：</p>
+<ul>
+<li>红色盒子指哪个 object？</li>
+<li>右边收纳盒在当前场景里对应哪个 target？</li>
+<li>是否要求盒子保持竖直？</li>
+<li>是否有时间上限？</li>
+<li>是否允许碰撞？</li>
+<li>怎样才算成功？</li>
+</ul>
+<p>因此，语言指令通常需要先解析成结构化任务。例如：</p>
+<pre><code class="language-json">{
+  "task_name": "pick_box_to_bin",
+  "object": {"type": "box", "color": "red"},
+  "target": {"name": "right_storage_box"},
+  "constraints": {"avoid_collision": true, "keep_upright": true},
+  "success_criteria": {"in_target": true, "released": true}
+}
+</code></pre>
+<p>结构化任务的重要性在于：</p>
+<ol>
+<li>更可验证；</li>
+<li>更可复现；</li>
+<li>更利于数据记录；</li>
+<li>更利于系统边界控制；</li>
+<li>更容易成为下游策略系统的稳定输入。</li>
+</ol>
+<h3 id="37-语言不能替代动作数据"><a class="header" href="#37-语言不能替代动作数据">3.7 语言不能替代动作数据</a></h3>
+<p>这是本章最重要的判断之一。</p>
+<p>语言非常重要，但语言不能替代动作数据。它能告诉机器人“要做什么”，却不能自动告诉机器人“具体如何做”。</p>
+<p>在机器人系统里：</p>
+<ul>
+<li>语言负责目标；</li>
+<li>视觉负责感知环境；</li>
+<li>状态负责描述机器人自身；</li>
+<li>动作数据负责告诉策略怎样执行。</li>
+</ul>
+<p>如果没有动作数据，VLA 最容易停留在“看起来懂任务，但不一定做得出来”的阶段。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-5-1-vlm-与-vla-的区别"><a class="header" href="#41-图-5-1-vlm-与-vla-的区别">4.1 图 5-1 VLM 与 VLA 的区别</a></h3>
+<p><img src="../../assets/images/ch05_vlm_vs_vla.png" alt="图 5-1 VLM 与 VLA 的区别" /></p>
+<p>这张图把本章最核心的差别表达得很清楚：</p>
+<ul>
+<li>左边 VLM 的输出是文本答案；</li>
+<li>右边 VLA 的输出是动作序列。</li>
+</ul>
+<p>请特别注意图中那个高亮判断：</p>
+<blockquote>
+<p>VLA 的关键不是聊天，而是从 observation / instruction / state 到 action 的映射。</p>
+</blockquote>
+<h3 id="42-图-5-2-从自然语言指令到结构化机器人任务"><a class="header" href="#42-图-5-2-从自然语言指令到结构化机器人任务">4.2 图 5-2 从自然语言指令到结构化机器人任务</a></h3>
+<p><img src="../../assets/images/ch05_instruction_to_structured_task.png" alt="图 5-2 从自然语言指令到结构化机器人任务" /></p>
+<p>这张图把本章主线项目新增能力说得很直观：先把自然语言任务解析成结构化 JSON / YAML，再让后续策略系统使用它。</p>
+<h3 id="43-mermaid-图vla-输入输出结构"><a class="header" href="#43-mermaid-图vla-输入输出结构">4.3 Mermaid 图：VLA 输入输出结构</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[自然语言指令] --&gt; B[任务解析]
+    C[视觉观察] --&gt; D[场景理解]
+    E[机器人状态] --&gt; F[状态整理]
+    B --&gt; G[策略输入]
+    D --&gt; G
+    F --&gt; G
+    G --&gt; H[动作策略 / Policy]
+    H --&gt; I[机器人动作]
+</code></pre>
+<h3 id="44-mermaid-图语言到结构化任务配置"><a class="header" href="#44-mermaid-图语言到结构化任务配置">4.4 Mermaid 图：语言到结构化任务配置</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[用户指令] --&gt; B[规则/LLM 解析器]
+    B --&gt; C[task_name]
+    B --&gt; D[object]
+    B --&gt; E[target]
+    B --&gt; F[constraints]
+    B --&gt; G[success_criteria]
+    C --&gt; H[任务 YAML / JSON]
+    D --&gt; H
+    E --&gt; H
+    F --&gt; H
+    G --&gt; H
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-为什么规则解析器仍然有价值"><a class="header" href="#51-为什么规则解析器仍然有价值">5.1 为什么规则解析器仍然有价值</a></h3>
+<p>很多读者看到“语言 → 任务解析”时，第一反应可能是：为什么不用 LLM，为什么还要写规则？</p>
+<p>原因很简单：本书当前阶段的目标不是追求语言理解能力最强，而是先建立一个<strong>稳定、可控、可验证</strong>的任务接口。</p>
+<p>规则解析器的优点在于：</p>
+<ul>
+<li>输出字段明确；</li>
+<li>可控性强；</li>
+<li>很适合小范围任务验证；</li>
+<li>更容易与后续 YAML 配置对接；</li>
+<li>能清楚暴露哪些语义还没有被支持。</li>
+</ul>
+<p>因此，规则解析器不是“最终方案”，而是一个非常好的教学与工程脚手架。</p>
+<h3 id="52-为什么本章不急着做真正-vla-训练"><a class="header" href="#52-为什么本章不急着做真正-vla-训练">5.2 为什么本章不急着做真正 VLA 训练</a></h3>
+<p>因为真正的 VLA 训练至少需要：</p>
+<ul>
+<li>大量机器人动作数据；</li>
+<li>统一的 observation / instruction / state / action 表达；</li>
+<li>较完整的训练与评测流程；</li>
+<li>足够强的计算与实验条件。</li>
+</ul>
+<p>如果在这些基础尚未成型前直接上 VLA，学习者很容易只剩下“看论文、看架构图、看演示视频”，却无法形成真正的工程能力。</p>
+<p>所以，本章在主线项目中的推进是非常务实的：</p>
+<ul>
+<li>先支持自然语言指令输入；</li>
+<li>再解析为结构化任务；</li>
+<li>然后在后续章节中，把结构化任务真正接到任务定义、episode 采集与策略训练上。</li>
+</ul>
+<h3 id="53-语言在机器人系统中的真实位置"><a class="header" href="#53-语言在机器人系统中的真实位置">5.3 语言在机器人系统中的真实位置</a></h3>
+<p>语言最适合处在系统的“高层任务接口”位置。它特别擅长：</p>
+<ul>
+<li>描述任务目标；</li>
+<li>给出高层限制；</li>
+<li>统一多任务表述；</li>
+<li>作为人机交互入口。</li>
+</ul>
+<p>但越往底层，语言就越需要被转化成更明确、更结构化的表示。因为控制系统和动作策略更需要的是：</p>
+<ul>
+<li>明确 object；</li>
+<li>明确 target；</li>
+<li>明确 success criteria；</li>
+<li>明确可执行约束。</li>
+</ul>
+<p>这就是为什么“自然语言 → 结构化任务”会成为本书主线项目中的重要一环。</p>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章在主线项目中的作用，是让项目第一次具备“语言指令入口”。</p>
+<p>新增文件：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  configs/
+    task_pick_box_to_bin.yaml
+  scripts/
+    rule_based_task_parser.py
+</code></pre>
+<p>项目新增能力：</p>
+<ol>
+<li>读者可以输入自然语言指令；</li>
+<li>解析器会抽取 task_name、object、target、constraints；</li>
+<li>输出结构化 JSON；</li>
+<li>在具备 PyYAML 时，还可以输出 YAML；</li>
+<li><code>task_pick_box_to_bin.yaml</code> 为后续第 6 章正式任务定义做铺垫。</li>
+</ol>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1把红色盒子放进右边收纳盒如何解析"><a class="header" href="#71-示例-1把红色盒子放进右边收纳盒如何解析">7.1 示例 1：“把红色盒子放进右边收纳盒”如何解析</a></h3>
+<p>原始指令：</p>
+<pre><code class="language-text">把红色盒子放进右边收纳盒
+</code></pre>
+<p>解析结果可以是：</p>
+<pre><code class="language-json">{
+  "task_name": "pick_box_to_bin",
+  "instruction": "把红色盒子放进右边收纳盒",
+  "object": {
+    "type": "box",
+    "color": "red"
+  },
+  "target": {
+    "name": "right_storage_box"
+  },
+  "constraints": {
+    "workspace": "table_top",
+    "avoid_collision": true,
+    "keep_upright": false,
+    "max_time_sec": 30
+  },
+  "success_criteria": {
+    "in_target": true,
+    "released": true,
+    "object_upright": false
+  }
+}
+</code></pre>
+<h3 id="72-示例-2vlm-能理解但不一定能执行"><a class="header" href="#72-示例-2vlm-能理解但不一定能执行">7.2 示例 2：VLM 能理解，但不一定能执行</a></h3>
+<p>假设你给一个 VLM 输入一张桌面图像，再问：</p>
+<pre><code class="language-text">红色盒子在哪里？
+</code></pre>
+<p>VLM 很可能回答：</p>
+<pre><code class="language-text">红色盒子在桌面右侧，蓝色盒子在左侧。
+</code></pre>
+<p>这说明它理解了视觉内容。但如果你想让机器人去抓取红色盒子，再放到蓝色盒子左侧，仅靠这句文本描述还远远不够。你仍然需要：</p>
+<ul>
+<li>机器人状态；</li>
+<li>动作表示；</li>
+<li>控制执行；</li>
+<li>成功标准；</li>
+<li>动作数据支撑的策略。</li>
+</ul>
+<h3 id="73-示例-3结构化任务-yaml"><a class="header" href="#73-示例-3结构化任务-yaml">7.3 示例 3：结构化任务 YAML</a></h3>
+<p>文件：<code>robot-learning-shelf-demo/configs/task_pick_box_to_bin.yaml</code></p>
+<p>这份 YAML 会包含：</p>
+<ul>
+<li>object 类型与颜色；</li>
+<li>target 名称；</li>
+<li>action mode；</li>
+<li>observation modalities；</li>
+<li>constraints；</li>
+<li>success / failure criteria；</li>
+<li>randomization 参数。</li>
+</ul>
+<p>它是后续第 6 章正式任务定义的雏形，而不是最终版。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<p>本章核心代码文件：<code>robot-learning-shelf-demo/scripts/rule_based_task_parser.py</code></p>
+<p>这个脚本会完成：</p>
+<ol>
+<li>接收自然语言指令；</li>
+<li>提取颜色、物体类型与目标区域；</li>
+<li>推断 task_name；</li>
+<li>构造 constraints 与 success_criteria；</li>
+<li>输出 JSON，并在可用时输出 YAML。</li>
+</ol>
+<p>推荐运行方式：</p>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/rule_based_task_parser.py \
+  --instruction "把红色盒子放进右边收纳盒" \
+  --output_json reports/ch05_task_parse.json
+</code></pre>
+<p>如果环境安装了 <code>PyYAML</code>，你还可以这样输出 YAML：</p>
+<pre><code class="language-bash">python scripts/rule_based_task_parser.py \
+  --instruction "请将红色盒子轻放到右边收纳盒，保持竖直" \
+  --output_json reports/ch05_task_parse.json \
+  --output_yaml reports/ch05_task_parse.yaml
+</code></pre>
+<p>脚本的教学重点并不在“语义理解最强”，而在于让你明白：<strong>自然语言要进入机器人系统，往往必须先被约束化。</strong></p>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-这段代码解决什么问题"><a class="header" href="#91-这段代码解决什么问题">9.1 这段代码解决什么问题</a></h3>
+<p>它解决的是：<strong>如何把一个自然语言任务，转成结构清晰、可验证、可存储的任务对象。</strong></p>
+<h3 id="92-输入是什么"><a class="header" href="#92-输入是什么">9.2 输入是什么</a></h3>
+<p>输入是一条自然语言指令，例如：</p>
+<ul>
+<li>把红色盒子放进右边收纳盒；</li>
+<li>请将红色的盒子放入右侧收纳盒中；</li>
+<li>把那个红色盒子放到右边的收纳盒里吧。</li>
+</ul>
+<h3 id="93-输出是什么"><a class="header" href="#93-输出是什么">9.3 输出是什么</a></h3>
+<p>输出是结构化任务配置，包括：</p>
+<ul>
+<li><code>task_name</code></li>
+<li><code>object</code></li>
+<li><code>target</code></li>
+<li><code>constraints</code></li>
+<li><code>success_criteria</code></li>
+</ul>
+<h3 id="94-为什么这个脚本重要"><a class="header" href="#94-为什么这个脚本重要">9.4 为什么这个脚本重要</a></h3>
+<p>因为它让主线项目第一次拥有了“从语言走向任务配置”的接口。后续第 6 章会把这个接口真正升级成完整的任务定义系统。</p>
+<h3 id="95-如何接入主线项目"><a class="header" href="#95-如何接入主线项目">9.5 如何接入主线项目</a></h3>
+<p>当前解析器输出的 JSON / YAML，可以在后续章节中作为：</p>
+<ul>
+<li>episode <code>meta.json</code> 的任务来源；</li>
+<li>任务配置文件生成器；</li>
+<li>rollout 评测时的任务说明；</li>
+<li>多任务扩展时的统一接口。</li>
+</ul>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="错误-1把语言理解等同于动作能力"><a class="header" href="#错误-1把语言理解等同于动作能力">错误 1：把语言理解等同于动作能力</a></h3>
+<p>一个系统会描述场景，并不意味着它会完成动作。VLA 的核心难点在于动作，而不是描述。</p>
+<h3 id="错误-2让自然语言直接驱动底层控制"><a class="header" href="#错误-2让自然语言直接驱动底层控制">错误 2：让自然语言直接驱动底层控制</a></h3>
+<p>如果没有中间约束层，语言输出往往太模糊，不适合直接驱动机器人动作。</p>
+<h3 id="错误-3忽略机器人状态"><a class="header" href="#错误-3忽略机器人状态">错误 3：忽略机器人状态</a></h3>
+<p>很多人谈 VLA 时只强调视觉和语言，但机器人状态同样关键。没有 state，策略很难知道自己现在处于什么执行阶段。</p>
+<h3 id="错误-4高估互联网知识对机器人动作的可迁移性"><a class="header" href="#错误-4高估互联网知识对机器人动作的可迁移性">错误 4：高估互联网知识对机器人动作的可迁移性</a></h3>
+<p>互联网数据能提供语义与常识，但机器人动作需要真实的状态—动作对齐数据，不能简单替代。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<h3 id="练习-1基础练习"><a class="header" href="#练习-1基础练习">练习 1：基础练习</a></h3>
+<p>请用自己的语言解释 VLM 与 VLA 的区别，重点说明两者输出形式的不同。</p>
+<h3 id="练习-2工程练习"><a class="header" href="#练习-2工程练习">练习 2：工程练习</a></h3>
+<p>使用 <code>rule_based_task_parser.py</code> 将以下 5 条自然语言指令解析成结构化任务：</p>
+<ol>
+<li>把红色盒子放进右边收纳盒；</li>
+<li>请把蓝色盒子放到左边收纳盒；</li>
+<li>把绿色盒子移动到桌面中央；</li>
+<li>请将红色的盒子轻放到右边收纳盒，保持竖直；</li>
+<li>Move the red box to the right storage box.</li>
+</ol>
+<h3 id="练习-3进阶练习"><a class="header" href="#练习-3进阶练习">练习 3：进阶练习</a></h3>
+<p>扩展规则解析器，使其支持：</p>
+<ul>
+<li>颜色更多样；</li>
+<li>目标区域更多样；</li>
+<li>“轻放”“快速”“保持竖直”等约束表达。</li>
+</ul>
+<h3 id="练习-4思考练习"><a class="header" href="#练习-4思考练习">练习 4：思考练习</a></h3>
+<p>如果将规则解析器替换成 LLM 解析器，哪些输出字段必须被严格约束与校验？为什么？</p>
+<h3 id="练习-5思考练习"><a class="header" href="#练习-5思考练习">练习 5：思考练习</a></h3>
+<p>为什么语言理解不能替代机器人动作数据？请从任务目标、动作执行、状态反馈和训练数据四个角度回答。</p>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>本章应当产出：</p>
+<ol>
+<li>对 VLA 本质的正确理解；</li>
+<li>对 VLM 与 VLA 差异的清晰判断；</li>
+<li>一个可运行的规则版 task parser；</li>
+<li>一个结构化任务 YAML 雏形；</li>
+<li>主线项目中的“语言 → 结构化任务”入口。</li>
+</ol>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>这一章最重要的判断可以概括成三句话。</p>
+<p>第一，VLA 与 VLM 的最本质差别不在于“是不是更聪明”，而在于输出是不是机器人动作。</p>
+<p>第二，语言理解非常重要，但它不能替代机器人动作数据。真正的执行能力仍然来自 observation / instruction / state 到 action 的学习。</p>
+<p>第三，自然语言如果要稳定进入机器人系统，通常必须经过“结构化任务”这一中间层。</p>
+<p>本章把主线项目推进到了一个很关键的位置：从“有 episode 数据、能训练 toy 策略”，进一步推进到“可以接收语言指令，并把它变成任务配置”。</p>
+<p>下一章，我们就会顺着这条线继续前进，系统讲清楚：一个真正可执行的机器人任务，应该如何定义。换句话说，我们要正式从“语言上的任务”走向“工程上的任务”。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/04-imitation-learning-behavior-cloning-act-diffusion-policy.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/06-task-definition-dont-start-with-general-household-robot.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/04-imitation-learning-behavior-cloning-act-diffusion-policy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/06-task-definition-dont-start-with-general-household-robot.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 7 章：机器人数据格式：一条 Episode 到底长什么样 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/07-robot-data-format-what-does-an-episode-look-like.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-7-章机器人数据格式一条-episode-到底长什么样"><a class="header" href="#第-7-章机器人数据格式一条-episode-到底长什么样">第 7 章：机器人数据格式：一条 Episode 到底长什么样</a></h1>
+<p>前一章，我们终于把主线任务 <code>pick_box_to_bin</code> 正式定义了出来。也就是说，我们已经知道：</p>
+<ul>
+<li>机器人要做什么；</li>
+<li>在什么工作空间里做；</li>
+<li>动作空间是什么；</li>
+<li>什么算成功；</li>
+<li>什么算失败；</li>
+<li>哪些因素会被随机化。</li>
+</ul>
+<p>但是，一个正式定义好的任务，仍然还不能直接拿去训练。因为策略训练最终吃的不是“任务说明文档”，而是<strong>数据</strong>。</p>
+<p>于是，问题自然推进到了这一章：</p>
+<blockquote>
+<p><strong>机器人学习里，一条 Episode 到底长什么样？</strong></p>
+</blockquote>
+<p>很多初学者会下意识地把机器人数据理解成“视频”。这是一个很常见、但也很危险的误解。视频当然重要，但它只是 observation 的一部分。真正能被训练系统消费的 episode，还必须包含：</p>
+<ul>
+<li>图像；</li>
+<li>状态；</li>
+<li>动作；</li>
+<li>时间戳；</li>
+<li>任务元信息；</li>
+<li>success / failure 标签；</li>
+<li>有时还包括 failure_reason、dataset_version 等。</li>
+</ul>
+<p>所以本章要做的，就是把“机器人数据不是视频”这件事彻底讲清楚，并让主线项目第一次拥有真正像样的数据目录结构。</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下九个问题：</p>
+<ol>
+<li>为什么机器人数据不能被简化成一段视频？</li>
+<li>一条 episode 最少应该包含哪些文件？</li>
+<li><code>meta.json</code> 应该记录什么？</li>
+<li><code>states.jsonl</code> 与 <code>actions.jsonl</code> 为什么要分开？</li>
+<li>图像应该如何保存？文件夹应如何组织？</li>
+<li>为什么 observation、state、action、timestamp 必须同步？</li>
+<li>success / failure / failure_reason 为什么属于 episode 的一部分？</li>
+<li>一条成功 episode 与一条失败 episode 在数据层面应该如何体现？</li>
+<li>如何用脚本生成并可视化一个标准 episode 样例？</li>
+</ol>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<h3 id="21-模型学到的不是录像而是带因果结构的样本"><a class="header" href="#21-模型学到的不是录像而是带因果结构的样本">2.1 模型学到的不是“录像”，而是带因果结构的样本</a></h3>
+<p>对于机器人策略来说，一条训练样本并不是“这一帧画面长什么样”，而是：</p>
+<ul>
+<li>在时刻 <code>t</code>，机器人观察到了什么；</li>
+<li>自己处于什么状态；</li>
+<li>任务是什么；</li>
+<li>然后应该执行什么动作；</li>
+<li>这个时刻对应哪个 phase；</li>
+<li>整条 episode 最终是成功还是失败。</li>
+</ul>
+<p>如果只有视频而没有动作，那你不知道专家到底做了什么；
+如果只有动作而没有状态，那你不知道动作是基于什么条件做出的；
+如果没有时间戳，模态之间的因果对应关系就会被破坏。</p>
+<h3 id="22-数据结构比有没有很多数据更基础"><a class="header" href="#22-数据结构比有没有很多数据更基础">2.2 数据结构比“有没有很多数据”更基础</a></h3>
+<p>很多人一开始会问：“我要多少条数据？”</p>
+<p>这是一个重要问题，但在它之前还有一个更底层的问题：</p>
+<blockquote>
+<p>你的每一条数据到底是不是<strong>结构完整</strong>的训练单元？</p>
+</blockquote>
+<p>如果数据结构都没理清，后面再多数据也只是放大混乱。</p>
+<h3 id="23-自动驾驶经验在这里依然很有帮助"><a class="header" href="#23-自动驾驶经验在这里依然很有帮助">2.3 自动驾驶经验在这里依然很有帮助</a></h3>
+<p>如果你做过自动驾驶数据闭环，会很熟悉这种感觉：</p>
+<ul>
+<li>log 不是单视频，而是多传感器同步；</li>
+<li>每个时间步都有状态与时间戳；</li>
+<li>标注、事件、任务上下文都很重要；</li>
+<li>质量问题常常出在时间同步与字段错位，而不是出在模型本身。</li>
+</ul>
+<p>机器人 episode 与自动驾驶 log 在思想上非常接近，只是对象和控制形式不同。</p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-什么是-episode"><a class="header" href="#31-什么是-episode">3.1 什么是 Episode</a></h3>
+<p>在本书中，一个 episode 指的是：</p>
+<blockquote>
+<p>从任务开始，到任务结束或中止为止的一段完整、多模态、带标签的时序数据单元。</p>
+</blockquote>
+<p>它至少应该能回答：</p>
+<ul>
+<li>任务是什么；</li>
+<li>一共有多少步；</li>
+<li>每一步看到了什么；</li>
+<li>每一步机器人处于什么状态；</li>
+<li>每一步执行了什么动作；</li>
+<li>最终成功了吗；</li>
+<li>如果失败了，原因是什么。</li>
+</ul>
+<h3 id="32-为什么机器人数据不是视频"><a class="header" href="#32-为什么机器人数据不是视频">3.2 为什么“机器人数据不是视频”</a></h3>
+<p>视频只是图像帧序列。它能提供视觉观测，但不能完整表达：</p>
+<ul>
+<li>机器人关节 / 末端状态；</li>
+<li>夹爪是否闭合；</li>
+<li>动作命令是什么；</li>
+<li>当前阶段是 pre_grasp 还是 transfer；</li>
+<li>该条样本最终是否成功。</li>
+</ul>
+<p>所以，机器人数据单元更准确的理解应该是：</p>
+<pre><code class="language-text">Episode = 图像 + 状态 + 动作 + 时间 + 标签 + 任务元信息
+</code></pre>
+<h3 id="33-episode-目录结构"><a class="header" href="#33-episode-目录结构">3.3 episode 目录结构</a></h3>
+<p>本书建议将一条 episode 设计为目录形式，例如：</p>
+<pre><code class="language-text">episode_0001/
+  images/
+    front/
+      frame_0000.png
+      frame_0001.png
+      ...
+    wrist/
+      frame_0000.png
+      frame_0001.png
+      ...
+  meta.json
+  states.jsonl
+  actions.jsonl
+</code></pre>
+<p>这种设计有几个好处：</p>
+<ol>
+<li>图像和结构化数据清晰分离；</li>
+<li>多视角图像容易扩展；</li>
+<li>states / actions 的解析更简单；</li>
+<li>与后续数据质检、转换脚本兼容性更好。</li>
+</ol>
+<h3 id="34-metajson-的作用"><a class="header" href="#34-metajson-的作用">3.4 <code>meta.json</code> 的作用</a></h3>
+<p><code>meta.json</code> 不是“可有可无的补充文件”，它是整条 episode 的总说明。至少建议记录：</p>
+<ul>
+<li><code>episode_id</code></li>
+<li><code>task_name</code></li>
+<li><code>instruction</code></li>
+<li><code>success</code></li>
+<li><code>failure_reason</code></li>
+<li><code>num_steps</code></li>
+<li><code>control_mode</code></li>
+<li><code>observation_modalities</code></li>
+<li><code>dataset_version</code></li>
+<li><code>notes</code></li>
+</ul>
+<p>换句话说，<code>meta.json</code> 更像 episode 的“封面信息”。</p>
+<h3 id="35-statesjsonl-与-actionsjsonl"><a class="header" href="#35-statesjsonl-与-actionsjsonl">3.5 <code>states.jsonl</code> 与 <code>actions.jsonl</code></a></h3>
+<p>为什么不把状态和动作都塞进一个大 JSON 里？</p>
+<p>因为从工程上说，分开存储更清晰：</p>
+<ul>
+<li><code>states.jsonl</code> 表示每个时刻世界与机器人“是什么样”；</li>
+<li><code>actions.jsonl</code> 表示每个时刻策略 / 专家“做了什么”；</li>
+<li><code>meta.json</code> 表示整条数据“属于什么任务、最终结果如何”。</li>
+</ul>
+<p>这种拆分让后续做：</p>
+<ul>
+<li>可视化；</li>
+<li>统计；</li>
+<li>校验；</li>
+<li>模型数据加载；</li>
+<li>失败分析；</li>
+</ul>
+<p>都更加方便。</p>
+<h3 id="36-时间同步为什么关键"><a class="header" href="#36-时间同步为什么关键">3.6 时间同步为什么关键</a></h3>
+<p>时间同步的核心不是“看起来整齐”，而是维护因果关系。</p>
+<p>在时刻 <code>t</code>：</p>
+<ul>
+<li>front camera 图像；</li>
+<li>wrist camera 图像；</li>
+<li>robot state；</li>
+<li>action；</li>
+<li>phase label；</li>
+</ul>
+<p>都必须尽可能对应同一个时间点。如果其中一项错位，就可能出现：</p>
+<ul>
+<li>图像还是接近物体阶段，但 action 已经是 release；</li>
+<li>状态显示夹爪已闭合，但动作还是 open；</li>
+<li>标签写的是 success，但真实上物体还没进收纳盒。</li>
+</ul>
+<p>这种错位会直接污染训练样本。</p>
+<h3 id="37-成功-episode-与失败-episode"><a class="header" href="#37-成功-episode-与失败-episode">3.7 成功 episode 与失败 episode</a></h3>
+<p>很多初学者只愿意保存成功 episode，觉得失败没价值。其实这是一个很大的损失。</p>
+<p>失败 episode 至少有两大价值：</p>
+<ol>
+<li>帮你诊断系统问题；</li>
+<li>帮你更准确地构造 success / failure 分布。</li>
+</ol>
+<p>因此，本章升级后的数据生成脚本会同时生成：</p>
+<ul>
+<li><code>episode_0001</code>：成功样本；</li>
+<li><code>episode_0002</code>：失败样本（<code>drop_during_transfer</code>）。</li>
+</ul>
+<p>这会让你更清楚地看到 <code>failure_reason</code> 在数据结构中的位置。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-7-1-一条-episode-的目录结构"><a class="header" href="#41-图-7-1-一条-episode-的目录结构">4.1 图 7-1 一条 Episode 的目录结构</a></h3>
+<p><img src="../../assets/images/ch07_episode_structure.png" alt="图 7-1 一条 Episode 的目录结构" /></p>
+<p>这张图直观地说明：episode 不是单一视频文件，而是一个小型数据包，包含图像目录和结构化文件。</p>
+<h3 id="42-图-7-2-episode-的时间同步与数据关系"><a class="header" href="#42-图-7-2-episode-的时间同步与数据关系">4.2 图 7-2 Episode 的时间同步与数据关系</a></h3>
+<p><img src="../../assets/images/ch07_episode_sync.png" alt="图 7-2 Episode 的时间同步与数据关系" /></p>
+<p>这张图非常关键，因为它解释了为什么 observation、state、action 与 timestamp 必须对齐。它也是后面“数据质检”章节的重要铺垫。</p>
+<h3 id="43-mermaid-图episode-目录结构"><a class="header" href="#43-mermaid-图episode-目录结构">4.3 Mermaid 图：episode 目录结构</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[episode_0001] --&gt; B[images/front]
+    A --&gt; C[images/wrist]
+    A --&gt; D[meta.json]
+    A --&gt; E[states.jsonl]
+    A --&gt; F[actions.jsonl]
+</code></pre>
+<h3 id="44-mermaid-图单时间步样本关系"><a class="header" href="#44-mermaid-图单时间步样本关系">4.4 Mermaid 图：单时间步样本关系</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[front_rgb_t]
+    B[wrist_rgb_t]
+    C[state_t]
+    D[action_t]
+    E[phase_t]
+    F[meta]
+    A --&gt; X[训练样本]
+    B --&gt; X
+    C --&gt; X
+    D --&gt; X
+    E --&gt; X
+    F --&gt; X
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-为什么使用-jsonl"><a class="header" href="#51-为什么使用-jsonl">5.1 为什么使用 JSONL</a></h3>
+<p>本书建议用 JSONL 存 states / actions，而不是一个超长 JSON 数组。原因是：</p>
+<ul>
+<li>逐行读取更方便；</li>
+<li>更适合流式处理；</li>
+<li>更便于调试与 diff；</li>
+<li>与很多日志系统习惯一致。</li>
+</ul>
+<h3 id="52-为什么图像按帧保存"><a class="header" href="#52-为什么图像按帧保存">5.2 为什么图像按帧保存</a></h3>
+<p>在学习阶段，把图像序列保存成独立帧文件而不是压成视频，有几个好处：</p>
+<ul>
+<li>调试简单；</li>
+<li>更容易检查缺帧；</li>
+<li>更容易与 timestamp 对应；</li>
+<li>后续做数据质检和示例展示更方便。</li>
+</ul>
+<p>当然，真实大规模系统中也可以使用更高效的打包格式，但本书当前阶段优先强调“结构清晰与可理解”。</p>
+<h3 id="53-为什么失败原因值得写进-metajson"><a class="header" href="#53-为什么失败原因值得写进-metajson">5.3 为什么失败原因值得写进 <code>meta.json</code></a></h3>
+<p>失败不是一个布尔值就能解释完的。至少在工程诊断中，我们通常还想知道：</p>
+<ul>
+<li>是 drop_during_transfer？</li>
+<li>是 timeout？</li>
+<li>是 out_of_workspace？</li>
+<li>还是 self_collision？</li>
+</ul>
+<p>因此，本章建议把 <code>failure_reason</code> 也写入元信息中，这对后面数据质检和评测分析都很重要。</p>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章对主线项目的推进非常关键。新增 / 升级内容包括：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  datasets/
+    dataset_v0_sample/
+      episode_0001/
+      episode_0002/
+  scripts/
+    01_generate_synthetic_episode.py
+    02_visualize_episode.py
+</code></pre>
+<p>也就是说，主线项目现在第一次具备：</p>
+<ol>
+<li>标准 episode 目录结构；</li>
+<li>前视 / 腕视图像序列；</li>
+<li>states / actions / meta 三类结构化数据；</li>
+<li>成功与失败样本；</li>
+<li>episode 完整性检查与可视化能力。</li>
+</ol>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1metajson"><a class="header" href="#71-示例-1metajson">7.1 示例 1：<code>meta.json</code></a></h3>
+<p>一个典型的 <code>meta.json</code> 可能包含：</p>
+<pre><code class="language-json">{
+  "episode_id": "episode_0001",
+  "task_name": "pick_box_to_bin",
+  "instruction": "把红色盒子放进右边收纳盒。",
+  "success": true,
+  "failure_reason": null,
+  "num_steps": 7,
+  "dataset_version": "v0.2"
+}
+</code></pre>
+<h3 id="72-示例-2statesjsonl"><a class="header" href="#72-示例-2statesjsonl">7.2 示例 2：<code>states.jsonl</code></a></h3>
+<p>每一行对应一个时间步，记录：</p>
+<ul>
+<li><code>timestamp</code></li>
+<li><code>ee_pose_xyzrpy</code></li>
+<li><code>gripper_open</code></li>
+<li><code>object_pose_xyz</code></li>
+<li><code>bin_pose_xyz</code></li>
+<li><code>phase</code></li>
+</ul>
+<p>例如 <code>phase</code> 可以依次是：</p>
+<pre><code class="language-text">reset -&gt; observe -&gt; pre_grasp -&gt; approach -&gt; grasp -&gt; transfer -&gt; release
+</code></pre>
+<h3 id="73-示例-3actionsjsonl"><a class="header" href="#73-示例-3actionsjsonl">7.3 示例 3：<code>actions.jsonl</code></a></h3>
+<p>每一行记录该时间步的动作：</p>
+<ul>
+<li><code>delta_ee_xyzrpy</code></li>
+<li><code>gripper_delta</code></li>
+<li><code>comment</code></li>
+</ul>
+<p>这使得你在看数据时，能够同时知道：</p>
+<ul>
+<li>当时机器人看到了什么；</li>
+<li>它处于什么状态；</li>
+<li>它执行了什么动作；</li>
+<li>以及动作背后的语义意图。</li>
+</ul>
+<h3 id="74-示例-4成功与失败对比"><a class="header" href="#74-示例-4成功与失败对比">7.4 示例 4：成功与失败对比</a></h3>
+<p><code>episode_0001</code>：成功样本。物体被抓起，转移到收纳盒，并最终释放成功。</p>
+<p><code>episode_0002</code>：失败样本。物体在 transfer 阶段发生掉落，<code>success=false</code>，并记录 <code>failure_reason=drop_during_transfer</code>。</p>
+<p>这类失败样本在后续数据质检和评测分析中非常有价值。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<h3 id="81-生成-synthetic-episode"><a class="header" href="#81-生成-synthetic-episode">8.1 生成 synthetic episode</a></h3>
+<p>脚本：<code>scripts/01_generate_synthetic_episode.py</code></p>
+<p>推荐运行：</p>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/01_generate_synthetic_episode.py
+</code></pre>
+<p>该脚本会生成两个 episode：</p>
+<ul>
+<li><code>episode_0001</code>（成功）</li>
+<li><code>episode_0002</code>（失败）</li>
+</ul>
+<p>并自动创建：</p>
+<ul>
+<li><code>images/front/*.png</code></li>
+<li><code>images/wrist/*.png</code></li>
+<li><code>meta.json</code></li>
+<li><code>states.jsonl</code></li>
+<li><code>actions.jsonl</code></li>
+</ul>
+<h3 id="82-可视化与完整性检查"><a class="header" href="#82-可视化与完整性检查">8.2 可视化与完整性检查</a></h3>
+<p>脚本：<code>scripts/02_visualize_episode.py</code></p>
+<p>推荐运行：</p>
+<pre><code class="language-bash">python scripts/02_visualize_episode.py \
+  --episode_dir datasets/dataset_v0_sample/episode_0001 \
+  --save_plot reports/ch07_episode_0001_action_timeline.png \
+  --save_summary reports/ch07_episode_0001_summary.md
+</code></pre>
+<p>它会做三件事：</p>
+<ol>
+<li>打印 episode 摘要；</li>
+<li>检查图像数量、时间戳和步数是否一致；</li>
+<li>生成 action 时间曲线与 Markdown 摘要。</li>
+</ol>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-01_generate_synthetic_episodepy"><a class="header" href="#91-01_generate_synthetic_episodepy">9.1 <code>01_generate_synthetic_episode.py</code></a></h3>
+<p>升级后的脚本有两个核心改动：</p>
+<p>第一，增加了图像帧生成。也就是说，episode 不再只有结构化 JSON / JSONL，而是真正带有 front / wrist 观测。</p>
+<p>第二，增加了失败样本生成。这样读者就不再只看到“完美数据”，而是能更直观地理解 <code>failure_reason</code> 的作用。</p>
+<h3 id="92-02_visualize_episodepy"><a class="header" href="#92-02_visualize_episodepy">9.2 <code>02_visualize_episode.py</code></a></h3>
+<p>这个脚本主要帮助读者完成三件事：</p>
+<ul>
+<li>读取一条 episode；</li>
+<li>生成人类可读的摘要；</li>
+<li>执行最小完整性检查。</li>
+</ul>
+<p>它体现了一个很重要的工程原则：</p>
+<blockquote>
+<p>数据格式一旦设计出来，就要尽快配套“看数据”和“查数据”的工具。</p>
+</blockquote>
+<p>否则你会陷入“虽然有数据，但不知道数据到底是不是好的”的状态。</p>
+<h3 id="93-为什么完整性检查是必要的"><a class="header" href="#93-为什么完整性检查是必要的">9.3 为什么完整性检查是必要的</a></h3>
+<p>本章虽然还没有正式进入“数据质检”，但已经先做了最小版检查，例如：</p>
+<ul>
+<li>states 数量是否等于 num_steps；</li>
+<li>actions 数量是否等于 num_steps；</li>
+<li>front / wrist 图像数量是否匹配；</li>
+<li>timestamps 是否单调；</li>
+<li>state timestamps 与 action timestamps 是否一致。</li>
+</ul>
+<p>这些检查会直接成为下一章数据质检工作的前置基础。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="错误-1把视频当成全部数据"><a class="header" href="#错误-1把视频当成全部数据">错误 1：把视频当成全部数据</a></h3>
+<p>视频只是 observation 的一部分，不是完整训练样本。</p>
+<h3 id="错误-2不保存动作或状态"><a class="header" href="#错误-2不保存动作或状态">错误 2：不保存动作或状态</a></h3>
+<p>没有动作，模仿学习无法训练；没有状态，动作的上下文会丢失。</p>
+<h3 id="错误-3时间戳不对齐"><a class="header" href="#错误-3时间戳不对齐">错误 3：时间戳不对齐</a></h3>
+<p>时间错位会破坏 observation → action 的因果对应，属于非常隐蔽但严重的问题。</p>
+<h3 id="错误-4只保留成功样本"><a class="header" href="#错误-4只保留成功样本">错误 4：只保留成功样本</a></h3>
+<p>失败样本对诊断和分布理解同样重要，不能被简单丢弃。</p>
+<h3 id="错误-5没有元信息字段"><a class="header" href="#错误-5没有元信息字段">错误 5：没有元信息字段</a></h3>
+<p>如果没有 <code>task_name</code>、<code>instruction</code>、<code>success</code>、<code>dataset_version</code> 等元信息，后面数据管理会迅速失控。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<h3 id="练习-1基础练习"><a class="header" href="#练习-1基础练习">练习 1：基础练习</a></h3>
+<p>请用自己的语言解释：为什么“机器人数据不是视频”？</p>
+<h3 id="练习-2工程练习"><a class="header" href="#练习-2工程练习">练习 2：工程练习</a></h3>
+<p>在 <code>states.jsonl</code> 中增加一个字段 <code>gripper_width_mm</code>，并同步修改生成脚本。</p>
+<h3 id="练习-3工程练习"><a class="header" href="#练习-3工程练习">练习 3：工程练习</a></h3>
+<p>在 <code>meta.json</code> 中增加 <code>session_id</code> 字段，并说明它对数据管理的作用。</p>
+<h3 id="练习-4进阶练习"><a class="header" href="#练习-4进阶练习">练习 4：进阶练习</a></h3>
+<p>给 <code>02_visualize_episode.py</code> 增加一个检查：如果 <code>success=true</code> 但 <code>failure_reason</code> 非空，则报告冲突。</p>
+<h3 id="练习-5思考练习"><a class="header" href="#练习-5思考练习">练习 5：思考练习</a></h3>
+<p>如果 action 存的是绝对位姿，而不是相对增量，会对：</p>
+<ul>
+<li>数据分布；</li>
+<li>模型学习难度；</li>
+<li>跨场景泛化；</li>
+<li>rollout 稳定性；</li>
+</ul>
+<p>分别带来什么影响？</p>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>本章应当产出：</p>
+<ol>
+<li>标准 episode 目录结构；</li>
+<li>两条示例 episode（成功 + 失败）；</li>
+<li>支持生成 RGB 图像的 synthetic data 脚本；</li>
+<li>一个可视化与完整性检查脚本；</li>
+<li>对“多模态 + 时间同步 + 结构化标签”这一机器人数据观的稳定理解。</li>
+</ol>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>这一章最重要的结论是：</p>
+<blockquote>
+<p><strong>机器人学习的数据单元，不是录像，而是结构完整、带时间对齐关系的 episode。</strong></p>
+</blockquote>
+<p>一个真正可训练的 episode 至少要同时包含：</p>
+<ul>
+<li>图像；</li>
+<li>状态；</li>
+<li>动作；</li>
+<li>时间戳；</li>
+<li>标签；</li>
+<li>任务元信息。</li>
+</ul>
+<p>而且，这些部分必须尽可能对齐。</p>
+<p>从主线项目角度看，本章完成了一个非常重要的里程碑：它把前一章的任务定义真正落成了数据结构。下一章，我们就会顺势进入一个非常现实的问题：</p>
+<p>既然数据格式已经有了，那么<strong>如何检查这些数据是不是好的？</strong></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/06-task-definition-dont-start-with-general-household-robot.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/08-data-validation-and-visualization.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/06-task-definition-dont-start-with-general-household-robot.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/08-data-validation-and-visualization.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

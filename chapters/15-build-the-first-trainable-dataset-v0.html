@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 15 章：构建第一版数据集 dataset_v0 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/15-build-the-first-trainable-dataset-v0.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-15-章构建第一版数据集-dataset_v0"><a class="header" href="#第-15-章构建第一版数据集-dataset_v0">第 15 章：构建第一版数据集 dataset_v0</a></h1>
+<p>到了这一章，我们终于来到一个非常关键的节点：</p>
+<ul>
+<li>第 13 章，我们得到了规则式 expert 数据；</li>
+<li>第 14 章，我们得到了遥操作示范数据；</li>
+<li>现在，我们要把这些“分散的数据来源”整合成<strong>第一版可训练数据集</strong>。</li>
+</ul>
+<p>对很多刚接触具身智能的工程师来说，容易产生一个误解：</p>
+<blockquote>
+<p>只要目录里堆满 episode，就叫数据集。</p>
+</blockquote>
+<p>事实上并不是。</p>
+<p>一个真正可训练、可评测、可迭代的数据集，至少应该回答以下问题：</p>
+<ul>
+<li>这批数据包含哪些任务？</li>
+<li>数据来自哪里？</li>
+<li>成功与失败比例是否合理？</li>
+<li>train / val / test 怎么划分？</li>
+<li>是否避免了数据泄漏？</li>
+<li>这个数据集的版本号是什么？</li>
+<li>下次更新以后，如何比较新旧结果？</li>
+</ul>
+<p>这也是为什么本章的关键词不只是“收集数据”，而是：</p>
+<ul>
+<li>组织；</li>
+<li>划分；</li>
+<li>版本化；</li>
+<li>报告化；</li>
+<li>可追溯。</li>
+</ul>
+<p>从自动驾驶经验迁移过来，这一步可以理解为：我们要把“零散采集片段”，升级成“可稳定支撑训练与评估的数据资产”。</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下问题：</p>
+<ol>
+<li><code>dataset_v0</code> 的设计目标是什么？</li>
+<li>为什么要把 scripted episode 和 teleop episode 混合起来？</li>
+<li>如何做 train / val / test 划分？</li>
+<li>为什么要避免 train 和 test 之间的信息泄漏？</li>
+<li>为什么数据集必须版本化？</li>
+<li>如何生成一份 dataset report？</li>
+</ol>
+<hr />
+<h2 id="2-从有数据到有数据集"><a class="header" href="#2-从有数据到有数据集">2. 从“有数据”到“有数据集”</a></h2>
+<h3 id="21-规则数据和遥操作数据不是竞争关系而是互补关系"><a class="header" href="#21-规则数据和遥操作数据不是竞争关系而是互补关系">2.1 规则数据和遥操作数据不是竞争关系，而是互补关系</a></h3>
+<p>规则式 expert 数据的优点是：</p>
+<ul>
+<li>生成快；</li>
+<li>一致性强；</li>
+<li>便于扩展；</li>
+<li>特别适合做系统联调和早期 baseline。</li>
+</ul>
+<p>遥操作数据的优点是：</p>
+<ul>
+<li>轨迹更接近人类策略；</li>
+<li>覆盖边界情况更自然；</li>
+<li>含有修正与恢复行为；</li>
+<li>对开放场景适应更强。</li>
+</ul>
+<p>因此，<code>dataset_v0</code> 的目标不是“选一边”，而是组合两边：</p>
+<ul>
+<li>用 scripted 数据提供规范基线；</li>
+<li>用 teleop 数据补充真实多样性；</li>
+<li>用统一的数据结构把它们放在一个可训练集合里。</li>
+</ul>
+<h3 id="22-数据集构建的本质是设计学习分布"><a class="header" href="#22-数据集构建的本质是设计学习分布">2.2 数据集构建的本质是设计“学习分布”</a></h3>
+<p>模型最终学到什么，不完全取决于模型结构，更取决于你给它看了什么数据。</p>
+<p>如果数据集：</p>
+<ul>
+<li>全是成功样本；</li>
+<li>全是规则直线轨迹；</li>
+<li>场景永远不变；</li>
+<li>测试集和训练集几乎一模一样；</li>
+</ul>
+<p>那么你训练出来的模型大概率只会对“教学演示环境”表现得很好，一旦换场景，就会暴露问题。</p>
+<p>所以，构建数据集其实是在设计一个学习分布：</p>
+<ul>
+<li>覆盖哪些任务；</li>
+<li>包含哪些难度层级；</li>
+<li>引入哪些扰动和随机化；</li>
+<li>保留多少失败样本；</li>
+<li>如何让 val/test 保持评测价值。</li>
+</ul>
+<hr />
+<h2 id="3-dataset_v0-的设计目标"><a class="header" href="#3-dataset_v0-的设计目标">3. dataset_v0 的设计目标</a></h2>
+<h3 id="31-最小可训练而不是最终完美"><a class="header" href="#31-最小可训练而不是最终完美">3.1 最小可训练，而不是最终完美</a></h3>
+<p>本书里的 <code>dataset_v0</code> 是一个教学型第一版数据集，它不追求规模最大，而追求：</p>
+<ul>
+<li>能支撑第一个 baseline 训练；</li>
+<li>能支撑 train / val / test 评估；</li>
+<li>能让读者看懂数据组织方式；</li>
+<li>能为后续扩展到更大规模做好结构准备。</li>
+</ul>
+<h3 id="32-必须具备的五个属性"><a class="header" href="#32-必须具备的五个属性">3.2 必须具备的五个属性</a></h3>
+<p>一个合格的 <code>dataset_v0</code> 至少具备：</p>
+<ol>
+<li><strong>任务覆盖明确</strong>：知道它在训练什么任务；</li>
+<li><strong>成功/失败平衡合理</strong>：不是清一色成功；</li>
+<li><strong>来源可追溯</strong>：知道 episode 来自 scripted 还是 teleop；</li>
+<li><strong>版本可管理</strong>：知道这个数据集是哪一版；</li>
+<li><strong>划分可复现</strong>：知道 train / val / test 是怎么来的。</li>
+</ol>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-15-1-dataset_v0-构建流程"><a class="header" href="#41-图-15-1-dataset_v0-构建流程">4.1 图 15-1 dataset_v0 构建流程</a></h3>
+<p><img src="../../assets/images/ch15_dataset_v0_build_pipeline.png" alt="图 15-1 dataset_v0 构建流程" /></p>
+<p>这张图把本章的主线讲清楚了：</p>
+<ul>
+<li>任务配置决定采什么；</li>
+<li>scripted 数据和 teleop 数据共同进入候选池；</li>
+<li>通过数据质检筛出可用 episode；</li>
+<li>再做 train / val / test 划分；</li>
+<li>最后生成 dataset report。</li>
+</ul>
+<h3 id="42-图-15-2-dataset_v0-划分与版本管理"><a class="header" href="#42-图-15-2-dataset_v0-划分与版本管理">4.2 图 15-2 dataset_v0 划分与版本管理</a></h3>
+<p><img src="../../assets/images/ch15_dataset_split_and_versioning.png" alt="图 15-2 dataset_v0 划分与版本管理" /></p>
+<p>这张图的重点在于强调：</p>
+<ul>
+<li>划分不是简单随机打乱；</li>
+<li>数据集必须伴随版本信息、数据卡片、来源记录与 changelog；</li>
+<li>这样才能支撑真正的实验对比和后续闭环迭代。</li>
+</ul>
+<h3 id="43-mermaid-图dataset_v0-构建管线"><a class="header" href="#43-mermaid-图dataset_v0-构建管线">4.3 Mermaid 图：dataset_v0 构建管线</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[任务配置] --&gt; B[规则 expert 数据]
+    A --&gt; C[遥操作数据]
+    B --&gt; D[候选 episode 池]
+    C --&gt; D
+    D --&gt; E[数据质检]
+    E --&gt; F[train / val / test split]
+    F --&gt; G[dataset card]
+    F --&gt; H[dataset report]
+</code></pre>
+<h3 id="44-mermaid-图版本化与评测关系"><a class="header" href="#44-mermaid-图版本化与评测关系">4.4 Mermaid 图：版本化与评测关系</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[dataset_v0.0.0] --&gt; B[训练 policy_v1]
+    B --&gt; C[记录指标]
+    C --&gt; D[数据扩展 / 清洗]
+    D --&gt; E[dataset_v0.1.0]
+    E --&gt; F[训练 policy_v2]
+    F --&gt; G[对比 policy_v1 与 policy_v2]
+</code></pre>
+<hr />
+<h2 id="5-数据集设计的工程原则"><a class="header" href="#5-数据集设计的工程原则">5. 数据集设计的工程原则</a></h2>
+<h3 id="51-train--val--test-的角色必须清楚"><a class="header" href="#51-train--val--test-的角色必须清楚">5.1 train / val / test 的角色必须清楚</a></h3>
+<ul>
+<li><strong>train</strong>：用于学习参数；</li>
+<li><strong>val</strong>：用于调参与选择 checkpoint；</li>
+<li><strong>test</strong>：用于最终评估。</li>
+</ul>
+<p>最常见的错误是把 val 当成 test，或者不断在 test 上反复调参，最终让 test 失去“真正未知数据”的意义。</p>
+<h3 id="52-为什么不能完全随机切分"><a class="header" href="#52-为什么不能完全随机切分">5.2 为什么不能完全随机切分</a></h3>
+<p>如果只是把所有 episode 打乱后随机切分，你很容易出现：</p>
+<ul>
+<li>同一场景的极相似轨迹同时出现在 train 和 test；</li>
+<li>同一个物体布局在 train 和 val 中高度重复；</li>
+<li>同一来源的重复 episode 被分到不同集合。</li>
+</ul>
+<p>这样会导致评测过于乐观。</p>
+<p>本书主线项目中，我们对教学数据做了轻量的<strong>按 <code>source × success</code> 分层</strong>，这是一个简化但合理的起点。真实项目中，你应该进一步考虑：</p>
+<ul>
+<li>场景分层；</li>
+<li>物体分层；</li>
+<li>难度分层；</li>
+<li>时间顺序分层；</li>
+<li>甚至操作者分层。</li>
+</ul>
+<h3 id="53-成功失败比例为什么重要"><a class="header" href="#53-成功失败比例为什么重要">5.3 成功/失败比例为什么重要</a></h3>
+<p>如果数据集里只有成功样本，模型会天然低估失败边界。</p>
+<p>如果失败样本过多，又可能：</p>
+<ul>
+<li>拉低行为克隆学习质量；</li>
+<li>让模型学到过多保守动作；</li>
+<li>或者在 reward / success 建模上产生偏移。</li>
+</ul>
+<p>因此，数据集不是“失败越多越好”或“失败越少越好”，而是要：</p>
+<ul>
+<li>失败样本有明确用途；</li>
+<li>失败原因可区分；</li>
+<li>训练目标与数据比例相匹配。</li>
+</ul>
+<h3 id="54-为什么一定要写-dataset-card"><a class="header" href="#54-为什么一定要写-dataset-card">5.4 为什么一定要写 dataset card</a></h3>
+<p>很多团队到最后都能把模型训起来，但一旦过几周回头看，会发现自己根本说不清：</p>
+<ul>
+<li>那次结果最好的是哪版数据？</li>
+<li>那一版数据比上一版多了什么？</li>
+<li>train 和 val 的比例是多少？</li>
+<li>是否做过清洗？</li>
+</ul>
+<p>dataset card 的意义，就是把这些信息显式化。它是数据工程的“最小文档化单元”。</p>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章新增/完善：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  scripts/
+    build_dataset_v0.py
+  datasets/
+    dataset_v0/
+      train/
+      val/
+      test/
+      splits/
+      dataset_card.json
+      manifest.json
+      README.md
+  reports/
+    ch15_dataset_v0_report.json
+    ch15_dataset_v0_report.md
+</code></pre>
+<h3 id="61-当前整合包里的-dataset_v0-是一个紧凑教学版"><a class="header" href="#61-当前整合包里的-dataset_v0-是一个紧凑教学版">6.1 当前整合包里的 dataset_v0 是一个紧凑教学版</a></h3>
+<p>按照原始练习规划，你完全可以继续扩展为：</p>
+<ul>
+<li>50 条成功 episode；</li>
+<li>20 条失败 episode；</li>
+<li>更多 scene / object randomization。</li>
+</ul>
+<p>但为了让整合包保持轻量、便于 mdBook 和 GitHub 管理，当前集成版提供的是一个<strong>可运行、可训练的紧凑版 <code>dataset_v0</code></strong>：</p>
+<ul>
+<li>总 episode：18</li>
+<li>success rate：0.7778</li>
+<li>source：
+<ul>
+<li><code>scripted_state_machine</code>：10</li>
+<li><code>teleop_keyboard_sim</code>：8</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1构建-dataset_v0"><a class="header" href="#71-示例-1构建-dataset_v0">7.1 示例 1：构建 dataset_v0</a></h3>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/build_dataset_v0.py \
+  --source_dirs datasets/dataset_v1_scripted datasets/dataset_teleop_demo \
+  --output_dir datasets/dataset_v0 \
+  --seed 2026 \
+  --dataset_name dataset_v0 \
+  --version v0.0.0 \
+  --report_json reports/ch15_dataset_v0_report.json \
+  --report_md reports/ch15_dataset_v0_report.md
+</code></pre>
+<p>该命令已经在整合包中执行完成。</p>
+<h3 id="72-示例-2当前-dataset_v0-的统计结果"><a class="header" href="#72-示例-2当前-dataset_v0-的统计结果">7.2 示例 2：当前 dataset_v0 的统计结果</a></h3>
+<p>当前教学版 <code>dataset_v0</code> 的统计如下：</p>
+<div class="table-wrapper"><table><thead><tr><th>split</th><th style="text-align: right">episodes</th><th style="text-align: right">success</th><th style="text-align: right">failure</th><th style="text-align: right">success_rate</th><th>source</th></tr></thead><tbody>
+<tr><td>train</td><td style="text-align: right">11</td><td style="text-align: right">9</td><td style="text-align: right">2</td><td style="text-align: right">0.8182</td><td>scripted + teleop</td></tr>
+<tr><td>val</td><td style="text-align: right">3</td><td style="text-align: right">2</td><td style="text-align: right">1</td><td style="text-align: right">0.6667</td><td>scripted + teleop</td></tr>
+<tr><td>test</td><td style="text-align: right">4</td><td style="text-align: right">3</td><td style="text-align: right">1</td><td style="text-align: right">0.75</td><td>scripted + teleop</td></tr>
+</tbody></table>
+</div>
+<p>整体：</p>
+<ul>
+<li>total_episodes = 18</li>
+<li>success_count = 14</li>
+<li>failure_count = 4</li>
+<li>success_rate = 0.7778</li>
+</ul>
+<h3 id="73-示例-3dataset-card-的最小内容"><a class="header" href="#73-示例-3dataset-card-的最小内容">7.3 示例 3：dataset card 的最小内容</a></h3>
+<p>本章产出的 <code>dataset_card.json</code> 至少包含：</p>
+<ul>
+<li><code>dataset_name</code></li>
+<li><code>version</code></li>
+<li><code>num_episodes</code></li>
+<li><code>success_rate</code></li>
+<li><code>splits</code></li>
+<li><code>source_counter</code></li>
+<li><code>task_name</code></li>
+<li><code>modalities</code></li>
+</ul>
+<p>这已经足以支撑第一版教学实验。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<p>本章练习代码位于：</p>
+<pre><code class="language-text">scripts/build_dataset_v0.py
+</code></pre>
+<p>其中最关键的流程是：</p>
+<ol>
+<li>扫描输入数据源目录；</li>
+<li>读取各 episode 的 <code>meta.json</code>；</li>
+<li>按 <code>source × success</code> 分组；</li>
+<li>做 train / val / test 划分；</li>
+<li>拷贝 episode 到目标数据集；</li>
+<li>生成 manifest、dataset card 和报告。</li>
+</ol>
+<p>下面这段代码体现了“按来源与成功率轻量分层”的思路：</p>
+<pre><code class="language-python">groups: dict[tuple[str, bool], list[dict[str, Any]]] = defaultdict(list)
+for item in items:
+    key = (item['meta'].get('source', 'unknown'), bool(item['meta'].get('success', False)))
+    groups[key].append(item)
+</code></pre>
+<p>对于教学项目，这已经足够清晰；对于真实项目，你可以把分层条件扩展成：</p>
+<ul>
+<li><code>task_name</code></li>
+<li><code>scene_id</code></li>
+<li><code>difficulty</code></li>
+<li><code>operator_id</code></li>
+<li><code>object_category</code></li>
+</ul>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-scan_episode_dirs"><a class="header" href="#91-scan_episode_dirs">9.1 <code>scan_episode_dirs()</code></a></h3>
+<p>这个函数负责在数据源目录下扫描所有包含 <code>meta.json</code> 的 episode 目录。它体现了一个好习惯：</p>
+<blockquote>
+<p>所有数据集处理脚本，最好都围绕统一的 episode 目录约定工作。</p>
+</blockquote>
+<p>这样后续你替换数据源时，不需要重写整个处理逻辑。</p>
+<h3 id="92-stratified_split"><a class="header" href="#92-stratified_split">9.2 <code>stratified_split()</code></a></h3>
+<p>本函数做的是轻量分层切分。它的目标不是做最复杂的统计最优切分，而是先满足：</p>
+<ul>
+<li>scripted / teleop 都能进入 train / val / test；</li>
+<li>success / failure 都能被保留；</li>
+<li>划分可以复现。</li>
+</ul>
+<h3 id="93-copy_episode"><a class="header" href="#93-copy_episode">9.3 <code>copy_episode()</code></a></h3>
+<p>它会把源 episode 拷贝到目标数据集中，同时：</p>
+<ul>
+<li>重新编号；</li>
+<li>更新 <code>episode_id</code>；</li>
+<li>记录 <code>original_episode_id</code>。</li>
+</ul>
+<p>这一步能保证新的数据集具有统一编号体系，同时保留溯源能力。</p>
+<h3 id="94-为什么要输出-manifestjson"><a class="header" href="#94-为什么要输出-manifestjson">9.4 为什么要输出 <code>manifest.json</code></a></h3>
+<p>因为你迟早会需要回答：</p>
+<ul>
+<li>这版数据集中到底有哪些 episode？</li>
+<li>它们被分到了哪个 split？</li>
+<li>来自哪个源数据集？</li>
+</ul>
+<p><code>manifest.json</code> 正是为这个问题服务的。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="101-把所有数据都丢进-train"><a class="header" href="#101-把所有数据都丢进-train">10.1 把所有数据都丢进 train</a></h3>
+<p>这样做短期看方便，长期看几乎一定会让你失去评测基准。</p>
+<h3 id="102-划分过程不可复现"><a class="header" href="#102-划分过程不可复现">10.2 划分过程不可复现</a></h3>
+<p>如果你没有固定随机种子，或者没有保存 split manifest，那么下次重新构建数据集时，train / val / test 可能完全不同，实验结果也就无法比较。</p>
+<h3 id="103-没有版本号"><a class="header" href="#103-没有版本号">10.3 没有版本号</a></h3>
+<p>“最新数据集”这种说法在工程里几乎没有意义。你必须明确：</p>
+<ul>
+<li><code>v0.0.0</code></li>
+<li><code>v0.1.0</code></li>
+<li><code>v1.0.0</code></li>
+</ul>
+<p>每一版都应该对应可复现快照。</p>
+<h3 id="104-只写数据不写报告"><a class="header" href="#104-只写数据不写报告">10.4 只写数据，不写报告</a></h3>
+<p>数据集报告不是形式主义。它能逼着你把：</p>
+<ul>
+<li>数据规模；</li>
+<li>成功率；</li>
+<li>来源分布；</li>
+<li>划分策略；</li>
+<li>版本信息；</li>
+</ul>
+<p>全部显式写出来。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<ol>
+<li>把 <code>dataset_v0</code> 扩展成 50 条成功 + 20 条失败 episode；</li>
+<li>为 <code>build_dataset_v0.py</code> 增加 <code>scene_id</code> 分层切分；</li>
+<li>新增 <code>difficulty</code> 字段，并在 split 时保持难度比例；</li>
+<li>把 <code>dataset_card.json</code> 扩展成更完整的 dataset card；</li>
+<li>思考：为什么 val / test 不能和 train 完全同分布？</li>
+</ol>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>完成本章后，主线项目新增：</p>
+<ul>
+<li>数据集构建脚本：<code>scripts/build_dataset_v0.py</code></li>
+<li>第一版教学数据集：<code>datasets/dataset_v0/</code></li>
+<li>数据集卡片：<code>datasets/dataset_v0/dataset_card.json</code></li>
+<li>数据集 manifest：<code>datasets/dataset_v0/manifest.json</code></li>
+<li>数据集报告：
+<ul>
+<li><code>reports/ch15_dataset_v0_report.json</code></li>
+<li><code>reports/ch15_dataset_v0_report.md</code></li>
+</ul>
+</li>
+<li>第 15 章配图：
+<ul>
+<li><code>images/ch15_dataset_v0_build_pipeline.png</code></li>
+<li><code>images/ch15_dataset_split_and_versioning.png</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>本章最重要的结论是：</p>
+<blockquote>
+<p>数据集不是 episode 的堆积，而是对学习分布、评测协议与数据可追溯性的工程化设计。</p>
+</blockquote>
+<p>通过本章，你应该掌握：</p>
+<ul>
+<li><code>dataset_v0</code> 的目标是“第一版可训练数据集”；</li>
+<li>scripted 与 teleop 数据应该互补使用；</li>
+<li>train / val / test 必须职责清晰；</li>
+<li>split 必须尽量避免信息泄漏；</li>
+<li>数据集必须版本化、报告化、可追溯。</li>
+</ul>
+<p>下一章，我们会使用本章生成的 <code>dataset_v0</code>，训练第一个 ACT baseline，让整个“数据 -&gt; 模型 -&gt; 评测”的主线第一次真正闭合起来。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/14-teleoperation-data-collection-the-source-of-robot-learning.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/16-train-the-first-act-baseline.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/14-teleoperation-data-collection-the-source-of-robot-learning.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/16-train-the-first-act-baseline.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

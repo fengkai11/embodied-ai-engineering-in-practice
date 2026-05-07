@@ -1,0 +1,540 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 10 章：rosbag 与机器人数据记录 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/10-rosbag-and-robot-data-recording.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-10-章rosbag-与机器人数据记录"><a class="header" href="#第-10-章rosbag-与机器人数据记录">第 10 章：rosbag 与机器人数据记录</a></h1>
+<p>上一章我们已经建立了主线项目的最小 ROS2 通信骨架：相机、关节状态、动作命令、任务信息等都通过 topic 在系统里流动。接下来，问题就变得非常具体了：</p>
+<blockquote>
+<p>这些在线流动的数据，如何被记录下来，并最终转成训练可用的 episode？</p>
+</blockquote>
+<p>在自动驾驶里，我们常常会说 log；在 ROS2 世界里，一个非常核心的工具就是 <strong>rosbag</strong>。它可以理解为：把多个 topic 的时间序列数据完整记录下来，并支持后续回放、调试、转换与分析。也正因为如此，rosbag 是连接“在线机器人运行”与“离线数据集构建”的关键桥梁。</p>
+<p>本章的目标，是让你建立这样一条完整理解链：</p>
+<ul>
+<li>ROS2 topics 在线发布；</li>
+<li>rosbag 记录这些 topic；</li>
+<li>后续用转换脚本抽取并整理数据；</li>
+<li>最终落成 episode 数据结构；</li>
+<li>再接回前面第 8 章的数据质检链路。</li>
+</ul>
+<p>这一步一旦想通，前 1–10 章的主线就会第一次形成一个较为完整的数据工程闭环。</p>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下问题：</p>
+<ol>
+<li>rosbag 是什么，为什么它重要？</li>
+<li><code>rosbag record</code> 与 <code>rosbag play</code> 分别做什么？</li>
+<li>rosbag 与自动驾驶 log 在思想上有什么相似之处？</li>
+<li>多 topic 记录时为什么时间同步是关键？</li>
+<li>recorder 节点与 rosbag 的关系是什么？</li>
+<li>如何从 rosbag 转换为 episode？</li>
+<li>为什么图像、状态、动作和元信息需要分别整理？</li>
+<li>不同频率 topic 的对齐难点在哪里？</li>
+<li>在没有真实 ROS2 / rosbag 环境时，如何先做教学版转换脚本？</li>
+</ol>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<h3 id="21-没有记录就没有可复现实验"><a class="header" href="#21-没有记录就没有可复现实验">2.1 没有记录，就没有可复现实验</a></h3>
+<p>如果你只是在线运行机器人，而没有把数据系统地记录下来，那么：</p>
+<ul>
+<li>失败 case 无法复盘；</li>
+<li>成功示范无法沉淀为训练数据；</li>
+<li>调参与模型更新无法和历史数据对照；</li>
+<li>数据质检与数据版本管理都无法成立。</li>
+</ul>
+<p>也就是说，<strong>记录能力是学习系统“可积累”的前提。</strong></p>
+<h3 id="22-rosbag-是离线分析的入口"><a class="header" href="#22-rosbag-是离线分析的入口">2.2 rosbag 是离线分析的入口</a></h3>
+<p>很多看似“训练问题”的问题，其实是录制问题。例如：</p>
+<ul>
+<li>某条 topic 没录到；</li>
+<li>图像和状态时间对不上；</li>
+<li>回放时发现某个关键阶段数据丢失；</li>
+<li>recorder 的时间基准和其他节点不一致。</li>
+</ul>
+<p>rosbag 的价值就在于：它能让你重新回到当时的运行现场，进行回放、调试和转换。</p>
+<h3 id="23-为什么-rosbag-和自动驾驶-log-很像"><a class="header" href="#23-为什么-rosbag-和自动驾驶-log-很像">2.3 为什么 rosbag 和自动驾驶 log 很像</a></h3>
+<p>如果你有自动驾驶背景，会很容易理解 rosbag 的位置：</p>
+<ul>
+<li>都是多源时序数据记录；</li>
+<li>都强调 timestamp；</li>
+<li>都服务于回放、调试、评测与数据构建；</li>
+<li>都是离线闭环和在线系统之间的桥梁。</li>
+</ul>
+<p>差异只在于：机器人系统更贴近执行器控制和操作任务，因此动作流与操作上下文在 rosbag 转换中更重要。</p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-rosbag-record记录-topic-数据流"><a class="header" href="#31-rosbag-record记录-topic-数据流">3.1 rosbag record：记录 topic 数据流</a></h3>
+<p><code>rosbag record</code> 的作用是订阅指定 topic，并把它们记录到 bag 文件中。对主线项目来说，最有价值的 topic 至少包括：</p>
+<ul>
+<li><code>/camera/front/image_raw</code></li>
+<li><code>/camera/wrist/image_raw</code></li>
+<li><code>/joint_states</code></li>
+<li><code>/action_cmd</code></li>
+<li><code>/task_info</code></li>
+</ul>
+<p>这些 topic 被记录后，就形成了后续可分析、可回放、可转换的原始材料。</p>
+<h3 id="32-rosbag-play回放历史数据"><a class="header" href="#32-rosbag-play回放历史数据">3.2 rosbag play：回放历史数据</a></h3>
+<p><code>rosbag play</code> 可以按照时间顺序把 bag 中的数据重新发布到各个 topic。它的意义在于：</p>
+<ul>
+<li>方便调试算法；</li>
+<li>方便验证 recorder / converter 的逻辑；</li>
+<li>方便复现现场；</li>
+<li>方便做可视化与错误分析。</li>
+</ul>
+<p>也就是说，<code>record</code> 更像是“冻结现场”，而 <code>play</code> 更像是“重放现场”。</p>
+<h3 id="33-rosbag-到-episode-的转换"><a class="header" href="#33-rosbag-到-episode-的转换">3.3 rosbag 到 episode 的转换</a></h3>
+<p>原始 rosbag 不是最终训练数据。因为 bag 文件更像系统级日志，而训练阶段通常更需要结构化 episode。转换过程至少包括：</p>
+<ol>
+<li>读取 bag 中相关 topic；</li>
+<li>按时间同步 / 对齐；</li>
+<li>导出图像帧；</li>
+<li>整理状态与动作序列；</li>
+<li>生成 <code>meta.json</code>；</li>
+<li>输出 episode 目录结构。</li>
+</ol>
+<h3 id="34-多-topic-对齐为什么难"><a class="header" href="#34-多-topic-对齐为什么难">3.4 多 topic 对齐为什么难</a></h3>
+<p>在真实系统中，不同 topic 常常频率不一致：</p>
+<ul>
+<li>图像 30Hz；</li>
+<li>joint state 50Hz；</li>
+<li>action command 10Hz；</li>
+<li>task_info 只有任务切换时才发一次。</li>
+</ul>
+<p>因此，rosbag 转 episode 的关键挑战之一，就是如何定义统一时间基准，并决定：</p>
+<ul>
+<li>以哪个流为主时间轴；</li>
+<li>哪些流做最近邻采样；</li>
+<li>哪些流只在元信息中保留；</li>
+<li>缺帧时如何处理。</li>
+</ul>
+<h3 id="35-为什么要引入-session_id"><a class="header" href="#35-为什么要引入-session_id">3.5 为什么要引入 session_id</a></h3>
+<p>一旦系统开始反复录制，数据管理会迅速变复杂。比如：</p>
+<ul>
+<li>今天上午录了 10 次；</li>
+<li>下午又录了 12 次；</li>
+<li>其中一半是调试，一半是正式采集。</li>
+</ul>
+<p>如果没有 <code>session_id</code> 或类似标识，后续数据追溯会很混乱。因此，本章会在讨论中强调 session 级管理的重要性。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-10-1-rosbag-记录与回放流程"><a class="header" href="#41-图-10-1-rosbag-记录与回放流程">4.1 图 10-1 rosbag 记录与回放流程</a></h3>
+<p><img src="../../assets/images/ch10_rosbag_record_and_replay.png" alt="图 10-1 rosbag 记录与回放流程" /></p>
+<p>这张图展示了 rosbag 的两个核心动作：</p>
+<ul>
+<li><code>record</code>：订阅并记录多 topic；</li>
+<li><code>play</code>：按时间顺序回放到各 topic。</li>
+</ul>
+<p>它强调了 rosbag 和自动驾驶 log 的类比关系：它们都不是最终训练数据本身，而是用于回放和构建数据集的原始记录材料。</p>
+<h3 id="42-图-10-2-rosbag-到-episode-的转换流程"><a class="header" href="#42-图-10-2-rosbag-到-episode-的转换流程">4.2 图 10-2 rosbag 到 episode 的转换流程</a></h3>
+<p><img src="../../assets/images/ch10_rosbag_to_episode_conversion.png" alt="图 10-2 rosbag 到 episode 的转换流程" /></p>
+<p>这张图把转换过程拆得非常清楚：</p>
+<ul>
+<li>时间同步；</li>
+<li>topic 解析；</li>
+<li>图像导出；</li>
+<li>state / action 整理；</li>
+<li>meta 生成；</li>
+<li>最后输出 episode dataset，并接上 validate dataset。</li>
+</ul>
+<h3 id="43-mermaid-图record--play--convert"><a class="header" href="#43-mermaid-图record--play--convert">4.3 Mermaid 图：record → play → convert</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[ROS2 topics] --&gt; B[rosbag record]
+    B --&gt; C[bag file]
+    C --&gt; D[rosbag play]
+    C --&gt; E[convert script]
+    E --&gt; F[episode dataset]
+    F --&gt; G[validate dataset]
+</code></pre>
+<h3 id="44-mermaid-图转换脚本内部流程"><a class="header" href="#44-mermaid-图转换脚本内部流程">4.4 Mermaid 图：转换脚本内部流程</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[读取 bag] --&gt; B[按 topic 分组]
+    B --&gt; C[时间同步]
+    C --&gt; D[导出图像]
+    C --&gt; E[整理 states]
+    C --&gt; F[整理 actions]
+    D --&gt; G[生成 episode 目录]
+    E --&gt; G
+    F --&gt; G
+    G --&gt; H[写入 meta.json]
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-recorder-与-rosbag-的关系"><a class="header" href="#51-recorder-与-rosbag-的关系">5.1 recorder 与 rosbag 的关系</a></h3>
+<p>有些初学者会把 recorder 与 rosbag 混为一谈。更准确地说：</p>
+<ul>
+<li>rosbag 是系统级的多 topic 录制工具；</li>
+<li>recorder node 更像系统里的一个业务节点，它可以辅助记录、筛选、标注或触发 episode 切分。</li>
+</ul>
+<p>在很多项目中，这两者会协同工作：用 rosbag 保存原始现场，用 recorder 提供结构化上下文。</p>
+<h3 id="52-教学阶段为什么先用-mock-rosbag"><a class="header" href="#52-教学阶段为什么先用-mock-rosbag">5.2 教学阶段为什么先用 mock rosbag</a></h3>
+<p>本章主线项目新增了一个教学版的“mock rosbag”输入文件：</p>
+<pre><code class="language-text">data/mock_rosbag/session_0001_mock_rosbag.jsonl
+</code></pre>
+<p>它并不是真实 <code>.db3</code> 文件，而是用 JSONL 模拟 rosbag 中按 topic 写入的消息流。这样做的好处是：</p>
+<ul>
+<li>便于读者直接看懂输入；</li>
+<li>便于用纯 Python 实现 converter；</li>
+<li>先理解转换流程，再迁移到真实 rosbag 环境。</li>
+</ul>
+<h3 id="53-为什么转换脚本值得单独写"><a class="header" href="#53-为什么转换脚本值得单独写">5.3 为什么转换脚本值得单独写</a></h3>
+<p>很多项目会直接在 recorder 里“边录边转”。这种做法不是不行，但在教学和工程上都不够清晰。把转换脚本单独拿出来有几个好处：</p>
+<ul>
+<li>逻辑可复用；</li>
+<li>便于离线调试；</li>
+<li>便于对不同 session 重复转换；</li>
+<li>便于版本管理和数据修复。</li>
+</ul>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章为主线项目新增：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  data/mock_rosbag/
+    session_0001_mock_rosbag.jsonl
+  scripts/
+    03_convert_rosbag_to_dataset.py
+  datasets/
+    dataset_from_mock_rosbag/
+      episode_9001/
+  reports/
+    ch10_rosbag_conversion_summary.md
+    ch10_dataset_from_mock_rosbag_report.json
+    ch10_dataset_from_mock_rosbag_report.md
+    ch10_dataset_from_mock_rosbag_action_distribution.png
+</code></pre>
+<p>这意味着主线项目现在第一次具备：</p>
+<ul>
+<li>从“模拟 bag”到 episode 的完整转换能力；</li>
+<li>一条新的 episode 数据来源通路；</li>
+<li>以及与第 8 章数据验证脚本的衔接能力。</li>
+</ul>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1记录哪些-topic"><a class="header" href="#71-示例-1记录哪些-topic">7.1 示例 1：记录哪些 topic</a></h3>
+<p>主线项目中最值得优先记录的 topic 是：</p>
+<ul>
+<li>前视图像；</li>
+<li>腕视图像；</li>
+<li>joint states；</li>
+<li>action command；</li>
+<li>task info。</li>
+</ul>
+<p>这些 topic 基本覆盖了 episode 构建所需的 observation、state、action 和 meta。</p>
+<h3 id="72-示例-2不同频率流如何处理"><a class="header" href="#72-示例-2不同频率流如何处理">7.2 示例 2：不同频率流如何处理</a></h3>
+<p>如果 <code>/joint_states</code> 更新频率高于 <code>/action_cmd</code>，一种常见做法是：</p>
+<ul>
+<li>以图像或主控制周期为主时间轴；</li>
+<li>对低频或高频 topic 做最近邻对齐；</li>
+<li>将原始 timestamp 仍然保留下来，便于复查。</li>
+</ul>
+<h3 id="73-示例-3从-mock-rosbag-转换到-episode"><a class="header" href="#73-示例-3从-mock-rosbag-转换到-episode">7.3 示例 3：从 mock rosbag 转换到 episode</a></h3>
+<p>本章新增的转换脚本会读取 <code>session_0001_mock_rosbag.jsonl</code>，并输出：</p>
+<pre><code class="language-text">datasets/dataset_from_mock_rosbag/episode_9001/
+  images/front/
+  images/wrist/
+  states.jsonl
+  actions.jsonl
+  meta.json
+</code></pre>
+<p>这让你第一次完整走通：topic → bag → episode 的链路。</p>
+<h3 id="74-示例-4转换后接入验证"><a class="header" href="#74-示例-4转换后接入验证">7.4 示例 4：转换后接入验证</a></h3>
+<p>转换只是第一步。更完整的工程闭环是：</p>
+<pre><code class="language-text">rosbag / mock bag
+  -&gt; convert
+  -&gt; episode
+  -&gt; validate_dataset
+</code></pre>
+<p>也就是说，任何新录制来源的数据，都应该在进入训练前先通过第 8 章的质检。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<h3 id="81-转换脚本"><a class="header" href="#81-转换脚本">8.1 转换脚本</a></h3>
+<p>运行方式：</p>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/03_convert_rosbag_to_dataset.py   --bag_jsonl data/mock_rosbag/session_0001_mock_rosbag.jsonl   --output_episode_dir datasets/dataset_from_mock_rosbag/episode_9001   --summary_md reports/ch10_rosbag_conversion_summary.md
+</code></pre>
+<h3 id="82-转换后验证"><a class="header" href="#82-转换后验证">8.2 转换后验证</a></h3>
+<pre><code class="language-bash">python scripts/04_validate_dataset.py   --dataset_dir datasets/dataset_from_mock_rosbag   --output_json reports/ch10_dataset_from_mock_rosbag_report.json   --output_md reports/ch10_dataset_from_mock_rosbag_report.md   --plot_path reports/ch10_dataset_from_mock_rosbag_action_distribution.png
+</code></pre>
+<p>这样，你就能验证转换出来的新数据是否合格。</p>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-03_convert_rosbag_to_datasetpy-的核心思路"><a class="header" href="#91-03_convert_rosbag_to_datasetpy-的核心思路">9.1 <code>03_convert_rosbag_to_dataset.py</code> 的核心思路</a></h3>
+<p>这个脚本的输入是按 topic 写入的 JSONL，输出是标准 episode 目录。它主要做了四件事：</p>
+<ol>
+<li>按 topic 分组；</li>
+<li>以主时间轴重采样对齐；</li>
+<li>分别生成 states / actions / meta；</li>
+<li>导出图像占位帧。</li>
+</ol>
+<p>其中“导出图像占位帧”并不是为了模拟真实视觉复杂度，而是为了让 episode 结构保持完整。</p>
+<h3 id="92-为什么先生成-placeholder-图像"><a class="header" href="#92-为什么先生成-placeholder-图像">9.2 为什么先生成 placeholder 图像</a></h3>
+<p>在真实系统中，图像当然来自真实相机数据；但在教学阶段，如果为了等真实图像链路而停住，会大大拖慢学习节奏。因此，这里先生成 placeholder 图像，目的是让你优先理解：</p>
+<ul>
+<li>episode 的目录结构；</li>
+<li>图像帧与时间步对应；</li>
+<li>conversion script 应该产出什么。</li>
+</ul>
+<h3 id="93-为什么-summary-报告仍然重要"><a class="header" href="#93-为什么-summary-报告仍然重要">9.3 为什么 summary 报告仍然重要</a></h3>
+<p>转换脚本不仅要“生成文件”，还要输出一份 summary，说明：</p>
+<ul>
+<li>转换了多少步；</li>
+<li>包含哪些 topic；</li>
+<li>导出了多少 front / wrist 帧；</li>
+<li>输出目录在哪里。</li>
+</ul>
+<p>这能帮助你快速判断转换有没有按预期完成。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="错误-1把-bag-当训练数据直接用"><a class="header" href="#错误-1把-bag-当训练数据直接用">错误 1：把 bag 当训练数据直接用</a></h3>
+<p>bag 更像原始记录，不是最终训练样本。</p>
+<h3 id="错误-2忽略多-topic-频率差异"><a class="header" href="#错误-2忽略多-topic-频率差异">错误 2：忽略多 topic 频率差异</a></h3>
+<p>不做时间对齐就直接拼接，很容易得到错位数据。</p>
+<h3 id="错误-3图像导出后不校验数量"><a class="header" href="#错误-3图像导出后不校验数量">错误 3：图像导出后不校验数量</a></h3>
+<p>导出图像数量与 state 数不一致，是非常常见的问题。</p>
+<h3 id="错误-4转换后不接质检"><a class="header" href="#错误-4转换后不接质检">错误 4：转换后不接质检</a></h3>
+<p>没有经过验证的新数据，不应直接进入训练环节。</p>
+<h3 id="错误-5没有-session-级命名规范"><a class="header" href="#错误-5没有-session-级命名规范">错误 5：没有 session 级命名规范</a></h3>
+<p>录制次数多起来后，没有 session_id 会让数据管理迅速失控。</p>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<ol>
+<li>设计 rosbag 录制命名规范，包含日期、任务名、operator_id、session_id；</li>
+<li>扩展 <code>03_convert_rosbag_to_dataset.py</code>，让它支持读取不同 topic 频率；</li>
+<li>在 <code>meta.json</code> 中增加 <code>session_id</code> 字段；</li>
+<li>思考：如果 wrist 图像频率只有 front 图像的一半，应如何对齐？</li>
+<li>思考：自动驾驶 log 回放和机器人 rosbag 回放有什么相同与不同？</li>
+</ol>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>本章应当产出：</p>
+<ol>
+<li>一份教学版 mock rosbag 数据；</li>
+<li>一条从 mock rosbag 到 episode 的转换脚本；</li>
+<li>转换后的 episode 数据目录；</li>
+<li>一份转换 summary；</li>
+<li>与第 8 章质检链路相衔接的完整流程。</li>
+</ol>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>这一章最重要的结论可以概括成一句话：</p>
+<blockquote>
+<p><strong>rosbag 的真正价值，不只是“把数据录下来”，而是把在线运行现场变成一个可回放、可分析、可转换、可沉淀的学习资产。</strong></p>
+</blockquote>
+<p>从主线项目角度看，到这一章结束时，我们已经把前面所有内容串成了一个较为完整的工程闭环：</p>
+<ul>
+<li>明确任务；</li>
+<li>定义 episode；</li>
+<li>检查数据；</li>
+<li>设计 ROS2 topic；</li>
+<li>记录 / 转换数据；</li>
+<li>再回到验证与训练。</li>
+</ul>
+<p>这意味着第 1–10 章已经不仅是概念介绍，而是在逐步搭起一个真正能继续长成完整具身智能项目的系统骨架。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/09-ros2-minimal-knowledge-for-data-collection.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/11-tf-robot-coordinate-frames-and-camera-spatial-understanding.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/09-ros2-minimal-knowledge-for-data-collection.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/11-tf-robot-coordinate-frames-and-camera-spatial-understanding.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

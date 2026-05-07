@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第 11 章：TF、机器人坐标系与相机空间理解 - 从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">从自动驾驶感知到具身智能：90 天构建机器人学习数据闭环</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/fengkai11/embodied-ai-engineering-in-practice/edit/main/src/chapters/11-tf-robot-coordinate-frames-and-camera-spatial-understanding.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第-11-章tf机器人坐标系与相机空间理解"><a class="header" href="#第-11-章tf机器人坐标系与相机空间理解">第 11 章：TF、机器人坐标系与相机空间理解</a></h1>
+<p>前两章我们已经把机器人数据流接到了主线项目里：你知道了 ROS2 topic 是怎么流动的，也知道了 rosbag / mock rosbag 怎么转成 episode。接下来，工程会立刻碰到一个自动驾驶工程师很熟悉、但在机器人里又更“直接”的问题：</p>
+<blockquote>
+<p>图像里的目标，怎样变成机器人真正能执行的空间位置？</p>
+</blockquote>
+<p>自动驾驶里，我们会讨论相机模型、外参、坐标变换、目标在车体坐标系中的位置；在具身智能里，这个问题并没有消失，只是从“车体坐标 → 世界坐标 → 规划轨迹”变成了“像素 → 相机坐标 → base_link → 抓取位姿 → 机械臂动作”。</p>
+<p>本章就是要把这条链路彻底讲明白，并把你的自动驾驶空间理解经验迁移到机器人上。读完本章后，你应该能清楚回答：</p>
+<ul>
+<li><code>world / map</code>、<code>base_link</code>、<code>camera_link</code>、<code>end_effector</code>、<code>object_frame</code> 各自代表什么；</li>
+<li>为什么同样都是相机，<strong>定置相机（eye-to-hand）</strong> 和 <strong>腕部相机（eye-in-hand）</strong> 会带来完全不同的标定链路与误差传播；</li>
+<li>给定一个像素点 <code>(u, v)</code> 和对应深度 <code>d</code>，如何求出相机坐标系下的 3D 点；</li>
+<li>如何利用外参矩阵把这个点变换到 <code>base_link</code>；</li>
+<li>为什么很多机器人“抓偏了”的问题，本质上不是模型没学好，而是坐标系错了。</li>
+</ul>
+<hr />
+<h2 id="1-本章要解决的问题"><a class="header" href="#1-本章要解决的问题">1. 本章要解决的问题</a></h2>
+<p>本章重点解决以下问题：</p>
+<ol>
+<li>机器人里常见的坐标系有哪些，它们之间是什么关系？</li>
+<li>TF tree 在工程上到底有什么用？</li>
+<li>像素点加深度是如何恢复为相机坐标系 3D 点的？</li>
+<li>相机坐标到机器人基座坐标需要哪些已知量？</li>
+<li>eye-to-hand 与 eye-in-hand 有什么本质差异？</li>
+<li>坐标系错误通常会表现为哪些抓取失败现象？</li>
+<li>主线项目如何把这一章的知识落成可运行代码与配置？</li>
+</ol>
+<hr />
+<h2 id="2-为什么这个问题重要"><a class="header" href="#2-为什么这个问题重要">2. 为什么这个问题重要</a></h2>
+<h3 id="21-机器人执行和自动驾驶感知的最大共同点都离不开空间链路"><a class="header" href="#21-机器人执行和自动驾驶感知的最大共同点都离不开空间链路">2.1 机器人执行和自动驾驶感知的最大共同点：都离不开空间链路</a></h3>
+<p>从视觉模型输出到动作执行，中间最容易被忽视的一层就是空间表达。自动驾驶里，你可能已经非常熟悉这些说法：</p>
+<ul>
+<li>目标在相机坐标系还是车体坐标系？</li>
+<li>BEV 坐标和原始图像坐标如何对应？</li>
+<li>标定误差会不会引入感知偏移？</li>
+</ul>
+<p>机器人里同样如此。区别只在于：自动驾驶中的空间误差通常体现在轨迹规划偏差、占据误差、检测偏移上；而在机器人里，空间误差会更直接地表现为：</p>
+<ul>
+<li>手爪明明对着盒子，却始终偏左 3 cm；</li>
+<li>下降方向正确，但高度不对，抓空了；</li>
+<li>转到收纳盒上方后，放置点明显跑偏；</li>
+<li>腕部相机视角一变，抓取效果突然不稳定。</li>
+</ul>
+<h3 id="22-在具身智能工程里坐标系是系统问题不是单个模块问题"><a class="header" href="#22-在具身智能工程里坐标系是系统问题不是单个模块问题">2.2 在具身智能工程里，坐标系是“系统问题”，不是单个模块问题</a></h3>
+<p>很多初学者会把抓取失败归因于检测模型、策略模型，甚至归因于“VLA 还不够强”。但如果你从工程闭环角度看，会发现空间问题横跨多个模块：</p>
+<ul>
+<li>相机内参决定像素反投影；</li>
+<li>外参决定相机系到机器人系的变换；</li>
+<li>任务定义决定抓取位姿的构造规则；</li>
+<li>运动学与规划决定末端执行器如何到达该位姿；</li>
+<li>数据记录又决定这些位姿是否被正确保存进 episode。</li>
+</ul>
+<p>所以，本章是连接“视觉理解”和“机械臂执行”的第一道桥。</p>
+<h3 id="23-这恰恰是自动驾驶感知工程师最容易建立优势的地方"><a class="header" href="#23-这恰恰是自动驾驶感知工程师最容易建立优势的地方">2.3 这恰恰是自动驾驶/感知工程师最容易建立优势的地方</a></h3>
+<p>如果你来自自动驾驶感知、泊车感知、BEV、点云或标定方向，那么这章内容不是陌生知识，而是一次迁移：</p>
+<ul>
+<li>你熟悉针孔成像和外参；</li>
+<li>你知道坐标系一旦搞错，后面整个链路都会歪；</li>
+<li>你知道“看起来像模型问题，实际是标定问题”在工程里有多常见。</li>
+</ul>
+<p>换句话说，很多机器人学习初学者最怕的空间理解问题，恰好是你可以迅速建立信心的切入口。</p>
+<hr />
+<h2 id="3-核心概念"><a class="header" href="#3-核心概念">3. 核心概念</a></h2>
+<h3 id="31-机器人里常见的坐标系"><a class="header" href="#31-机器人里常见的坐标系">3.1 机器人里常见的坐标系</a></h3>
+<p>在本书主线项目里，我们重点关心以下几个坐标系：</p>
+<ul>
+<li><code>world / map</code>：全局参考系。对桌面任务来说，它有时只是一个教学上的全局系；</li>
+<li><code>base_link</code>：机器人基座坐标系。后续很多抓取位姿都要以它作为执行参考；</li>
+<li><code>camera_link</code>：相机坐标系。视觉观测直接发生在这里；</li>
+<li><code>end_effector</code>：末端执行器坐标系，也就是夹爪 / 工具坐标；</li>
+<li><code>object_frame</code>：目标物体坐标系。抓取点、物体朝向通常围绕它来定义。</li>
+</ul>
+<p>其中最关键的一点是：<strong>策略或者规则最终输出的目标位姿，通常必须落在机器人控制器能理解的参考坐标系中</strong>，这个系在桌面任务里通常就是 <code>base_link</code>。</p>
+<h3 id="32-tf-tree把谁相对谁表达清楚"><a class="header" href="#32-tf-tree把谁相对谁表达清楚">3.2 TF tree：把“谁相对谁”表达清楚</a></h3>
+<p>TF 的核心不是画一棵好看的树，而是明确每个坐标系之间的变换链。你可以把 TF tree 理解成：</p>
+<ul>
+<li>系统里有哪些 frame；</li>
+<li>每个 frame 的父节点是谁；</li>
+<li>某个点或位姿想从 A 系变到 B 系，需要沿哪条链做变换。</li>
+</ul>
+<p>如果这棵树不清楚，后续会出现三类典型混乱：</p>
+<ol>
+<li>相机系点直接拿去控制机械臂；</li>
+<li><code>base_link</code> 和 <code>world</code> 被混用；</li>
+<li><code>camera_link -&gt; end_effector</code> 和 <code>camera_link -&gt; base_link</code> 的链路搞反。</li>
+</ol>
+<h3 id="33-像素--深度为什么能恢复-3d-点"><a class="header" href="#33-像素--深度为什么能恢复-3d-点">3.3 像素 + 深度为什么能恢复 3D 点</a></h3>
+<p>如果相机已知内参 <code>fx, fy, cx, cy</code>，并且某个像素点 <code>(u, v)</code> 对应深度 <code>d</code>，那么相机坐标系下的 3D 点 <code>P_c = [x, y, z]^T</code> 可由针孔模型恢复：</p>
+<pre><code class="language-text">x = (u - cx) * d / fx
+y = (v - cy) * d / fy
+z = d
+</code></pre>
+<p>这一步本质上就是“反投影”。</p>
+<p>在自动驾驶里，你可能更习惯把这件事理解成“由像素射线和深度恢复空间点”；在机器人里，意义非常直接：这个 3D 点可以继续被变换到 <code>base_link</code>，从而成为抓取位姿构造的输入。</p>
+<h3 id="34-外参矩阵把相机看到的点送到机器人能执行的系里"><a class="header" href="#34-外参矩阵把相机看到的点送到机器人能执行的系里">3.4 外参矩阵：把相机看到的点，送到机器人能执行的系里</a></h3>
+<p>当你有了 <code>P_c</code> 后，还需要一个 4×4 齐次变换矩阵 <code>T_base_camera</code>，才能将点变换到机器人基座坐标系：</p>
+<pre><code class="language-text">P_b = T_base_camera * P_c
+</code></pre>
+<p>这里的关键不在公式本身，而在于：</p>
+<ul>
+<li><code>T_base_camera</code> 是已知的吗？</li>
+<li>它是定置相机的静态外参，还是腕部相机的动态链路一部分？</li>
+<li>它的旋转顺序和轴定义是否与系统一致？</li>
+</ul>
+<p>机器人项目里大量“偏一点点”的问题，往往都藏在这里。</p>
+<h3 id="35-eye-to-hand-与-eye-in-hand"><a class="header" href="#35-eye-to-hand-与-eye-in-hand">3.5 Eye-to-Hand 与 Eye-in-Hand</a></h3>
+<p>这两个安装方式几乎决定了你后面的系统风格：</p>
+<ul>
+<li><strong>Eye-to-Hand（定置相机）</strong>：相机固定在环境中，观察机器人和桌面；</li>
+<li><strong>Eye-in-Hand（腕部相机）</strong>：相机装在末端，视角跟随机械臂运动。</li>
+</ul>
+<p>它们的工程差异可以简化理解为：</p>
+<div class="table-wrapper"><table><thead><tr><th>维度</th><th>Eye-to-Hand</th><th>Eye-in-Hand</th></tr></thead><tbody>
+<tr><td>视野</td><td>稳定</td><td>随运动变化</td></tr>
+<tr><td>遮挡</td><td>容易被机器人遮挡</td><td>通常更灵活</td></tr>
+<tr><td>标定链路</td><td>相对长</td><td>相对短</td></tr>
+<tr><td>使用场景</td><td>全局观察、桌面任务</td><td>精细操作、局部观测</td></tr>
+</tbody></table>
+</div>
+<p>在主线项目 <code>pick_box_to_bin</code> 中，我们先采用 <strong>eye-to-hand</strong>，因为它更适合教学，也更容易把空间链路讲清楚。</p>
+<hr />
+<h2 id="4-概念图--流程图--架构图"><a class="header" href="#4-概念图--流程图--架构图">4. 概念图 / 流程图 / 架构图</a></h2>
+<h3 id="41-图-11-1-tf-树与从像素到抓取位姿的空间链路"><a class="header" href="#41-图-11-1-tf-树与从像素到抓取位姿的空间链路">4.1 图 11-1 TF 树与从像素到抓取位姿的空间链路</a></h3>
+<p><img src="../../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png" alt="图 11-1 TF 树与从像素到抓取位姿的空间链路" /></p>
+<p>这张图可以作为本章总图来理解。它把两件事连到了一起：</p>
+<ol>
+<li>上半部分说明了 <code>world / base_link / camera_link / end_effector / object_frame</code> 之间的关系；</li>
+<li>下半部分把“像素 + 深度”到“抓取位姿”的工程链路拆成 5 步。</li>
+</ol>
+<h3 id="42-图-11-2-eye-to-hand-与-eye-in-hand-对比"><a class="header" href="#42-图-11-2-eye-to-hand-与-eye-in-hand-对比">4.2 图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比</a></h3>
+<p><img src="../../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png" alt="图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比" /></p>
+<p>这张图重点帮助你理解：相机安装方式不是部署细节，而是会直接影响标定链路、误差传播和遮挡模式的系统选择。</p>
+<h3 id="43-mermaid-图从视觉观测到抓取执行的最小链路"><a class="header" href="#43-mermaid-图从视觉观测到抓取执行的最小链路">4.3 Mermaid 图：从视觉观测到抓取执行的最小链路</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    A[像素 u,v + 深度 d] --&gt; B[相机坐标点 P_c]
+    B --&gt; C[通过 T_base_camera 变换到 P_b]
+    C --&gt; D[构造抓取位姿 T_grasp]
+    D --&gt; E[发送给运动规划器]
+    E --&gt; F[机械臂执行]
+</code></pre>
+<h3 id="44-mermaid-图主线项目中的坐标链"><a class="header" href="#44-mermaid-图主线项目中的坐标链">4.4 Mermaid 图：主线项目中的坐标链</a></h3>
+<pre><code class="language-mermaid">flowchart TD
+    A[world / map] --&gt; B[base_link]
+    B --&gt; C[camera_link]
+    B --&gt; D[end_effector]
+    C --&gt; E[视觉估计 object_frame]
+    E --&gt; F[在 base_link 中构造抓取位姿]
+</code></pre>
+<hr />
+<h2 id="5-工程化理解"><a class="header" href="#5-工程化理解">5. 工程化理解</a></h2>
+<h3 id="51-先把参考坐标系固定下来再谈抓取策略"><a class="header" href="#51-先把参考坐标系固定下来再谈抓取策略">5.1 先把“参考坐标系”固定下来，再谈抓取策略</a></h3>
+<p>初学者最常见的错误之一，是一边看视觉结果，一边随手在不同坐标系里写规则。例如：</p>
+<ul>
+<li>检测输出在图像平面；</li>
+<li>抓取点在相机系；</li>
+<li>放置点又直接写成了桌面系的数值；</li>
+<li>最终控制指令却默认控制器接收 <code>base_link</code>。</li>
+</ul>
+<p>这样做的结果是：每一步看起来都合理，但整个链路拼不起来。一个更工程化的做法是：</p>
+<ol>
+<li>明确视觉输出在什么系；</li>
+<li>明确控制器需要什么系；</li>
+<li>明确中间所有已知变换；</li>
+<li>统一在同一个“执行参考系”中表达抓取 / 放置位姿。</li>
+</ol>
+<p>在主线项目里，这个执行参考系统一为 <code>base_link</code>。</p>
+<h3 id="52-机器人里的标定问题往往比模型问题更值得先查"><a class="header" href="#52-机器人里的标定问题往往比模型问题更值得先查">5.2 机器人里的“标定问题”往往比模型问题更值得先查</a></h3>
+<p>如果机器人抓偏，可以按如下顺序排查：</p>
+<ol>
+<li>先看像素点是否选对；</li>
+<li>再看深度是否可信；</li>
+<li>再看内参是否正确；</li>
+<li>再看相机外参是否正确；</li>
+<li>最后才看抓取位姿构造与运动规划。</li>
+</ol>
+<p>这和自动驾驶里“先查数据、再查标定、最后查模型”的思路是高度一致的。</p>
+<h3 id="53-坐标系调试不要只看数字要看现象模式"><a class="header" href="#53-坐标系调试不要只看数字要看现象模式">5.3 坐标系调试不要只看数字，要看现象模式</a></h3>
+<p>很多空间错误是有“症状”的：</p>
+<ul>
+<li><strong>整体固定偏移</strong>：通常怀疑外参平移；</li>
+<li><strong>方向反了</strong>：通常怀疑坐标轴定义或旋转顺序；</li>
+<li><strong>离中心正常，边缘很差</strong>：通常怀疑内参与深度误差；</li>
+<li><strong>腕部相机到处跳</strong>：通常怀疑动态链路、末端姿态或时间同步。</li>
+</ul>
+<p>学会从现象反推链路位置，是从“会写公式”走向“会调系统”的关键。</p>
+<hr />
+<h2 id="6-主线项目中的位置"><a class="header" href="#6-主线项目中的位置">6. 主线项目中的位置</a></h2>
+<p>本章为主线项目新增了以下文件：</p>
+<pre><code class="language-text">robot-learning-shelf-demo/
+  configs/
+    camera_config.yaml
+    robot_config.yaml
+  ros2_ws/src/
+    shelf_demo_tf_tools/
+      README.md
+  scripts/
+    geometry_utils.py
+  reports/
+    ch11_transform_demo.json
+</code></pre>
+<p>这些新增内容的作用分别是：</p>
+<ul>
+<li><code>camera_config.yaml</code>：定义相机内参与静态外参；</li>
+<li><code>robot_config.yaml</code>：定义主线任务的基座、末端与工作空间参数；</li>
+<li><code>geometry_utils.py</code>：把本章最关键的空间计算真正跑起来；</li>
+<li><code>ch11_transform_demo.json</code>：保存一次从像素到 <code>base_link</code> 的计算结果，便于后续复查和教学展示。</li>
+</ul>
+<hr />
+<h2 id="7-示例"><a class="header" href="#7-示例">7. 示例</a></h2>
+<h3 id="71-示例-1给定像素和深度求相机坐标点"><a class="header" href="#71-示例-1给定像素和深度求相机坐标点">7.1 示例 1：给定像素和深度，求相机坐标点</a></h3>
+<p>假设：</p>
+<ul>
+<li><code>u = 356</code></li>
+<li><code>v = 242</code></li>
+<li><code>d = 0.58</code></li>
+<li><code>fx = fy = 615</code></li>
+<li><code>cx = 320</code></li>
+<li><code>cy = 240</code></li>
+</ul>
+<p>则相机坐标为：</p>
+<pre><code class="language-text">x = (356 - 320) * 0.58 / 615 ≈ 0.0339
+y = (242 - 240) * 0.58 / 615 ≈ 0.0019
+z = 0.58
+</code></pre>
+<p>这说明该点在相机系中，位于镜头前方约 58 cm、略偏右上方。</p>
+<h3 id="72-示例-2用-geometry_utilspy-计算-base_link-坐标"><a class="header" href="#72-示例-2用-geometry_utilspy-计算-base_link-坐标">7.2 示例 2：用 <code>geometry_utils.py</code> 计算 <code>base_link</code> 坐标</a></h3>
+<pre><code class="language-bash">cd robot-learning-shelf-demo
+python scripts/geometry_utils.py \
+  --camera_config configs/camera_config.yaml \
+  --u 356 --v 242 --depth 0.58 \
+  --output reports/ch11_transform_demo.json
+</code></pre>
+<p>输出文件中会包含：</p>
+<ul>
+<li>输入像素与深度；</li>
+<li>相机内参；</li>
+<li><code>T_base_camera</code> 4×4 矩阵；</li>
+<li>点在相机系下的位置；</li>
+<li>点在 <code>base_link</code> 下的位置。</li>
+</ul>
+<h3 id="73-示例-3固定偏移型抓偏"><a class="header" href="#73-示例-3固定偏移型抓偏">7.3 示例 3：固定偏移型抓偏</a></h3>
+<p>假设你发现抓取总是比目标偏左约 2–3 cm，且在所有场景中偏差方向相近。此时优先怀疑：</p>
+<ul>
+<li><code>T_base_camera</code> 的平移量有误；</li>
+<li>物体点位构造时用了错误的 reference frame；</li>
+<li>末端执行器抓取偏置（grasp offset）没有加对。</li>
+</ul>
+<p>这类问题通常和“模型是否足够智能”关系不大。</p>
+<hr />
+<h2 id="8-练习代码"><a class="header" href="#8-练习代码">8. 练习代码</a></h2>
+<p>本章的练习代码放在：</p>
+<pre><code class="language-text">scripts/geometry_utils.py
+</code></pre>
+<p>下面给出一个最小核心片段：</p>
+<pre><code class="language-python">from geometry_utils import CameraIntrinsics, pixel_to_camera_point, pose_to_matrix, transform_point
+
+intr = CameraIntrinsics(fx=615.0, fy=615.0, cx=320.0, cy=240.0)
+p_c = pixel_to_camera_point(u=356, v=242, depth=0.58, intr=intr)
+T_base_camera = pose_to_matrix(
+    translation_xyz=[0.45, -0.30, 0.72],
+    rpy_rad=[-2.45, 0.0, -1.57],
+)
+p_b = transform_point(T_base_camera, p_c)
+
+print('camera point =', p_c)
+print('base point   =', p_b)
+</code></pre>
+<p>建议你做两个小实验：</p>
+<ol>
+<li>把 <code>u, v</code> 往四周移动，观察 <code>P_c</code> 和 <code>P_b</code> 如何变化；</li>
+<li>故意把外参平移 <code>x</code> 增大 0.03 m，再看抓取点会偏移多少。</li>
+</ol>
+<hr />
+<h2 id="9-代码解释"><a class="header" href="#9-代码解释">9. 代码解释</a></h2>
+<h3 id="91-pixel_to_camera_point"><a class="header" href="#91-pixel_to_camera_point">9.1 <code>pixel_to_camera_point()</code></a></h3>
+<p>这是最核心的反投影函数。它要求输入：</p>
+<ul>
+<li>像素坐标；</li>
+<li>深度值；</li>
+<li>相机内参。</li>
+</ul>
+<p>输出则是相机坐标系下的三维点。它帮助你把“2D 检测结果”提升到“3D 执行候选点”。</p>
+<h3 id="92-pose_to_matrix"><a class="header" href="#92-pose_to_matrix">9.2 <code>pose_to_matrix()</code></a></h3>
+<p>这个函数把平移 + RPY 角转成齐次变换矩阵。教学版实现故意保持简洁，让你看清：</p>
+<ul>
+<li>旋转矩阵是怎么组合的；</li>
+<li>平移是如何进入 4×4 矩阵的；</li>
+<li>为什么后续所有点变换都可以统一写成一次矩阵乘法。</li>
+</ul>
+<h3 id="93-transform_point"><a class="header" href="#93-transform_point">9.3 <code>transform_point()</code></a></h3>
+<p>这个函数把一个 3D 点从源坐标系映射到目标坐标系。对本章来说，它就是“把相机看到的点送进机器人坐标系”的桥梁。</p>
+<hr />
+<h2 id="10-常见错误"><a class="header" href="#10-常见错误">10. 常见错误</a></h2>
+<h3 id="101-把深度值当成了-z-轴以外的量"><a class="header" href="#101-把深度值当成了-z-轴以外的量">10.1 把深度值当成了 z 轴以外的量</a></h3>
+<p>在很多深度相机里，深度代表从相机出发沿光线方向或投影模型约定的距离；如果你对深度的定义没有统一，就可能在反投影第一步就出错。</p>
+<h3 id="102-旋转顺序不一致"><a class="header" href="#102-旋转顺序不一致">10.2 旋转顺序不一致</a></h3>
+<p><code>roll -&gt; pitch -&gt; yaw</code> 和 <code>yaw -&gt; pitch -&gt; roll</code> 不是一回事。如果相机外参看起来“差不多”，但结果总有奇怪偏差，首先检查旋转顺序。</p>
+<h3 id="103-搞混了-point-和-pose"><a class="header" href="#103-搞混了-point-和-pose">10.3 搞混了 point 和 pose</a></h3>
+<p>3D 点只有位置，没有姿态；抓取位姿不仅包含位置，还包含末端执行器的方向。很多初学者把一个目标点直接当成抓取位姿，这是不完整的。</p>
+<h3 id="104-忘了抓取偏置"><a class="header" href="#104-忘了抓取偏置">10.4 忘了抓取偏置</a></h3>
+<p>真正的抓取位姿通常不会等于目标表面中心点本身。你往往还需要考虑：</p>
+<ul>
+<li>从哪个方向抓；</li>
+<li>夹爪张开方向；</li>
+<li>预抓取高度；</li>
+<li>工具中心点与视觉参考点之间的偏置。</li>
+</ul>
+<hr />
+<h2 id="11-本章练习"><a class="header" href="#11-本章练习">11. 本章练习</a></h2>
+<ol>
+<li>解释 <code>base_link</code> 与 <code>camera_link</code> 的关系，并画出你自己的 TF tree；</li>
+<li>修改 <code>camera_config.yaml</code> 中的外参平移，观察 <code>reports/ch11_transform_demo.json</code> 的变化；</li>
+<li>自己实现 <code>pixel_to_camera_point()</code>，不要直接复制示例；</li>
+<li>思考：如果改用腕部相机，<code>camera_link -&gt; base_link</code> 这条链路会发生什么变化？</li>
+<li>用一句话总结：为什么坐标系问题经常被误判为模型问题？</li>
+</ol>
+<hr />
+<h2 id="12-本章产出"><a class="header" href="#12-本章产出">12. 本章产出</a></h2>
+<p>完成本章后，你的主线项目新增了：</p>
+<ul>
+<li>相机与机器人配置：<code>configs/camera_config.yaml</code>, <code>configs/robot_config.yaml</code></li>
+<li>几何工具脚本：<code>scripts/geometry_utils.py</code></li>
+<li>一份计算示例结果：<code>reports/ch11_transform_demo.json</code></li>
+<li>第 11 章两张配图：
+<ul>
+<li><code>images/ch11_tf_tree_and_pixel_to_grasp_pose.png</code></li>
+<li><code>images/ch11_eye_to_hand_vs_eye_in_hand.png</code></li>
+</ul>
+</li>
+</ul>
+<p>这意味着：主线项目第一次真正具备了“从视觉观测走向抓取空间目标”的基础能力。</p>
+<hr />
+<h2 id="13-小结"><a class="header" href="#13-小结">13. 小结</a></h2>
+<p>本章可以概括成一句话：</p>
+<blockquote>
+<p>视觉看到的是像素，机器人执行的是位姿，而坐标系与 TF 链路负责把两者连接起来。</p>
+</blockquote>
+<p>对于自动驾驶/机器人算法工程师来说，这一章的真正价值不只是会写反投影公式，而是建立一套工程判断：</p>
+<ul>
+<li>先统一坐标系；</li>
+<li>再统一参考系；</li>
+<li>再谈抓取策略；</li>
+<li>最后再谈模型与泛化。</li>
+</ul>
+<p>下一章，我们将沿着这条链继续往下走：既然目标位姿已经有了，机械臂究竟怎样才能到达它？这就进入了机械臂、夹爪、运动学与 MoveIt2 的世界。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapters/10-rosbag-and-robot-data-recording.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapters/12-robot-arm-gripper-kinematics-and-moveit2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapters/10-rosbag-and-robot-data-recording.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapters/12-robot-arm-gripper-kinematics-and-moveit2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
