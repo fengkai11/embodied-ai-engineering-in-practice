@@ -423,3 +423,8 @@ bag 更像原始记录，不是最终训练样本。
 - 再回到验证与训练。
 
 这意味着第 1–10 章已经不仅是概念介绍，而是在逐步搭起一个真正能继续长成完整具身智能项目的系统骨架。
+
+### 补充结果图：rosbag 转换后动作分布
+
+![dataset_from_mock_rosbag 动作分布](../assets/images/ch10_dataset_from_mock_rosbag_action_distribution.png)
+

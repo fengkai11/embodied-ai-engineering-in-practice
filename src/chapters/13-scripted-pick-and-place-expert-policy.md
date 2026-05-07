@@ -448,3 +448,8 @@ plan = [
 - 有数据质检。
 
 下一章开始，我们会继续往“真实数据”方向推进，进入遥操作数据采集。这时你会发现：有了规则 expert 作为对照基线，后续所有示教与学习过程都会更容易理解，也更容易诊断问题。
+
+### 补充结果图：scripted dataset 动作分布
+
+![dataset_v1_scripted 动作分布](../assets/images/ch13_dataset_v1_scripted_action_distribution.png)
+

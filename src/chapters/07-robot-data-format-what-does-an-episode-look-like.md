@@ -558,3 +558,8 @@ python scripts/02_visualize_episode.py \
 从主线项目角度看，本章完成了一个非常重要的里程碑：它把前一章的任务定义真正落成了数据结构。下一章，我们就会顺势进入一个非常现实的问题：
 
 既然数据格式已经有了，那么**如何检查这些数据是不是好的？**
+
+### 补充结果图：Episode action timeline
+
+![Chapter 7 episode action timeline 示例](../assets/images/ch07_episode_0001_action_timeline.png)
+

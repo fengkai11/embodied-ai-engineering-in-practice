@@ -542,3 +542,8 @@ python scripts/02_visualize_episode.py \
 这些概念一旦在脑中稳定，后面任务定义、数据格式、行为克隆训练和评测协议都会变得顺很多。相反，如果这里混乱，后面每一章都会觉得“看着懂，一做就乱”。
 
 下一章，我们将在这个概念地基上继续前进，进入模仿学习、行为克隆、ACT 与 Diffusion Policy。届时你会看到：策略学习并不是一个抽象大词，而是从本章的 observation / state / action 关系中自然长出来的。
+
+### 补充结果图：action timeline
+
+![Chapter 3 action timeline 示例](../assets/images/action_timeline.png)
+

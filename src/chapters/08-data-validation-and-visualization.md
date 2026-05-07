@@ -408,3 +408,10 @@ notebooks/02_action_distribution_analysis.ipynb
 如果数据结构错了、时间乱了、动作越界了、标签冲突了，那么你后面做再多训练都只是在放大问题。相反，只要你先建立起一套最小数据质检链路，哪怕数据量还不大，也能在一个健康的基础上持续迭代。
 
 下一章，我们就顺着这个思路进入真实机器人系统的基础设施：既然数据要被可靠采集、同步和记录，那么在机器人世界里，最重要的通信中间层是什么？答案就是 **ROS2**。
+
+### 补充结果图：数据集动作分布对比
+
+![dataset_v0_sample 动作分布](../assets/images/ch08_dataset_v0_sample_action_distribution.png)
+
+![dataset_v0_bad_examples 动作分布](../assets/images/ch08_dataset_v0_bad_examples_action_distribution.png)
+

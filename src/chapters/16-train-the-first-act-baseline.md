@@ -511,3 +511,8 @@ loss 低只说明离线拟合还可以，不代表真实 rollout 成功率一定
 - 训练第一个可工作的策略 baseline。
 
 后续章节，我们将继续进入评测、失败回收、闭环迭代与更高阶系统设计，让这个基础闭环真正走向“工程化可持续演进”。
+
+### 补充结果图：ACT baseline 训练损失曲线
+
+![ACT dataset_v0 loss curve](../assets/images/ch16_act_dataset_v0_loss_curve.png)
+
