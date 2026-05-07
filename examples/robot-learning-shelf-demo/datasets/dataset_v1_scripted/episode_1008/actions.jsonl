@@ -1,0 +1,10 @@
+{"t": 0, "timestamp": 28.0, "delta_ee_xyzrpy": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Episode start"}
+{"t": 1, "timestamp": 28.04, "delta_ee_xyzrpy": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Observe scene"}
+{"t": 2, "timestamp": 28.08, "delta_ee_xyzrpy": [0.0798, 0.1019, -0.07, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Move above object"}
+{"t": 3, "timestamp": 28.12, "delta_ee_xyzrpy": [0.0, 0.0, -0.13, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Move down"}
+{"t": 4, "timestamp": 28.16, "delta_ee_xyzrpy": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gripper_delta": -1.0, "comment": "Close gripper"}
+{"t": 5, "timestamp": 28.2, "delta_ee_xyzrpy": [0.0, 0.0, 0.17, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Lift object"}
+{"t": 6, "timestamp": 28.24, "delta_ee_xyzrpy": [0.19, -0.0819, -0.04, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Move above bin"}
+{"t": 7, "timestamp": 28.28, "delta_ee_xyzrpy": [0.0, 0.0, -0.1, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Move down to bin"}
+{"t": 8, "timestamp": 28.32, "delta_ee_xyzrpy": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gripper_delta": 1.0, "comment": "Open gripper"}
+{"t": 9, "timestamp": 28.36, "delta_ee_xyzrpy": [-0.19, -0.02, 0.17, 0.0, 0.0, 0.0], "gripper_delta": 0.0, "comment": "Return home"}

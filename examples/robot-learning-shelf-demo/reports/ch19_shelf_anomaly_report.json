@@ -1,0 +1,111 @@
+{
+  "shelf_slots": [
+    {
+      "slot_id": "A1",
+      "expected_sku": "tea_01",
+      "observed_sku": "tea_01",
+      "tilt_deg": 2.0,
+      "occupancy": 1.0
+    },
+    {
+      "slot_id": "A2",
+      "expected_sku": "tea_02",
+      "observed_sku": null,
+      "tilt_deg": 0.0,
+      "occupancy": 0.0
+    },
+    {
+      "slot_id": "A3",
+      "expected_sku": "juice_01",
+      "observed_sku": "juice_02",
+      "tilt_deg": 4.0,
+      "occupancy": 1.0
+    },
+    {
+      "slot_id": "B1",
+      "expected_sku": "milk_01",
+      "observed_sku": "milk_01",
+      "tilt_deg": 18.5,
+      "occupancy": 1.0
+    },
+    {
+      "slot_id": "B2",
+      "expected_sku": "milk_02",
+      "observed_sku": "milk_02",
+      "tilt_deg": 3.0,
+      "occupancy": 1.0
+    },
+    {
+      "slot_id": "B3",
+      "expected_sku": "snack_01",
+      "observed_sku": "snack_01",
+      "tilt_deg": 1.0,
+      "occupancy": 1.0
+    }
+  ],
+  "results": [
+    {
+      "slot_id": "A1",
+      "expected_sku": "tea_01",
+      "observed_sku": "tea_01",
+      "status": "normal",
+      "tilt_deg": 2.0,
+      "note": "状态正常"
+    },
+    {
+      "slot_id": "A2",
+      "expected_sku": "tea_02",
+      "observed_sku": null,
+      "status": "missing",
+      "tilt_deg": 0.0,
+      "note": "格口空缺或占用率过低"
+    },
+    {
+      "slot_id": "A3",
+      "expected_sku": "juice_01",
+      "observed_sku": "juice_02",
+      "status": "misplaced",
+      "tilt_deg": 4.0,
+      "note": "观察商品与目标 SKU 不一致"
+    },
+    {
+      "slot_id": "B1",
+      "expected_sku": "milk_01",
+      "observed_sku": "milk_01",
+      "status": "tilted",
+      "tilt_deg": 18.5,
+      "note": "商品倾角过大，需扶正"
+    },
+    {
+      "slot_id": "B2",
+      "expected_sku": "milk_02",
+      "observed_sku": "milk_02",
+      "status": "normal",
+      "tilt_deg": 3.0,
+      "note": "状态正常"
+    },
+    {
+      "slot_id": "B3",
+      "expected_sku": "snack_01",
+      "observed_sku": "snack_01",
+      "status": "normal",
+      "tilt_deg": 1.0,
+      "note": "状态正常"
+    }
+  ],
+  "summary": {
+    "num_slots": 6,
+    "status_counter": {
+      "normal": 3,
+      "missing": 1,
+      "misplaced": 1,
+      "tilted": 1
+    },
+    "priority_action": "restock_missing_items",
+    "action_order": [
+      "missing -> 补货",
+      "misplaced -> 调整格口",
+      "tilted -> 扶正并对齐"
+    ]
+  }
+}

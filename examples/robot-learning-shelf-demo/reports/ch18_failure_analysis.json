@@ -1,0 +1,169 @@
+{
+  "num_trials": 40,
+  "num_failures": 12,
+  "failure_rate": 0.3,
+  "failure_reason_distribution": {
+    "drop_during_transfer": 1,
+    "grasp_offset": 5,
+    "timeout": 2,
+    "collision_risk": 2,
+    "perception_miss": 2
+  },
+  "failure_category_distribution": {
+    "control_or_contact_failure": 1,
+    "strategy_failure": 5,
+    "task_management_failure": 2,
+    "control_or_safety_failure": 2,
+    "perception_failure": 2
+  },
+  "scenario_failure_distribution": {
+    "object_shift": {
+      "drop_during_transfer": 1,
+      "grasp_offset": 2,
+      "collision_risk": 2
+    },
+    "random_position": {
+      "grasp_offset": 2,
+      "timeout": 1,
+      "perception_miss": 2
+    },
+    "lighting_shift": {
+      "grasp_offset": 1,
+      "timeout": 1
+    }
+  },
+  "failure_database": [
+    {
+      "trial_id": 4,
+      "scenario_type": "object_shift",
+      "failure_reason": "drop_during_transfer",
+      "category": "control_or_contact_failure",
+      "description": "物体在搬运阶段掉落，可能与夹爪闭合、路径或速度有关。",
+      "recommended_action": "补采慢速搬运、夹持确认、提升高度变化样本；检查夹爪控制。",
+      "object_x": 0.4351,
+      "object_y": -0.0579,
+      "lighting_scale": 1.303
+    },
+    {
+      "trial_id": 10,
+      "scenario_type": "random_position",
+      "failure_reason": "grasp_offset",
+      "category": "strategy_failure",
+      "description": "抓取点或接近姿态偏移，导致抓空或夹持不稳定。",
+      "recommended_action": "补采接近/对齐阶段数据；加入 pre-grasp 对齐与修正动作。",
+      "object_x": 0.3938,
+      "object_y": 0.0704,
+      "lighting_scale": 1.0
+    },
+    {
+      "trial_id": 11,
+      "scenario_type": "lighting_shift",
+      "failure_reason": "grasp_offset",
+      "category": "strategy_failure",
+      "description": "抓取点或接近姿态偏移，导致抓空或夹持不稳定。",
+      "recommended_action": "补采接近/对齐阶段数据；加入 pre-grasp 对齐与修正动作。",
+      "object_x": 0.4344,
+      "object_y": 0.0277,
+      "lighting_scale": 1.55
+    },
+    {
+      "trial_id": 12,
+      "scenario_type": "object_shift",
+      "failure_reason": "grasp_offset",
+      "category": "strategy_failure",
+      "description": "抓取点或接近姿态偏移，导致抓空或夹持不稳定。",
+      "recommended_action": "补采接近/对齐阶段数据；加入 pre-grasp 对齐与修正动作。",
+      "object_x": 0.48,
+      "object_y": 0.1125,
+      "lighting_scale": 1.069
+    },
+    {
+      "trial_id": 14,
+      "scenario_type": "random_position",
+      "failure_reason": "timeout",
+      "category": "task_management_failure",
+      "description": "任务长时间未完成，可能因策略犹豫或阶段切换失败。",
+      "recommended_action": "补采阶段切换和失败恢复数据；加入超时退出与重试逻辑。",
+      "object_x": 0.4351,
+      "object_y": 0.0511,
+      "lighting_scale": 1.0
+    },
+    {
+      "trial_id": 16,
+      "scenario_type": "object_shift",
+      "failure_reason": "collision_risk",
+      "category": "control_or_safety_failure",
+      "description": "路径与桌面、容器或障碍物存在碰撞风险。",
+      "recommended_action": "补采避障、容器边缘、路径绕行数据；增加安全约束。",
+      "object_x": 0.483,
+      "object_y": -0.0781,
+      "lighting_scale": 0.77
+    },
+    {
+      "trial_id": 20,
+      "scenario_type": "object_shift",
+      "failure_reason": "collision_risk",
+      "category": "control_or_safety_failure",
+      "description": "路径与桌面、容器或障碍物存在碰撞风险。",
+      "recommended_action": "补采避障、容器边缘、路径绕行数据；增加安全约束。",
+      "object_x": 0.4727,
+      "object_y": 0.023,
+      "lighting_scale": 1.012
+    },
+    {
+      "trial_id": 27,
+      "scenario_type": "lighting_shift",
+      "failure_reason": "timeout",
+      "category": "task_management_failure",
+      "description": "任务长时间未完成，可能因策略犹豫或阶段切换失败。",
+      "recommended_action": "补采阶段切换和失败恢复数据；加入超时退出与重试逻辑。",
+      "object_x": 0.3631,
+      "object_y": 0.0318,
+      "lighting_scale": 1.35
+    },
+    {
+      "trial_id": 30,
+      "scenario_type": "random_position",
+      "failure_reason": "perception_miss",
+      "category": "perception_failure",
+      "description": "目标检测、深度估计、遮挡或光照导致感知错误。",
+      "recommended_action": "补采遮挡、光照变化、物体扰动样本；检查相机与标注质量。",
+      "object_x": 0.3377,
+      "object_y": 0.0021,
+      "lighting_scale": 1.0
+    },
+    {
+      "trial_id": 32,
+      "scenario_type": "object_shift",
+      "failure_reason": "grasp_offset",
+      "category": "strategy_failure",
+      "description": "抓取点或接近姿态偏移，导致抓空或夹持不稳定。",
+      "recommended_action": "补采接近/对齐阶段数据；加入 pre-grasp 对齐与修正动作。",
+      "object_x": 0.4361,
+      "object_y": -0.0459,
+      "lighting_scale": 1.123
+    },
+    {
+      "trial_id": 34,
+      "scenario_type": "random_position",
+      "failure_reason": "perception_miss",
+      "category": "perception_failure",
+      "description": "目标检测、深度估计、遮挡或光照导致感知错误。",
+      "recommended_action": "补采遮挡、光照变化、物体扰动样本；检查相机与标注质量。",
+      "object_x": 0.4271,
+      "object_y": -0.024,
+      "lighting_scale": 1.0
+    },
+    {
+      "trial_id": 38,
+      "scenario_type": "random_position",
+      "failure_reason": "grasp_offset",
+      "category": "strategy_failure",
+      "description": "抓取点或接近姿态偏移，导致抓空或夹持不稳定。",
+      "recommended_action": "补采接近/对齐阶段数据；加入 pre-grasp 对齐与修正动作。",
+      "object_x": 0.3816,
+      "object_y": -0.0105,
+      "lighting_scale": 1.0
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "episode_id": "episode_00001",
+  "task_name": "pick_box_to_bin_teleop_keyboard",
+  "instruction": "使用键盘遥操作机械臂把桌面方块抓起并放入右侧收纳盒。",
+  "source": "teleop_keyboard_sim",
+  "teleop_device": "keyboard",
+  "operator_id": "teacher_01",
+  "success": true,
+  "failure_reason": null,
+  "intervention_count": 0,
+  "num_steps": 154,
+  "control_mode": "delta_end_effector_pose_with_gripper",
+  "observation_modalities": [
+    "front_rgb",
+    "wrist_rgb",
+    "robot_state"
+  ],
+  "notes": "Simulated keyboard teleoperation episode for Chapter 14.",
+  "original_episode_id": "episode_2001"
+}

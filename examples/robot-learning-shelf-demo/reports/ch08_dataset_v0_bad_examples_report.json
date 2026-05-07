@@ -1,0 +1,94 @@
+{
+  "dataset_dir": "datasets/dataset_v0_bad_examples",
+  "summary": {
+    "total_episodes": 4,
+    "ok_episodes": 0,
+    "bad_episodes": 4
+  },
+  "episodes": [
+    {
+      "episode_id": "episode_bad_action_range",
+      "ok": false,
+      "issues": [
+        "action out of range: 2 sample(s)"
+      ],
+      "warnings": [],
+      "front_image_count": 7,
+      "wrist_image_count": 7,
+      "num_states": 7,
+      "num_actions": 7,
+      "success": true,
+      "failure_reason": null,
+      "task_name": "pick_box_to_bin",
+      "action_out_of_range_samples": [
+        {
+          "t": 4,
+          "field": "dx",
+          "value": 0.25,
+          "limit": [
+            -0.2,
+            0.2
+          ]
+        },
+        {
+          "t": 4,
+          "field": "gripper_delta",
+          "value": 1.6,
+          "limit": [
+            -1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "episode_id": "episode_bad_label_conflict",
+      "ok": false,
+      "issues": [
+        "label conflict: success=true but failure_reason is non-empty"
+      ],
+      "warnings": [],
+      "front_image_count": 7,
+      "wrist_image_count": 7,
+      "num_states": 7,
+      "num_actions": 7,
+      "success": true,
+      "failure_reason": "drop_during_transfer",
+      "task_name": "pick_box_to_bin",
+      "action_out_of_range_samples": []
+    },
+    {
+      "episode_id": "episode_bad_missing_meta",
+      "ok": false,
+      "issues": [
+        "missing meta.json"
+      ],
+      "warnings": [],
+      "front_image_count": 7,
+      "wrist_image_count": 7,
+      "num_states": 7,
+      "num_actions": 7,
+      "success": null,
+      "failure_reason": null,
+      "task_name": null,
+      "action_out_of_range_samples": []
+    },
+    {
+      "episode_id": "episode_bad_timestamp",
+      "ok": false,
+      "issues": [
+        "state timestamps are not monotonically increasing",
+        "state timestamps do not match action timestamps"
+      ],
+      "warnings": [],
+      "front_image_count": 7,
+      "wrist_image_count": 7,
+      "num_states": 7,
+      "num_actions": 7,
+      "success": true,
+      "failure_reason": null,
+      "task_name": "pick_box_to_bin",
+      "action_out_of_range_samples": []
+    }
+  ]
+}

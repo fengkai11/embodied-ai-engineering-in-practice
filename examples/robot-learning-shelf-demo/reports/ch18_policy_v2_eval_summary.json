@@ -1,0 +1,37 @@
+{
+  "num_trials": 40,
+  "success_count": 32,
+  "success_rate": 0.8,
+  "collision_rate": 0.025,
+  "drop_rate": 0.025,
+  "intervention_rate": 0.025,
+  "mean_completion_time_sec": 9.771,
+  "failure_reason_distribution": {
+    "collision_risk": 1,
+    "drop_during_transfer": 1,
+    "grasp_offset": 3,
+    "perception_miss": 3
+  },
+  "by_scenario": {
+    "fixed": {
+      "num_trials": 10,
+      "success_rate": 0.8,
+      "mean_completion_time_sec": 8.963
+    },
+    "lighting_shift": {
+      "num_trials": 10,
+      "success_rate": 0.7,
+      "mean_completion_time_sec": 10.697
+    },
+    "object_shift": {
+      "num_trials": 10,
+      "success_rate": 0.8,
+      "mean_completion_time_sec": 10.207
+    },
+    "random_position": {
+      "num_trials": 10,
+      "success_rate": 0.9,
+      "mean_completion_time_sec": 9.217
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "task_name": "pick_box_to_bin",
+  "instruction": "请将红色盒子轻放到右边收纳盒，保持竖直",
+  "object": {
+    "type": "box",
+    "color": "red"
+  },
+  "target": {
+    "name": "right_storage_box"
+  },
+  "constraints": {
+    "workspace": "table_top",
+    "avoid_collision": true,
+    "keep_upright": true,
+    "max_time_sec": 30
+  },
+  "success_criteria": {
+    "in_target": true,
+    "released": true,
+    "object_upright": true
+  }
+}

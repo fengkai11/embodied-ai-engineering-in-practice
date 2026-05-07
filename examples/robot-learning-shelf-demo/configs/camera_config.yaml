@@ -1,0 +1,16 @@
+camera_name: front_fixed_camera
+mount_type: eye_to_hand
+image_size: [640, 480]
+fx: 615.0
+fy: 615.0
+cx: 320.0
+cy: 240.0
+depth_scale: 1.0
+frame_id: camera_link
+extrinsics:
+  parent_frame: base_link
+  translation_xyz_m: [0.45, -0.30, 0.72]
+  rpy_rad: [-2.45, 0.0, -1.57]
+notes: |
+  This is a teaching configuration for Chapter 11.
+  The camera is fixed above the table, looking down at the workspace.

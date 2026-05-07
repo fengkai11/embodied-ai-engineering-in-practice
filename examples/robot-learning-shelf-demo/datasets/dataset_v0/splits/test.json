@@ -1,0 +1,22 @@
+[
+  {
+    "episode_id": "episode_00015",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00016",
+    "source": "teleop_keyboard_sim",
+    "success": true
+  },
+  {
+    "episode_id": "episode_00017",
+    "source": "teleop_keyboard_sim",
+    "success": false
+  },
+  {
+    "episode_id": "episode_00018",
+    "source": null,
+    "success": true
+  }
+]

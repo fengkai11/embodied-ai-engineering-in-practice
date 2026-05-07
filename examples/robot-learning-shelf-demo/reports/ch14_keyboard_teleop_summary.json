@@ -1,0 +1,62 @@
+{
+  "items": [
+    {
+      "episode_id": "episode_2001",
+      "success": true,
+      "failure_reason": null,
+      "operator_id": "teacher_01",
+      "num_steps": 154
+    },
+    {
+      "episode_id": "episode_2002",
+      "success": true,
+      "failure_reason": null,
+      "operator_id": "teacher_02",
+      "num_steps": 154
+    },
+    {
+      "episode_id": "episode_2003",
+      "success": true,
+      "failure_reason": null,
+      "operator_id": "teacher_01",
+      "num_steps": 154
+    },
+    {
+      "episode_id": "episode_2004",
+      "success": true,
+      "failure_reason": null,
+      "operator_id": "teacher_02",
+      "num_steps": 130
+    },
+    {
+      "episode_id": "episode_2005",
+      "success": true,
+      "failure_reason": null,
+      "operator_id": "teacher_01",
+      "num_steps": 154
+    },
+    {
+      "episode_id": "episode_2006",
+      "success": false,
+      "failure_reason": "bad_alignment",
+      "operator_id": "teacher_02",
+      "num_steps": 154
+    },
+    {
+      "episode_id": "episode_2007",
+      "success": false,
+      "failure_reason": "drop_during_transfer",
+      "operator_id": "teacher_01",
+      "num_steps": 130
+    },
+    {
+      "episode_id": "episode_2008",
+      "success": false,
+      "failure_reason": "timeout",
+      "operator_id": "teacher_02",
+      "num_steps": 131
+    }
+  ],
+  "success_count": 5,
+  "failure_count": 3
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "episode_id": "episode_00001",
+    "source": "teleop_keyboard_sim",
+    "success": true
+  },
+  {
+    "episode_id": "episode_00002",
+    "source": "teleop_keyboard_sim",
+    "success": true
+  },
+  {
+    "episode_id": "episode_00003",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00004",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00005",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00006",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00007",
+    "source": null,
+    "success": false
+  },
+  {
+    "episode_id": "episode_00008",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00009",
+    "source": "teleop_keyboard_sim",
+    "success": false
+  },
+  {
+    "episode_id": "episode_00010",
+    "source": null,
+    "success": true
+  },
+  {
+    "episode_id": "episode_00011",
+    "source": "teleop_keyboard_sim",
+    "success": true
+  }
+]

@@ -1,0 +1,10 @@
+{"t": 0, "timestamp": 30.0, "ee_pose_xyzrpy": [0.3, -0.1, 0.25, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "reset"}
+{"t": 1, "timestamp": 30.04, "ee_pose_xyzrpy": [0.3, -0.1, 0.25, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "observe"}
+{"t": 2, "timestamp": 30.08, "ee_pose_xyzrpy": [0.4683, -0.0235, 0.18, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "pre_grasp"}
+{"t": 3, "timestamp": 30.12, "ee_pose_xyzrpy": [0.4683, -0.0235, 0.05, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "approach"}
+{"t": 4, "timestamp": 30.16, "ee_pose_xyzrpy": [0.4683, -0.0235, 0.05, 3.14, 0.0, 0.0], "gripper_open": false, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "grasp"}
+{"t": 5, "timestamp": 30.2, "ee_pose_xyzrpy": [0.4183, -0.0235, 0.22, 3.14, 0.0, 0.0], "gripper_open": false, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "lift"}
+{"t": 6, "timestamp": 30.24, "ee_pose_xyzrpy": [0.62, -0.08, 0.18, 3.14, 0.0, 0.0], "gripper_open": false, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "transfer"}
+{"t": 7, "timestamp": 30.28, "ee_pose_xyzrpy": [0.62, -0.08, 0.08, 3.14, 0.0, 0.0], "gripper_open": false, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "place"}
+{"t": 8, "timestamp": 30.32, "ee_pose_xyzrpy": [0.62, -0.08, 0.08, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "release"}
+{"t": 9, "timestamp": 30.36, "ee_pose_xyzrpy": [0.3, -0.1, 0.25, 3.14, 0.0, 0.0], "gripper_open": true, "object_pose_xyz": [0.4183, -0.0235, 0.02], "bin_pose_xyz": [0.62, -0.08, 0.04], "phase": "return_home"}

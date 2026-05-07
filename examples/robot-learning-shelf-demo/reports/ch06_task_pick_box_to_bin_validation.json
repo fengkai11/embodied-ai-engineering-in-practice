@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "summary": {
+    "task_name": "pick_box_to_bin",
+    "version": "v1",
+    "observation_modalities": [
+      "top_rgb",
+      "wrist_rgb",
+      "robot_state"
+    ],
+    "action_mode": "delta_end_effector_pose_with_gripper",
+    "num_success_criteria": 5,
+    "num_failure_criteria": 4
+  }
+}

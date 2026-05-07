@@ -1,0 +1,16 @@
+{
+  "topics_observed": [
+    "/camera/front/image_raw",
+    "/joint_states",
+    "/action_cmd",
+    "/task_info"
+  ],
+  "summary": {
+    "camera_messages": 5,
+    "joint_messages": 5,
+    "action_messages": 5,
+    "task_messages": 1
+  },
+  "total_published_messages": 16,
+  "note": "This is a pure-Python mock demo used to explain ROS2 topic flow without requiring a ROS2 runtime."
+}
