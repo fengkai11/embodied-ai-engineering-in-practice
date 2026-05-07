@@ -270,7 +270,13 @@ a_t
 
 这张图很重要，因为它不是“玩具任务专用图”，而是后面真实机器人训练都适用的通用骨架。
 
-### 4.3 Mermaid 图：BC 与 action chunk 的输出差异
+### 4.3 图 4-3 toy rollout 对比图（BC vs Chunk）
+
+![图 4-3 toy rollout 对比图（BC vs Chunk）](../assets/images/ch04_toy_act_rollout.png)
+
+这张图来自 `reports/ch04_toy_act_rollout.png`，用于直观看到两类策略在 rollout 轨迹上的差异。
+
+### 4.4 Mermaid 图：BC 与 action chunk 的输出差异
 
 ```mermaid
 flowchart LR
@@ -279,7 +285,7 @@ flowchart LR
     B --> C2[Chunk: Action_t:t+k]
 ```
 
-### 4.4 Mermaid 图：模仿学习最小闭环
+### 4.5 Mermaid 图：模仿学习最小闭环
 
 ```mermaid
 flowchart TD
