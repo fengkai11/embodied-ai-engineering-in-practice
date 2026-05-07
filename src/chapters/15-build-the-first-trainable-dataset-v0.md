@@ -121,7 +121,7 @@
 
 ### 4.1 图 15-1 dataset_v0 构建流程
 
-![图 15-1 dataset_v0 构建流程](../../assets/images/ch15_dataset_v0_build_pipeline.png)
+![图 15-1 dataset_v0 构建流程](../assets/images/ch15_dataset_v0_build_pipeline.png)
 
 这张图把本章的主线讲清楚了：
 
@@ -133,7 +133,7 @@
 
 ### 4.2 图 15-2 dataset_v0 划分与版本管理
 
-![图 15-2 dataset_v0 划分与版本管理](../../assets/images/ch15_dataset_split_and_versioning.png)
+![图 15-2 dataset_v0 划分与版本管理](../assets/images/ch15_dataset_split_and_versioning.png)
 
 这张图的重点在于强调：
 

@@ -139,7 +139,7 @@ ros2_ws/src/shelf_demo_msgs/msg/TaskInfo.msg
 
 ### 4.1 图 9-1 ROS2 节点与 Topic 通信图
 
-![图 9-1 ROS2 节点与 Topic 通信图](../../assets/images/ch09_ros2_node_topic_communication.png)
+![图 9-1 ROS2 节点与 Topic 通信图](../assets/images/ch09_ros2_node_topic_communication.png)
 
 这张图展示了主线项目中的最小通信骨架：
 
@@ -151,7 +151,7 @@ ros2_ws/src/shelf_demo_msgs/msg/TaskInfo.msg
 
 ### 4.2 图 9-2 ROS2 Topic 到 Episode 字段映射
 
-![图 9-2 ROS2 Topic 到 Episode 字段映射](../../assets/images/ch09_ros2_topic_to_episode_mapping.png)
+![图 9-2 ROS2 Topic 到 Episode 字段映射](../assets/images/ch09_ros2_topic_to_episode_mapping.png)
 
 这张图非常关键，因为它直接把 ROS2 数据流和前面几章定义的 episode 结构连接了起来：
 

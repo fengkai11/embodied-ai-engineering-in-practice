@@ -244,7 +244,7 @@ a_t
 
 ### 4.1 图 4-1 单步 BC 与 ACT / Chunk Prediction 对比
 
-![图 4-1 单步 BC 与 ACT / Chunk Prediction 对比](../../assets/images/ch04_bc_vs_act.png)
+![图 4-1 单步 BC 与 ACT / Chunk Prediction 对比](../assets/images/ch04_bc_vs_act.png)
 
 这张图是本章最重要的图之一。它把两个核心差异讲得很直观：
 
@@ -255,7 +255,7 @@ a_t
 
 ### 4.2 图 4-2 模仿学习训练流程图
 
-![图 4-2 模仿学习训练流程图](../../assets/images/ch04_imitation_learning_flow.png)
+![图 4-2 模仿学习训练流程图](../assets/images/ch04_imitation_learning_flow.png)
 
 这张图把本章的最小训练闭环完整表达了出来：
 

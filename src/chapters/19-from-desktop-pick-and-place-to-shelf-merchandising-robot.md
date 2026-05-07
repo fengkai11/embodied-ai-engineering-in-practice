@@ -102,7 +102,7 @@
 
 ### 3.1 图 19-1：从桌面拣放到货架补货 / 陈列机器人的六阶段路径
 
-![图 19-1 从桌面拣放到货架补货 / 陈列机器人的六阶段演进路径](../../assets/images/ch19_desktop_to_shelf_robot_evolution.png)
+![图 19-1 从桌面拣放到货架补货 / 陈列机器人的六阶段演进路径](../assets/images/ch19_desktop_to_shelf_robot_evolution.png)
 
 这张图是本章的主线图，它非常重要，因为它告诉你：
 
@@ -233,7 +233,7 @@
 
 ### 6.1 图 19-2：货架陈列机器人架构
 
-![图 19-2 货架陈列机器人架构](../../assets/images/ch19_shelf_merchandising_robot_architecture.png)
+![图 19-2 货架陈列机器人架构](../assets/images/ch19_shelf_merchandising_robot_architecture.png)
 
 这张图把理货机器人的最小系统结构分成了三层：
 

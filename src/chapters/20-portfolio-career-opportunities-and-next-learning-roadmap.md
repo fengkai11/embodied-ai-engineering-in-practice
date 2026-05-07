@@ -90,7 +90,7 @@
 
 ### 3.1 图 20-1：将机器人学习项目转化为作品集与职业材料
 
-![图 20-1 将机器人学习项目转化为作品集与职业材料](../../assets/images/ch20_project_to_portfolio_map.png)
+![图 20-1 将机器人学习项目转化为作品集与职业材料](../assets/images/ch20_project_to_portfolio_map.png)
 
 这张图把本章最重要的收束逻辑画了出来：
 
@@ -290,7 +290,7 @@ docs/interview_qa.md
 
 ### 8.1 图 20-2：从自动驾驶到具身智能的职业与学习路线图
 
-![图 20-2 从自动驾驶到具身智能的职业与学习路线图](../../assets/images/ch20_career_learning_roadmap.png)
+![图 20-2 从自动驾驶到具身智能的职业与学习路线图](../assets/images/ch20_career_learning_roadmap.png)
 
 这张图把一个很重要的现实问题讲清楚了：
 

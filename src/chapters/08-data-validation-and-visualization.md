@@ -129,13 +129,13 @@
 
 ### 4.1 图 8-1 机器人数据质检流程
 
-![图 8-1 机器人数据质检流程](../../assets/images/ch08_dataset_quality_workflow.png)
+![图 8-1 机器人数据质检流程](../assets/images/ch08_dataset_quality_workflow.png)
 
 这张图展示了一个非常实用的最小数据质检流水线：从读取数据集开始，逐步检查目录结构、`meta.json`、`states/actions`、图像数量、时间戳、动作范围和 success/failure 标签，最后输出 `dataset report`。它也是本章脚本 `04_validate_dataset.py` 的结构蓝图。
 
 ### 4.2 图 8-2 数据异常分类与动作分布分析
 
-![图 8-2 数据异常分类与动作分布分析](../../assets/images/ch08_data_anomaly_and_action_distribution.png)
+![图 8-2 数据异常分类与动作分布分析](../assets/images/ch08_data_anomaly_and_action_distribution.png)
 
 这张图强调两个重点：
 

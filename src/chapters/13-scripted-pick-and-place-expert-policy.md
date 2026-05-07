@@ -152,13 +152,13 @@
 
 ### 4.1 图 13-1 规则式 Pick-and-Place 状态机
 
-![图 13-1 规则式 Pick-and-Place 状态机](../../assets/images/ch13_scripted_pick_and_place_state_machine.png)
+![图 13-1 规则式 Pick-and-Place 状态机](../assets/images/ch13_scripted_pick_and_place_state_machine.png)
 
 这张图就是本章最核心的“任务剧本”。它把脚本策略从一堆 if/else 逻辑，变成了可视化的阶段流。
 
 ### 4.2 图 13-2 从规则 Expert Rollout 到 Episode 数据
 
-![图 13-2 从规则 Expert Rollout 到 Episode 数据](../../assets/images/ch13_expert_rollout_to_episode.png)
+![图 13-2 从规则 Expert Rollout 到 Episode 数据](../assets/images/ch13_expert_rollout_to_episode.png)
 
 这张图把本章与前面所有章节连接起来：
 

@@ -142,13 +142,13 @@
 
 ### 4.1 图 18-1 失败分类树与改进方向
 
-![图 18-1 失败分类树与改进方向](../../assets/images/ch18_failure_taxonomy.svg)
+![图 18-1 失败分类树与改进方向](../assets/images/ch18_failure_taxonomy.svg)
 
 这张图把失败分成四类：感知失败、策略失败、控制失败、环境失败。每一类失败都对应不同的改进动作：补采视觉数据、改策略阶段、调整控制参数或扩大场景随机化。
 
 ### 4.2 图 18-2 失败回收、补采数据与 policy_v2 闭环
 
-![图 18-2 失败回收、补采数据与 policy_v2 闭环](../../assets/images/ch18_failure_loop_policy_compare.svg)
+![图 18-2 失败回收、补采数据与 policy_v2 闭环](../assets/images/ch18_failure_loop_policy_compare.svg)
 
 这张图展示了本章的主线闭环：从 eval CSV 中筛出失败样本，做失败分类，生成补采计划，构建下一版数据集，训练 `policy_v2`，再用同一评测协议对比。
 

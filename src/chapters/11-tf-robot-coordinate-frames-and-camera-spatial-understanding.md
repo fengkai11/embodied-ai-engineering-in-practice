@@ -153,7 +153,7 @@ P_b = T_base_camera * P_c
 
 ### 4.1 图 11-1 TF 树与从像素到抓取位姿的空间链路
 
-![图 11-1 TF 树与从像素到抓取位姿的空间链路](../../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png)
+![图 11-1 TF 树与从像素到抓取位姿的空间链路](../assets/images/ch11_tf_tree_and_pixel_to_grasp_pose.png)
 
 这张图可以作为本章总图来理解。它把两件事连到了一起：
 
@@ -162,7 +162,7 @@ P_b = T_base_camera * P_c
 
 ### 4.2 图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比
 
-![图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比](../../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png)
+![图 11-2 Eye-to-Hand 与 Eye-in-Hand 对比](../assets/images/ch11_eye_to_hand_vs_eye_in_hand.png)
 
 这张图重点帮助你理解：相机安装方式不是部署细节，而是会直接影响标定链路、误差传播和遮挡模式的系统选择。
 

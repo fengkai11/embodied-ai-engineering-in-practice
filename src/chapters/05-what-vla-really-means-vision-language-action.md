@@ -242,7 +242,7 @@ VLA 则进一步要求模型完成：
 
 ### 4.1 图 5-1 VLM 与 VLA 的区别
 
-![图 5-1 VLM 与 VLA 的区别](../../assets/images/ch05_vlm_vs_vla.png)
+![图 5-1 VLM 与 VLA 的区别](../assets/images/ch05_vlm_vs_vla.png)
 
 这张图把本章最核心的差别表达得很清楚：
 
@@ -255,7 +255,7 @@ VLA 则进一步要求模型完成：
 
 ### 4.2 图 5-2 从自然语言指令到结构化机器人任务
 
-![图 5-2 从自然语言指令到结构化机器人任务](../../assets/images/ch05_instruction_to_structured_task.png)
+![图 5-2 从自然语言指令到结构化机器人任务](../assets/images/ch05_instruction_to_structured_task.png)
 
 这张图把本章主线项目新增能力说得很直观：先把自然语言任务解析成结构化 JSON / YAML，再让后续策略系统使用它。
 

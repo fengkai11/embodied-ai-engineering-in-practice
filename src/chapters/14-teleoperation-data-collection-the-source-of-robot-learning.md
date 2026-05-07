@@ -178,7 +178,7 @@
 
 ### 4.1 图 14-1 遥操作数据采集系统结构
 
-![图 14-1 遥操作数据采集系统结构](../../assets/images/ch14_teleoperation_system_structure.png)
+![图 14-1 遥操作数据采集系统结构](../assets/images/ch14_teleoperation_system_structure.png)
 
 这张图建议你反复看。它不是在讲某个具体产品，而是在讲一个通用的机器人学习采集结构：
 
@@ -189,7 +189,7 @@
 
 ### 4.2 图 14-2 从人类示范到 Episode 数据
 
-![图 14-2 从人类示范到 Episode 数据](../../assets/images/ch14_human_demo_to_episode_data_flow.png)
+![图 14-2 从人类示范到 Episode 数据](../assets/images/ch14_human_demo_to_episode_data_flow.png)
 
 这张图把“演示”与“训练数据”之间的转换过程画得很直观。它提醒我们：
 

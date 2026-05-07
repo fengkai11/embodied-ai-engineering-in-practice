@@ -225,13 +225,13 @@ episode_0001/
 
 ### 4.1 图 7-1 一条 Episode 的目录结构
 
-![图 7-1 一条 Episode 的目录结构](../../assets/images/ch07_episode_structure.png)
+![图 7-1 一条 Episode 的目录结构](../assets/images/ch07_episode_structure.png)
 
 这张图直观地说明：episode 不是单一视频文件，而是一个小型数据包，包含图像目录和结构化文件。
 
 ### 4.2 图 7-2 Episode 的时间同步与数据关系
 
-![图 7-2 Episode 的时间同步与数据关系](../../assets/images/ch07_episode_sync.png)
+![图 7-2 Episode 的时间同步与数据关系](../assets/images/ch07_episode_sync.png)
 
 这张图非常关键，因为它解释了为什么 observation、state、action 与 timestamp 必须对齐。它也是后面“数据质检”章节的重要铺垫。
 

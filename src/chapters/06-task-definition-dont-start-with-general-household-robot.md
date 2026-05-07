@@ -240,7 +240,7 @@ delta_end_effector_pose_with_gripper
 
 ### 4.1 图 6-1 从模糊目标到可执行任务
 
-![图 6-1 从模糊目标到可执行任务](../../assets/images/ch06_task_decomposition_and_versions.png)
+![图 6-1 从模糊目标到可执行任务](../assets/images/ch06_task_decomposition_and_versions.png)
 
 这张图做了三件事：
 
@@ -252,7 +252,7 @@ delta_end_effector_pose_with_gripper
 
 ### 4.2 图 6-2 从自然语言任务到 YAML 配置
 
-![图 6-2 从自然语言任务到 YAML 配置](../../assets/images/ch06_task_yaml_config.png)
+![图 6-2 从自然语言任务到 YAML 配置](../assets/images/ch06_task_yaml_config.png)
 
 这张图强调的是：自然语言指令必须进一步规格化，变成可执行任务配置。它是第 5 章“语言 → 结构化任务”的延续，也是本章“结构化任务 → 正式配置文件”的落地。
 

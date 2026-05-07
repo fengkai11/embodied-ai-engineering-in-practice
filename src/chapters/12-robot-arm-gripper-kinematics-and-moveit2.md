@@ -131,7 +131,7 @@ MoveIt2 可以粗略理解为一个“机器人操作任务的中间层”：
 
 ### 4.1 图 12-1 机械臂、FK/IK 与 MoveIt2 规划流程
 
-![图 12-1 机械臂、FK/IK 与 MoveIt2 规划流程](../../assets/images/ch12_robot_arm_fk_ik_moveit2.png)
+![图 12-1 机械臂、FK/IK 与 MoveIt2 规划流程](../assets/images/ch12_robot_arm_fk_ik_moveit2.png)
 
 这张图把本章的知识压缩成了三个层次：
 
@@ -141,7 +141,7 @@ MoveIt2 可以粗略理解为一个“机器人操作任务的中间层”：
 
 ### 4.2 图 12-2 规划场景与抓取路径示意
 
-![图 12-2 规划场景与抓取路径示意](../../assets/images/ch12_planning_scene_and_grasp_path.png)
+![图 12-2 规划场景与抓取路径示意](../assets/images/ch12_planning_scene_and_grasp_path.png)
 
 这张图特别适合与第 13 章衔接，因为它已经把 `pick_box_to_bin` 的几个关键阶段画出来了：
 

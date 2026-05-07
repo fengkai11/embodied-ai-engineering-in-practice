@@ -114,7 +114,7 @@ assets/images/ch02_data_closed_loop_comparison.png
 则图片引用可以写成：
 
 ```markdown
-![图示](../../assets/images/ch02_data_closed_loop_comparison.png)
+![图示](../assets/images/ch02_data_closed_loop_comparison.png)
 ```
 
 为了减少混乱，建议最终整理时统一路径。

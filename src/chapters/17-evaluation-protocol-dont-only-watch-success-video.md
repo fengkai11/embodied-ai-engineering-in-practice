@@ -163,13 +163,13 @@ intervention_rate = trials_with_intervention / total_trials
 
 ### 4.1 图 17-1 机器人策略评测协议流程
 
-![图 17-1 机器人策略评测协议流程](../../assets/images/ch17_eval_protocol_flow.svg)
+![图 17-1 机器人策略评测协议流程](../assets/images/ch17_eval_protocol_flow.svg)
 
 这张图说明了一个最小评测协议：同一个 `policy_v1` 不能只跑一个固定场景，而要分别经过固定位置、随机位置、光照变化和物体扰动测试。所有 trial 都写入评测 CSV，最后统一生成报告。
 
 ### 4.2 图 17-2 评测指标关系图
 
-![图 17-2 评测指标关系图](../../assets/images/ch17_metric_dashboard.svg)
+![图 17-2 评测指标关系图](../assets/images/ch17_metric_dashboard.svg)
 
 这张图强调：success rate 只是入口，completion time、collision rate、drop rate、intervention rate 和 failure reason distribution 共同决定策略是否真的可用。
 
